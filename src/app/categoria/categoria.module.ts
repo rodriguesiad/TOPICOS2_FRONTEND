@@ -15,8 +15,6 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-
-
 @NgModule({
   declarations: [
     CategoriaListComponent,
@@ -35,8 +33,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatIconModule,
     MatPaginatorModule,
     MatSlideToggleModule,
-    FormsModule, 
-    ReactiveFormsModule
+    FormsModule
   ]
 })
 export class CategoriaModule { }

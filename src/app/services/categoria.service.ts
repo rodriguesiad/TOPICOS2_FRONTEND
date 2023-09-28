@@ -16,6 +16,14 @@ export class CategoriaService {
     return this.http.get<Categoria[]>(`${this.baseURL}/categorias`);
   }
 
+  findAllPaginado(pageNumber: number, pageSize: number): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(`${this.baseURL}/categorias/paginado?page=${pageNumber}&size=${pageSize}`);
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/categorias/count`);
+  }
+
   findById(id: string): Observable<Categoria> {
     return this.http.get<Categoria>(`${this.baseURL}/categorias/${id}`);
   }
