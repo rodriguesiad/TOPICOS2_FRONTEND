@@ -41,7 +41,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
       catchError( err => {
         console.log("Erro carregando categorias");
         alert("Erro carregando categorias.");
-        return throwError(err);
+        return throwError((() => err));
       })
     )
     .subscribe();
@@ -54,7 +54,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
       catchError( err => {
         console.log("Erro carregando o total de categorias");
         alert("Erro carregando categorias.");
-        return throwError(err);
+        return throwError((() => err));
       })
     )
     .subscribe()

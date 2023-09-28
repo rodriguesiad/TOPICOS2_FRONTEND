@@ -16,14 +16,13 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button style="color: var(--default-green);"
-                routerLink="/categoriaslist" class="button-form">
+                routerLink="/categorias/list">
                 CANCELAR
             </button>
             <button mat-raised-button
-                color="primary" 
                 (click)="salvar()"
                 [disabled]="formGroup.invalid"
-                style="background-color: var(--default-green);">
+                style="background-color: var(--default-green); color: white;">
                 SALVAR
             </button>
         </mat-card-actions>
