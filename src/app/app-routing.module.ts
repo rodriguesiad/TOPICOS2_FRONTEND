@@ -18,7 +18,13 @@ const routes: Routes = [
     path: 'categorias', loadChildren:
       () => import('./categoria/categoria.module')
         .then(m => m.CategoriaModule)
-  }
+  },
+
+  {
+    path: 'metodos-recebimento', loadChildren:
+      () => import('./metodo-recebimento/metodo-recebimento.module')
+        .then(m => m.MetodoRecebimentoModule)
+  },
 ];
 
 @NgModule({
