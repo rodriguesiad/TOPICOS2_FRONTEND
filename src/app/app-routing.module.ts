@@ -25,6 +25,13 @@ const routes: Routes = [
       () => import('./metodo-recebimento/metodo-recebimento.module')
         .then(m => m.MetodoRecebimentoModule)
   },
+
+  
+  {
+    path: 'racas', loadChildren:
+      () => import('./raca/raca.module')
+        .then(m => m.RacaModule)
+  },
 ];
 
 @NgModule({
