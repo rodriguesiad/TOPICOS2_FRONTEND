@@ -29,7 +29,7 @@
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <mat-slide-toggle [checked]="categoria.ativo"  (click)="openDialog(categoria)"></mat-slide-toggle>   
+              <mat-slide-toggle [checked]="categoria.ativo" (click)="openDialog($event, categoria)"></mat-slide-toggle>   
             </div>
           </td>
         </ng-container>

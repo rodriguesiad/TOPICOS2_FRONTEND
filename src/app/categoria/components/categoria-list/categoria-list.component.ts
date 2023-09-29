@@ -1,16 +1,25 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import {
+  MatSlideToggleModule,
+  MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
+} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-categoria-list',
   templateUrl: './categoria-list.component.html',
-  styleUrls: ['./categoria-list.component.css']
+  styleUrls: ['./categoria-list.component.css'],
+  providers: [
+    {
+      provide: MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
+      useValue: { disableToggleValue: true },
+    },
+  ],
 })
 export class CategoriaListComponent implements OnInit, AfterViewInit {
   tableColumns: string[] = ['nome-column', 'actions-column'];
@@ -21,6 +30,8 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
+
+  estadosAtivos: boolean[] = [];
 
   constructor(private categoriaService: CategoriaService, public dialog: MatDialog) {}
 
@@ -41,7 +52,10 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   carregarDadosPaginados() {
     this.categoriaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
     .pipe(
-      tap(categorias => this.categorias = categorias),
+      tap(categorias => {
+        this.categorias = categorias,
+        this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
+      }),
       catchError( err => {
         console.log("Erro carregando categorias");
         alert("Erro carregando categorias.");
@@ -64,7 +78,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
     .subscribe()
   }
 
-  openDialog(categoria: Categoria){
+  openDialog(event: Event, categoria: Categoria){
     let situacao = categoria.ativo ? 'desativar' : 'ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
@@ -79,7 +93,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
       if(result == true) {
         this.categoriaService.alterarSituacao(categoria, !categoria.ativo)
         .pipe(
-          tap(),
+          tap(ca => categoria.ativo = ca.ativo),
           catchError( err => {
             console.log("Erro ao" + situacao+ " categoria.");
             alert("Erro ao" + situacao+ " categoria.");
@@ -87,9 +101,10 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
           })
         )
         .subscribe();
+      
+        
       }
     });
-
   }
 
 }
