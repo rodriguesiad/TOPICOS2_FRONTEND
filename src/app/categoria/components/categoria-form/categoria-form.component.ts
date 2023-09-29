@@ -13,16 +13,16 @@ export class CategoriaFormComponent {
   formGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private categoriaService: CategoriaService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+    private categoriaService: CategoriaService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
 
     const categoria: Categoria = this.activatedRoute.snapshot.data['categoria'];
 
     this.formGroup = formBuilder.group({
-      id:[(categoria && categoria.id) ? categoria.id : null],
-      nome:[(categoria && categoria.nome) ? categoria.nome : '', Validators.required],
-      ativo:[(categoria && categoria.ativo) ? categoria.ativo : null]
+      id: [(categoria && categoria.id) ? categoria.id : null],
+      nome: [(categoria && categoria.nome) ? categoria.nome : '', Validators.required],
+      ativo: [(categoria && categoria.ativo) ? categoria.ativo : null]
     })
   }
 
@@ -46,7 +46,7 @@ export class CategoriaFormComponent {
           error: (err) => {
             console.log('Erro ao alterar' + JSON.stringify(err));
           }
-        });        
+        });
       }
     }
   }
@@ -62,7 +62,7 @@ export class CategoriaFormComponent {
           console.log('Erro ao excluir' + JSON.stringify(err));
         }
       });
-    }      
+    }
   }
 
 }

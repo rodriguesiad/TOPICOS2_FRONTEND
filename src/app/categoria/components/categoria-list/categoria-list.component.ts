@@ -33,7 +33,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private categoriaService: CategoriaService, public dialog: MatDialog) {}
+  constructor(private categoriaService: CategoriaService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -51,34 +51,34 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   carregarDadosPaginados() {
     this.categoriaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
-    .pipe(
-      tap(categorias => {
-        this.categorias = categorias,
-        this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
-      }),
-      catchError( err => {
-        console.log("Erro carregando categorias");
-        alert("Erro carregando categorias.");
-        return throwError((() => err));
-      })
-    )
-    .subscribe();
+      .pipe(
+        tap(categorias => {
+          this.categorias = categorias,
+            this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
+        }),
+        catchError(err => {
+          console.log("Erro carregando categorias");
+          alert("Erro carregando categorias.");
+          return throwError((() => err));
+        })
+      )
+      .subscribe();
   }
 
   carregarTotal() {
     this.categoriaService.count()
-    .pipe(
-      tap(count => this.total = count),
-      catchError( err => {
-        console.log("Erro carregando o total de categorias");
-        alert("Erro carregando categorias.");
-        return throwError((() => err));
-      })
-    )
-    .subscribe()
+      .pipe(
+        tap(count => this.total = count),
+        catchError(err => {
+          console.log("Erro carregando o total de categorias");
+          alert("Erro carregando categorias.");
+          return throwError((() => err));
+        })
+      )
+      .subscribe()
   }
 
-  openDialog(event: Event, categoria: Categoria){
+  openDialog(event: Event, categoria: Categoria) {
     let situacao = categoria.ativo ? 'desativar' : 'ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
@@ -86,23 +86,23 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
       height: "225px",
       data: {
         message: 'Você realmente deseja ' + situacao + ' a categoria  "' + categoria.nome + '"?'
-      } 
+      }
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
+      if (result == true) {
         this.categoriaService.alterarSituacao(categoria, !categoria.ativo)
-        .pipe(
-          tap(ca => categoria.ativo = ca.ativo),
-          catchError( err => {
-            console.log("Erro ao" + situacao+ " categoria.");
-            alert("Erro ao" + situacao+ " categoria.");
-            return throwError((() => err));
-          })
-        )
-        .subscribe();
-      
-        
+          .pipe(
+            tap(ca => categoria.ativo = ca.ativo),
+            catchError(err => {
+              console.log("Erro ao" + situacao + " categoria.");
+              alert("Erro ao" + situacao + " categoria.");
+              return throwError((() => err));
+            })
+          )
+          .subscribe();
+
+
       }
     });
   }

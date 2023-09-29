@@ -24,7 +24,7 @@ mat-card {
 button[mat-raised-button] {
     width: 120px;
     font-size: 12px;
-    background-color: var(--default-green); 
+    background-color: var(--default-green);
     color: white;
     margin: 5px 5px 0 0;
 }
@@ -84,5 +84,5 @@ table {
 }
 
 ::ng-deep .mdc-switch:enabled .mdc-switch__track {
-    background-color: var(--default-green); 
+    background-color: var(--default-green);
 }
