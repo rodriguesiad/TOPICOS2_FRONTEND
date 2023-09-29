@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, tap, throwError } from 'rxjs';
+import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
 
@@ -15,10 +17,12 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   categorias: Categoria[] = [];
   total = 0;
 
+  ativo = false;
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private categoriaService: CategoriaService) {}
+  constructor(private categoriaService: CategoriaService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -58,6 +62,34 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
       })
     )
     .subscribe()
+  }
+
+  openDialog(categoria: Categoria){
+    let situacao = categoria.ativo ? 'desativar' : 'ativar';
+
+    const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
+      width: "350px",
+      height: "225px",
+      data: {
+        message: 'Você realmente deseja ' + situacao + ' a categoria  "' + categoria.nome + '"?'
+      } 
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        this.categoriaService.alterarSituacao(categoria, !categoria.ativo)
+        .pipe(
+          tap(),
+          catchError( err => {
+            console.log("Erro ao" + situacao+ " categoria.");
+            alert("Erro ao" + situacao+ " categoria.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
+      }
+    });
+
   }
 
 }

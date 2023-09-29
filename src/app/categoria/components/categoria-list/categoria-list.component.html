@@ -28,7 +28,8 @@
                 routerLink="/categorias/edit/{{categoria.id}}">
                 <mat-icon>edit</mat-icon>
               </button>
-              <mat-slide-toggle [checked]="categoria.ativo"></mat-slide-toggle>
+
+              <mat-slide-toggle [checked]="categoria.ativo"  (click)="openDialog(categoria)"></mat-slide-toggle>   
             </div>
           </td>
         </ng-container>

@@ -10,14 +10,14 @@ mat-card {
 .flex-container {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-end;
     width: 100%;
 }
 
 .button-container {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding-right: 25px;
 }
 
@@ -81,4 +81,8 @@ table {
     border: 1px solid rgb(224, 223, 223);
     border-radius: 2px;
     padding: 5px;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track {
+    background-color: var(--default-green); 
 }
