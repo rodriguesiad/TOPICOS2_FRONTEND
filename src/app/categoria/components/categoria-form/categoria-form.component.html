@@ -1,30 +1,38 @@
-<mat-toolbar class="centered-toolbar">Cadastro de Categoria</mat-toolbar>
-<div class="form-container">
-    <mat-card>
-        <mat-card-content>
-            <form [formGroup]="formGroup" >
-                <mat-form-field appearance="outline" class="full-width-input">
-                    <mat-label>Nome</mat-label>
-                    <input matInput type="text" formControlName="nome" />
-                    <mat-error *ngIf="formGroup.get('nome') &&
-                formGroup.get('nome')?.invalid &&
-                formGroup.get('nome')?.touched">
-                        Nome é obrigatório.
-                    </mat-error>
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button style="color: var(--default-green);"
-                routerLink="/categorias/list">
-                CANCELAR
-            </button>
-            <button mat-raised-button
-                (click)="salvar()"
-                [disabled]="formGroup.invalid"
-                style="background-color: var(--default-green); color: white;">
-                SALVAR
-            </button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+<mat-card class="no-shadow pagina">
+    <div>
+        <mat-toolbar>
+          <div class="flex-container">
+            <span class="toolbar-title"> Cadastro de Categoria </span>
+          </div>
+        </mat-toolbar>
+    </div>
+    <div class="form-container">
+        <mat-card class="form">
+            <mat-card-content>
+                <form [formGroup]="formGroup" >
+                    <mat-form-field appearance="outline" class="full-width-input">
+                        <mat-label>Nome</mat-label>
+                        <input matInput type="text" formControlName="nome" />
+                        <mat-error *ngIf="formGroup.get('nome') &&
+                    formGroup.get('nome')?.invalid &&
+                    formGroup.get('nome')?.touched">
+                            Nome é obrigatório.
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button style="color: var(--default-green);"
+                    routerLink="/categorias/list">
+                    CANCELAR
+                </button>
+                <button mat-raised-button
+                    (click)="salvar()"
+                    [disabled]="formGroup.invalid"
+                    style="background-color: var(--default-green); color: white;">
+                    SALVAR
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</mat-card>
