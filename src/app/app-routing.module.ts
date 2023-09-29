@@ -32,6 +32,13 @@ const routes: Routes = [
       () => import('./raca/raca.module')
         .then(m => m.RacaModule)
   },
+
+  {
+    path: 'usuarios', loadChildren:
+      () => import('./usuario/usuario.module')
+        .then(m => m.UsuarioModule)
+  },
+  
 ];
 
 @NgModule({

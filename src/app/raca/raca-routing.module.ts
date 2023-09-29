@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'new', component: RacaFormComponent },
   { path: 'edit/:id', component: RacaFormComponent, resolve: { raca: racaResolver } }
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

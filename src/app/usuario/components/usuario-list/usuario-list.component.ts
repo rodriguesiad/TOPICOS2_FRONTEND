@@ -1,20 +1,16 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from '@angular/material/slide-toggle';
 import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
-
-import {
-  MatSlideToggleModule,
-  MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
-} from '@angular/material/slide-toggle';
-import { Raca } from 'src/app/models/raca.model';
-import { RacaService } from 'src/app/services/raca.service';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-raca-list',
-  templateUrl: './raca-list.component.html',
-  styleUrls: ['./raca-list.component.css'],
+  selector: 'app-usuario-list',
+  templateUrl: './usuario-list.component.html',
+  styleUrls: ['./usuario-list.component.css'],
   providers: [
     {
       provide: MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
@@ -22,9 +18,9 @@ import { RacaService } from 'src/app/services/raca.service';
     },
   ],
 })
-export class RacaListComponent implements OnInit, AfterViewInit {
+export class UsuarioListComponent  implements OnInit, AfterViewInit {
   tableColumns: string[] = ['nome-column', 'actions-column'];
-  racas: Raca[] = [];
+  usuarios: Usuario[] = [];
   total = 0;
 
   ativo = false;
@@ -34,7 +30,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private racaService: RacaService, public dialog: MatDialog) { }
+  constructor(private usuarioService: UsuarioService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -51,11 +47,11 @@ export class RacaListComponent implements OnInit, AfterViewInit {
   }
 
   carregarDadosPaginados() {
-    this.racaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+    this.usuarioService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
       .pipe(
-        tap(racas => {
-          this.racas = racas,
-            this.estadosAtivos = this.racas.map(raca => raca.ativo)
+        tap(usuarios => {
+          this.usuarios = usuarios,
+            this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
         }),
         catchError(err => {
           console.log("Erro carregando raças");
@@ -67,7 +63,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
   }
 
   carregarTotal() {
-    this.racaService.count()
+    this.usuarioService.count()
       .pipe(
         tap(count => this.total = count),
         catchError(err => {
@@ -79,22 +75,22 @@ export class RacaListComponent implements OnInit, AfterViewInit {
       .subscribe()
   }
 
-  openDialog(event: Event, raca: Raca) {
-    let situacao = raca.ativo ? 'desativar' : 'ativar';
+  openDialog(event: Event, usuario: Usuario) {
+    let situacao = usuario.ativo ? 'desativar' : 'ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
       width: "350px",
       height: "225px",
       data: {
-        message: 'Você realmente deseja ' + situacao + ' a raça  "' + raca.nome + '"?'
+        message: 'Você realmente deseja ' + situacao + ' o usuário  "' + usuario.nome + '"?'
       }
     })
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.racaService.alterarSituacao(raca, !raca.ativo)
+        this.usuarioService.alterarSituacao(usuario, !usuario.ativo)
           .pipe(
-            tap(ca => raca.ativo = ca.ativo),
+            tap(ca => usuario.ativo = ca.ativo),
             catchError(err => {
               console.log("Erro ao" + situacao + " raça.");
               alert("Erro ao" + situacao + " raça.");
