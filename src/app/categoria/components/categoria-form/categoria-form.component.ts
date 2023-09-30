@@ -46,7 +46,7 @@ export class CategoriaFormComponent {
           error: (err) => {
             console.log('Erro ao alterar' + JSON.stringify(err));
           }
-        });        
+        });
       }
     }
   }
@@ -62,7 +62,7 @@ export class CategoriaFormComponent {
           console.log('Erro ao excluir' + JSON.stringify(err));
         }
       });
-    }      
+    }
   }
 
 }

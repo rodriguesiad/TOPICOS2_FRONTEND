@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Cidade } from 'src/app/models/cidade.model';
-import { Estado } from 'src/app/models/estado.model';
-import { CidadeService } from 'src/app/services/cidade.service';
-import { EstadoService } from 'src/app/services/estado.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Cidade} from 'src/app/models/cidade.model';
+import {Estado} from 'src/app/models/estado.model';
+import {CidadeService} from 'src/app/services/cidade.service';
+import {EstadoService} from 'src/app/services/estado.service';
 
 @Component({
   selector: 'app-cidade-form',
@@ -21,34 +21,33 @@ export class CidadeFormComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute) {
 
-              this.formGroup = this.formBuilder.group({
-                id:[null],
-                nome:[ '', Validators.required],
-                estado: [null]
-              })
+    this.formGroup = this.formBuilder.group({
+      id: [null],
+      nome: ['', Validators.required],
+      estado: [null]
+    })
 
   }
 
   ngOnInit(): void {
-
     // buscando todos os estados para o select
     this.estadoService.findAll().subscribe(data => {
       this.estados = data;
       this.initializeForm();
     });
   }
+
   initializeForm() {
     const cidade: Cidade = this.activatedRoute.snapshot.data['cidade'];
 
-    // selectionando o estado 
+    // selectionando o estado
     const estado = this.estados.find(estado => estado.id === (cidade?.estado?.id || null));
 
     this.formGroup = this.formBuilder.group({
-      id:[(cidade && cidade.id) ? cidade.id : null],
-      nome:[(cidade && cidade.nome) ? cidade.nome : '', Validators.required],
-      estado:[estado]
+      id: [(cidade && cidade.id) ? cidade.id : null],
+      nome: [(cidade && cidade.nome) ? cidade.nome : '', Validators.required],
+      estado: [estado]
     })
-    console.log(this.formGroup.value);
   }
 
   salvar() {
@@ -71,7 +70,7 @@ export class CidadeFormComponent implements OnInit {
           error: (err) => {
             console.log('Erro ao alterar' + JSON.stringify(err));
           }
-        });        
+        });
       }
     }
   }
@@ -87,7 +86,7 @@ export class CidadeFormComponent implements OnInit {
           console.log('Erro ao excluir' + JSON.stringify(err));
         }
       });
-    }      
+    }
   }
 
 }

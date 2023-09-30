@@ -9,7 +9,7 @@ import { CidadeService } from 'src/app/services/cidade.service';
 })
 export class CidadeListComponent {
 
-  tableColumns: string[] = ['id-column', 'nome-column', 'estado-column'];
+  tableColumns: string[] = ['id-column', 'nome-column', 'estado-column', 'actions-column'];
   cidades: Cidade[] = [];
 
   constructor(private cidadeService: CidadeService) {}

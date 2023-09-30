@@ -11,6 +11,10 @@ export class PixRecebimentoService {
   private baseURL: string =  'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
+  getByInativo(): Observable<PixRecebimento[]> {
+    return this.http.get<PixRecebimento[]>(`${this.baseURL}/metodo-recebimento/pix/get-inativos`);
+  }
+
   findByAtivo(): Observable<PixRecebimento> {
     return this.http.get<PixRecebimento>(`${this.baseURL}/metodo-recebimento/pix`);
   }

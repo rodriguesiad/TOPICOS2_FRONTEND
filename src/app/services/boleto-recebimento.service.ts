@@ -12,6 +12,10 @@ export class BoletoRecebimentoService {
 
   constructor(private http: HttpClient) { }
 
+  getByInativo(): Observable<BoletoRecebimento[]> {
+    return this.http.get<BoletoRecebimento[]>(`${this.baseURL}/metodo-recebimento/boleto/get-inativos`);
+  }
+
   findByAtivo(): Observable<BoletoRecebimento> {
     return this.http.get<BoletoRecebimento>(`${this.baseURL}/metodo-recebimento/boleto`);
   }

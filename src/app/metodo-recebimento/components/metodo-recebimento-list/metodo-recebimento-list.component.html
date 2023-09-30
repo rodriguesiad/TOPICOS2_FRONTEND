@@ -2,92 +2,117 @@
   <div>
     <mat-toolbar>
       <div class="flex-container">
-        <span class="toolbar-title"> Métodos de Recebimento </span>
-        <button mat-fab color="accent" routerLink="/metodos-recebimento/new">
-          <mat-icon>add</mat-icon>
-        </button>
+        <span class="toolbar-title"> Histórico de Métodos de Recebimento </span>
       </div>
     </mat-toolbar>
   </div>
+  <mat-tab-group>
+    <mat-tab class="conteinerBoleto" label="Boleto">
+      <div style="padding: 5px;">
+        <table mat-table [dataSource]="metodosBoleto" class="mat-elevation-z8 no-shadow rounded-corners">
 
-  <div class="card-metodo">
-    <mat-tab-group>
-      <mat-tab class="conteinerBoleto" label="Boleto">
-        <form [formGroup]="boletoRecebimento" >
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="first-width-input">
-              <mat-label for="nome_id">Nome</mat-label>
-              <input matInput type="text" id="nome_id" formControlName="nome" />
-            </mat-form-field>
-          </div>
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">CNPJ</mat-label>
-              <input matInput type="text" id="cnpj_id" formControlName="cnpj" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">Banco</mat-label>
-              <input matInput type="text" id="banco_id" formControlName="banco" />
-            </mat-form-field>
-          </div>
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">Agência</mat-label>
-              <input matInput type="text" id="agencia_id" formControlName="agencia" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">Conta</mat-label>
-              <input matInput type="text" id="conta_id" formControlName="conta" />
-            </mat-form-field>
-          </div>
-      </form>
-        <mat-card-actions>
-          <button mat-raised-button style="color: var(--default-green);"
-                  routerLink="/metodos-recebimento/list">
-            CANCELAR
-          </button>
-          <button mat-raised-button
-                  color="primary"
-                  (click)="salvarBoletoRecebimento()"
-                  [disabled]="boletoRecebimento.invalid"
-                  style="background-color: var(--default-green);">
-            SALVAR
-          </button>
-        </mat-card-actions>
-        </mat-tab>
+          <!-- Nome Column -->
+          <ng-container matColumnDef="nome-column">
+            <th mat-header-cell *matHeaderCellDef> Nome</th>
+            <td mat-cell *matCellDef="let boleto">
+              {{boleto.nome}}
+            </td>
+          </ng-container>
 
-        <mat-tab label="Pix">
-          <form [formGroup]="pixRecebimento" >
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="first-width-input">
-              <mat-label for="nome_id">Tipo</mat-label>
-              <input matInput type="text" id="tipo_id" formControlName="chave" />
-            </mat-form-field>
-          </div>
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="first-width-input">
-              <mat-label for="nome_id">Chave</mat-label>
-              <input matInput type="text" id="chave_id" formControlName="tipoChavePix" />
-            </mat-form-field>
-          </div>
-          </form>
+          <ng-container matColumnDef="cnpj-column">
+            <th mat-header-cell *matHeaderCellDef> CNPJ</th>
+            <td mat-cell *matCellDef="let boleto">
+              {{boleto.cnpj}}
+            </td>
+          </ng-container>
 
-            <mat-card-actions>
-              <button mat-raised-button style="color: var(--default-green);"
-                      routerLink="/metodos-recebimento/list">
-                CANCELAR
-              </button>
-              <button mat-raised-button
-                      color="primary"
-                      (click)="salvarPixRecebimento()"
-                      [disabled]="pixRecebimento.invalid"
-                      style="background-color: var(--default-green);">
-                SALVAR
-              </button>
-            </mat-card-actions>
+          <ng-container matColumnDef="banco-column">
+            <th mat-header-cell *matHeaderCellDef> Banco</th>
+            <td mat-cell *matCellDef="let boleto">
+              {{boleto.banco}}
+            </td>
+          </ng-container>
 
-        </mat-tab>
-    </mat-tab-group>
-  </div>
+          <ng-container matColumnDef="agencia-column">
+            <th mat-header-cell *matHeaderCellDef> Agência</th>
+            <td mat-cell *matCellDef="let boleto">
+              {{boleto.agencia}}
+            </td>
+          </ng-container>
 
+          <ng-container matColumnDef="conta-column">
+            <th mat-header-cell *matHeaderCellDef> Conta</th>
+            <td mat-cell *matCellDef="let boleto">
+              {{boleto.conta}}
+            </td>
+          </ng-container>
+
+          <!-- Ações Column -->
+          <ng-container matColumnDef="actions-column">
+            <th mat-header-cell *matHeaderCellDef> Ações</th>
+            <td mat-cell *matCellDef="let categoria">
+              <div class="edit-button-container">
+                <button mat-mini-fab color="black" aria-label="Editar categoria" class="no-shadow"
+                        routerLink="/categorias/edit/{{categoria.id}}">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="tableColumnsBoleto"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableColumnsBoleto;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Selecione a página" #paginator>
+        </mat-paginator>
+
+      </div>
+    </mat-tab>
+    <mat-tab label="Pix">
+      <div style="padding: 5px;">
+        <table mat-table [dataSource]="metodosPix" class="mat-elevation-z8 no-shadow rounded-corners">
+
+          <!-- Nome Column -->
+          <ng-container matColumnDef="tipo-column">
+            <th mat-header-cell *matHeaderCellDef> Tipo</th>
+            <td mat-cell *matCellDef="let pix">
+              {{pix.tipoChavePix}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="chave-column">
+            <th mat-header-cell *matHeaderCellDef> Chave</th>
+            <td mat-cell *matCellDef="let pix">
+              {{pix.chave}}
+            </td>
+          </ng-container>
+
+          <!-- Ações Column -->
+          <ng-container matColumnDef="actions-column">
+            <th mat-header-cell *matHeaderCellDef> Ações</th>
+            <td mat-cell *matCellDef="let categoria">
+              <div class="edit-button-container">
+                <button mat-mini-fab color="black" aria-label="Editar categoria" class="no-shadow"
+                        routerLink="/categorias/edit/{{categoria.id}}">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="tableColumnsPix"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableColumnsPix;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Selecione a página" #paginator>
+        </mat-paginator>
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
+
+<button mat-raised-button style="color: var(--default-green);"
+        id="buttonVoltar"
+        routerLink="/metodos-recebimento/show">
+  VOLTAR
+</button>

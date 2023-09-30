@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Categoria} from "../../../models/categoria.model";
 import {CategoriaService} from "../../../services/categoria.service";
 import {BoletoRecebimento} from "../../../models/boleto-recebimento.model";
@@ -8,62 +8,54 @@ import {BoletoRecebimentoService} from "../../../services/boleto-recebimento.ser
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, Observer} from "rxjs";
-
-export interface ExampleTab {
-  label: string;
-}
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-metodo-recebimento-list',
   templateUrl: './metodo-recebimento-list.component.html',
   styleUrls: ['./metodo-recebimento-list.component.css']
 })
-export class MetodoRecebimentoListComponent {
-  asyncTabs: Observable<ExampleTab[]>;
+export class MetodoRecebimentoListComponent implements OnInit, AfterViewInit {
+  asyncTabs: Observable<string[]>;
+  tableColumnsPix: string[] = ['tipo-column', 'chave-column', 'actions-column'];
+  tableColumnsBoleto: string[] = ['nome-column', 'cnpj-column', 'banco-column', 'agencia-column', 'conta-column', 'actions-column'];
+  metodosPix: PixRecebimento[] = [];
+  metodosBoleto: BoletoRecebimento[] = [];
 
-  boletoRecebimento: FormGroup;
-  pixRecebimento: FormGroup;
-
-  constructor(private categoriaService: CategoriaService,
-              private boletoService: BoletoRecebimentoService,
-              private pixService: PixRecebimentoService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private activatedRoute: ActivatedRoute
-  ) {
-    const pix: PixRecebimento = this.activatedRoute.snapshot.data['pix_recebimento'];
-    const boleto: BoletoRecebimento = this.activatedRoute.snapshot.data['boleto_recebimento'];
-
-    this.boletoRecebimento = formBuilder.group({
-      id: [(boleto && boleto.id) ? boleto.id : null],
-      nome: [(boleto && boleto.nome) ? boleto.nome : '', Validators.required],
-      cnpj: [(boleto && boleto.cnpj) ? boleto.cnpj : '', Validators.required],
-      banco: [(boleto && boleto.banco) ? boleto.banco : '', Validators.required],
-      agencia: [(boleto && boleto.agencia) ? boleto.agencia : '', Validators.required],
-      conta: [(boleto && boleto.conta) ? boleto.conta : '', Validators.required]
-    });
-
-    this.pixRecebimento = formBuilder.group({
-      id: [(pix && pix.id) ? pix.id : null],
-      chave: [(pix && pix.chave) ? pix.chave : '', Validators.required],
-      tipoChavePix: [(pix && pix.tipoChavePix) ? pix.tipoChavePix : '', Validators.required],
-    });
-
-    this.asyncTabs = new Observable((observer: Observer<ExampleTab[]>) => {
+  constructor(
+    private pixService: PixRecebimentoService,
+    private boletoService: BoletoRecebimentoService
+              ) {
+    this.asyncTabs = new Observable((observer: Observer<string[]>) => {
       setTimeout(() => {
         observer.next([
-          {label: 'Boleto'},
-          {label: 'Pix'}
+          'Boleto',
+          'Pix'
         ]);
       }, 1000);
     });
   }
 
-  salvarBoletoRecebimento() {
+  ngOnInit(): void {
+    this.pixService.getByInativo().subscribe(data => {
+      this.metodosPix = data;
+    });
 
+    this.boletoService.getByInativo().subscribe(data => {
+      this.metodosBoleto = data;
+    });
   }
 
-  salvarPixRecebimento() {
+  dataSourcePix = new MatTableDataSource<PixRecebimento>(this.metodosPix);
+  dataSourceBoleto = new MatTableDataSource<BoletoRecebimento>(this.metodosBoleto);
 
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.dataSourcePix.paginator = this.paginator;
+      this.dataSourceBoleto.paginator = this.paginator;
+    }
   }
 }

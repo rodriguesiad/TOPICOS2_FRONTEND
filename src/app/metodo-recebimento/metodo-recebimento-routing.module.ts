@@ -6,11 +6,14 @@ import {boletoRecebimentoResolver} from "./resolver/boleto-recebimento-resolver"
 import {MetodoRecebimentoListComponent} from "./components/metodo-recebimento-list/metodo-recebimento-list.component";
 
 const routes: Routes = [
-  {path: 'new', component: MetodoRecebimentoListComponent},
+  {path: 'new', component: MetodoRecebimentoFormComponent},
   {
-    path: 'list',
-    component: MetodoRecebimentoListComponent,
+    path: 'show',
+    component: MetodoRecebimentoFormComponent,
     resolve: {pix_recebimento: pixRecebimentoResolver, boleto_recebimento: boletoRecebimentoResolver}
+  },
+  {
+    path: 'list', component: MetodoRecebimentoListComponent
   }
 ];
 
