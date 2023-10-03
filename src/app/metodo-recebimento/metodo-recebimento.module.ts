@@ -17,11 +17,19 @@ import {MatInputModule} from "@angular/material/input";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+import { BoletoRecebimentoFormComponent } from './components/metodo-recebimento-form/boleto-recebimento-form/boleto-recebimento-form.component';
+import { PixRecebimentoFormComponent } from './components/metodo-recebimento-form/pix-recebimento-form/pix-recebimento-form.component';
+import { PixRecebimentoListComponent } from './components/metodo-recebimento-list/pix-recebimento-list/pix-recebimento-list.component';
+import { BoletoRecebimentoListComponent } from './components/metodo-recebimento-list/boleto-recebimento-list/boleto-recebimento-list.component';
 
 @NgModule({
   declarations: [
     MetodoRecebimentoFormComponent,
-    MetodoRecebimentoListComponent
+    MetodoRecebimentoListComponent,
+    BoletoRecebimentoFormComponent,
+    BoletoRecebimentoListComponent,
+    PixRecebimentoFormComponent,
+    PixRecebimentoListComponent,
   ],
   imports: [
     CommonModule,

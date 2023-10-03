@@ -1,0 +1,24 @@
+.edit-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.mat-column {
+  width: 50%;
+}
+
+.mat-column-actions-column {
+  width: 15%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  margin-right: 10px;
+}

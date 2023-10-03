@@ -6,7 +6,9 @@ import {boletoRecebimentoResolver} from "./resolver/boleto-recebimento-resolver"
 import {MetodoRecebimentoListComponent} from "./components/metodo-recebimento-list/metodo-recebimento-list.component";
 
 const routes: Routes = [
-  {path: 'new', component: MetodoRecebimentoFormComponent},
+  {path: 'new', component: MetodoRecebimentoFormComponent, data: {
+    isCadastro: true
+    }},
   {
     path: 'show',
     component: MetodoRecebimentoFormComponent,
