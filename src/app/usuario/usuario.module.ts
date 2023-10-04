@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CategoriaRoutingModule } from './categoria-routing.module';
-import { CategoriaListComponent } from './components/categoria-list/categoria-list.component';
-import { CategoriaFormComponent } from './components/categoria-form/categoria-form.component';
+import { UsuarioRoutingModule } from './usuario-routing.module';
+import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,14 +17,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
+
 @NgModule({
   declarations: [
-    CategoriaListComponent,
-    CategoriaFormComponent
+    UsuarioListComponent,
+    UsuarioFormComponent
   ],
   imports: [
     CommonModule,
-    CategoriaRoutingModule,
+    UsuarioRoutingModule,
     MatTableModule,
     MatToolbarModule,
     ReactiveFormsModule,
@@ -38,4 +41,4 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule
   ]
 })
-export class CategoriaModule { }
+export class UsuarioModule { }

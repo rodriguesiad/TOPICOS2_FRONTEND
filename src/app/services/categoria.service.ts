@@ -36,6 +36,10 @@ export class CategoriaService {
     return this.http.put<Categoria>(`${this.baseURL}/categorias/${categoria.id}`, categoria );
   }
 
+  alterarSituacao(categoria: Categoria, situacao: boolean): Observable<Categoria> {
+    return this.http.put<Categoria>(`${this.baseURL}/categorias/situacao/${categoria.id}`, situacao );
+  }
+
   delete(cidade: Categoria): Observable<any> {
     return this.http.delete<Categoria>(`${this.baseURL}/categorias/${cidade.id}`);
   }

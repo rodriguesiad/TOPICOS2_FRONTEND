@@ -3,14 +3,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
-import { Categoria } from 'src/app/models/categoria.model';
-import { CategoriaService } from 'src/app/services/categoria.service';
-import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from '@angular/material/slide-toggle';
+
+import {
+  MatSlideToggleModule,
+  MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
+} from '@angular/material/slide-toggle';
+import { Raca } from 'src/app/models/raca.model';
+import { RacaService } from 'src/app/services/raca.service';
 
 @Component({
-  selector: 'app-categoria-list',
-  templateUrl: './categoria-list.component.html',
-  styleUrls: ['./categoria-list.component.css'],
+  selector: 'app-raca-list',
+  templateUrl: './raca-list.component.html',
+  styleUrls: ['./raca-list.component.css'],
   providers: [
     {
       provide: MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
@@ -18,9 +22,9 @@ import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from '@angular/material/slide-toggle'
     },
   ],
 })
-export class CategoriaListComponent implements OnInit, AfterViewInit {
+export class RacaListComponent implements OnInit, AfterViewInit {
   tableColumns: string[] = ['nome-column', 'actions-column'];
-  categorias: Categoria[] = [];
+  racas: Raca[] = [];
   total = 0;
 
   ativo = false;
@@ -30,7 +34,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private categoriaService: CategoriaService, public dialog: MatDialog) { }
+  constructor(private racaService: RacaService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -47,15 +51,15 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   }
 
   carregarDadosPaginados() {
-    this.categoriaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+    this.racaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
       .pipe(
-        tap(categorias => {
-          this.categorias = categorias,
-            this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
+        tap(racas => {
+          this.racas = racas,
+            this.estadosAtivos = this.racas.map(raca => raca.ativo)
         }),
         catchError(err => {
-          console.log("Erro carregando categorias");
-          alert("Erro carregando categorias.");
+          console.log("Erro carregando raças");
+          alert("Erro carregando raças.");
           return throwError((() => err));
         })
       )
@@ -63,37 +67,37 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   }
 
   carregarTotal() {
-    this.categoriaService.count()
+    this.racaService.count()
       .pipe(
         tap(count => this.total = count),
         catchError(err => {
-          console.log("Erro carregando o total de categorias");
-          alert("Erro carregando categorias.");
+          console.log("Erro carregando o total de raças");
+          alert("Erro carregando raças.");
           return throwError((() => err));
         })
       )
       .subscribe()
   }
 
-  openDialog(event: Event, categoria: Categoria) {
-    let situacao = categoria.ativo ? 'desativar' : 'ativar';
+  openDialog(event: Event, raca: Raca) {
+    let situacao = raca.ativo ? 'desativar' : 'ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
       width: "350px",
       height: "225px",
       data: {
-        message: 'Você realmente deseja ' + situacao + ' a categoria  "' + categoria.nome + '"?'
+        message: 'Você realmente deseja ' + situacao + ' a raça  "' + raca.nome + '"?'
       }
     })
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.categoriaService.alterarSituacao(categoria, !categoria.ativo)
+        this.racaService.alterarSituacao(raca, !raca.ativo)
           .pipe(
-            tap(ca => categoria.ativo = ca.ativo),
+            tap(ca => raca.ativo = ca.ativo),
             catchError(err => {
-              console.log("Erro ao" + situacao + " categoria.");
-              alert("Erro ao" + situacao + " categoria.");
+              console.log("Erro ao" + situacao + " raça.");
+              alert("Erro ao" + situacao + " raça.");
               return throwError((() => err));
             })
           )

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CategoriaRoutingModule } from './categoria-routing.module';
-import { CategoriaListComponent } from './components/categoria-list/categoria-list.component';
-import { CategoriaFormComponent } from './components/categoria-form/categoria-form.component';
+import { RacaRoutingModule } from './raca-routing.module';
+import { RacaFormComponent } from './components/raca-form/raca-form.component';
+import { RacaListComponent } from './components/raca-list/raca-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,14 +16,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
 @NgModule({
   declarations: [
-    CategoriaListComponent,
-    CategoriaFormComponent
+    RacaFormComponent,
+    RacaListComponent
   ],
   imports: [
     CommonModule,
-    CategoriaRoutingModule,
+    RacaRoutingModule,
     MatTableModule,
     MatToolbarModule,
     ReactiveFormsModule,
@@ -38,4 +39,4 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule
   ]
 })
-export class CategoriaModule { }
+export class RacaModule { }

@@ -8,7 +8,7 @@
   </div>
 
   <div style="padding: 5px;">
-    <div class="table-container no-shadow rounded-corners" >
+    <div class="table-container no-shadow rounded-corners">
       <table mat-table [dataSource]="categorias">
 
         <!-- Nome Column -->
@@ -18,32 +18,29 @@
             {{categoria.nome}}
           </td>
         </ng-container>
-  
+
         <!-- Ações Column -->
         <ng-container matColumnDef="actions-column">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let categoria">
             <div class="edit-button-container">
-              <button mat-mini-fab color="black" aria-label="Editar categoria" class="no-shadow"
+              <button [disabled]="!categoria.ativo" mat-mini-fab color="black" aria-label="Editar categoria" class="no-shadow"
                 routerLink="/categorias/edit/{{categoria.id}}">
                 <mat-icon>edit</mat-icon>
               </button>
-              <mat-slide-toggle [checked]="categoria.ativo"></mat-slide-toggle>
+
+              <mat-slide-toggle [checked]="categoria.ativo" (click)="openDialog($event, categoria)"></mat-slide-toggle>
             </div>
           </td>
         </ng-container>
-  
+
         <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" 
-                     [pageSize]="5" 
-                     [length]="total" 
-                     showFirstLastButtons 
-                     aria-label="Selecione a página" #paginator
-                     style="border-top: 1px solid rgb(224, 223, 223);">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [length]="total" showFirstLastButtons
+        aria-label="Selecione a página" #paginator style="border-top: 1px solid rgb(224, 223, 223);">
       </mat-paginator>
-  
+
     </div>
   </div>
   <div class="button-container">
