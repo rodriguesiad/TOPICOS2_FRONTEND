@@ -25,6 +25,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseURL}/usuarios/${id}`);
   }
 
+  findByIdPorAdmin(id: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseURL}/usuarios/admin/${id}`);
+  }
+
   save(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuario);
   }

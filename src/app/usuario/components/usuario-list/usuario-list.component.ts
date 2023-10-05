@@ -5,6 +5,7 @@ import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from '@angular/material/slide-toggle
 import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Usuario } from 'src/app/models/usuario.model';
+import { PerfilEnum } from 'src/app/models/perfil.enum';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -19,7 +20,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   ],
 })
 export class UsuarioListComponent  implements OnInit, AfterViewInit {
-  tableColumns: string[] = ['nome-column', 'actions-column'];
+  tableColumns: string[] = ['nome-column', 'email-column', 'cpf-column', 'perfis-column', 'actions-column'];
   usuarios: Usuario[] = [];
   total = 0;
 
@@ -73,6 +74,16 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
         })
       )
       .subscribe()
+  }
+
+  getPerfisText(perfis: number[]): string {
+    
+    const perfisText = perfis.map(perfil => {
+      const perfilObj = PerfilEnum.items.find((item: { text: string; value: number }) => item.value === perfil);
+      return perfilObj ? perfilObj.text : '';
+    });
+
+    return perfisText.join(', ');
   }
 
   openDialog(event: Event, usuario: Usuario) {

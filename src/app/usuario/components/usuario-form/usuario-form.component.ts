@@ -6,6 +6,7 @@ import { PerfilEnum } from 'src/app/models/perfil.enum';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-usuario-form',
@@ -28,10 +29,14 @@ export class UsuarioFormComponent implements OnInit {
 
   selectedPerfil = this.perfis[1].value;
 
+  usuario: Usuario;
+
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
+
+    this.usuario = this.activatedRoute.snapshot.data['usuario'];
 
     this.formGroup = formBuilder.group({
       id: [null],
@@ -52,31 +57,41 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   initializeForm() {
-    const usuario: Usuario = this.activatedRoute.snapshot.data['usuario'];
-
     this.formGroup = this.formBuilder.group({
-      id: [(usuario && usuario.id) ? usuario.id : null],
-      nome: [(usuario && usuario.nome) ? usuario.nome : '', Validators.required],
-      email: [(usuario && usuario.email) ? usuario.email : '', Validators.required],
-      cpf: [(usuario && usuario.cpf) ? usuario.cpf : '', Validators.required],
-      senha: [(usuario && usuario.senha) ? usuario.senha : '', Validators.required],
-      dataNascimento: [(usuario && usuario.dataNascimento) ? usuario.dataNascimento : null],
-      telefones: [(usuario && usuario.telefones) ? usuario.telefones : null],
-      perfis: [(usuario && usuario.perfis) ? usuario.perfis : null, Validators.required],
-      ativo: [(usuario && usuario.ativo) ? usuario.ativo : null]
+      id: [(this.usuario && this.usuario.id) ? this.usuario.id : null],
+      nome: [(this.usuario && this.usuario.nome) ? this.usuario.nome : '', Validators.required],
+      email: [(this.usuario && this.usuario.email) ? this.usuario.email : '', Validators.required],
+      cpf: [(this.usuario && this.usuario.cpf) ? this.usuario.cpf : '', Validators.required],
+      senha: [(this.usuario && this.usuario.senha) ? 'Visualização indisponível. Se deseja alterar, escreva uma nova senha.' : ''],
+      dataNascimento: [(this.usuario && this.usuario.dataNascimento) ? this.usuario.dataNascimento : null],
+      telefones: [(this.usuario && this.usuario.telefones) ? this.usuario.telefones : null],
+      perfis: [(this.usuario && this.usuario.perfis) ? this.usuario.perfis : null, Validators.required],
+      ativo: [(this.usuario && this.usuario.ativo) ? this.usuario.ativo : null]
     });
+
+    if (this.usuario?.id !== null) {
+      this.formGroup?.get('senha')?.clearValidators();
+    } else {
+      this.formGroup?.get('senha')?.setValidators([Validators.required]);
+    }
+
+    this.formGroup?.get('senha')?.updateValueAndValidity();
 
   }
 
   salvar() {
     if (this.formGroup.valid) {
-      const usuario = this.formGroup.value;
+      const usuarioNovo = this.formGroup.value;
 
-      console.log(usuario);
-      
+      const dataFormatada = new DatePipe('pt-BR').transform(usuarioNovo.dataNascimento, 'yyyy-MM-dd');
+      usuarioNovo.dataNascimento = dataFormatada;
 
-      if (usuario.id == null) {
-        this.usuarioService.save(usuario).subscribe({
+      if(usuarioNovo.senha == 'Visualização indisponível. Se deseja alterar, escreva uma nova senha.'){
+        usuarioNovo.senha = this.usuario.senha ;
+      }
+
+      if (usuarioNovo.id == null) {
+        this.usuarioService.save(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
             this.router.navigateByUrl('/usuarios/list');
           },
@@ -85,7 +100,7 @@ export class UsuarioFormComponent implements OnInit {
           }
         });
       } else {
-        this.usuarioService.update(usuario).subscribe({
+        this.usuarioService.update(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
             this.router.navigateByUrl('/usuarios/list');
           },

@@ -6,5 +6,5 @@ import { UsuarioService } from "src/app/services/usuario.service";
 
 export const usuarioResolver: ResolveFn<Usuario> = 
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-        return inject(UsuarioService).findById(route.paramMap.get('id')!);
+        return inject(UsuarioService).findByIdPorAdmin(route.paramMap.get('id')!);
     };

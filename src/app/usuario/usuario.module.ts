@@ -18,8 +18,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePtBr from '@angular/common/locales/pt';
 
-
+// Registre o local 'pt-BR'
+registerLocaleData(localePtBr);
 
 
 @NgModule({
@@ -45,6 +49,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatSelectModule,
     
-  ]
+  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
 })
 export class UsuarioModule { }

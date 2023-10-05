@@ -2,7 +2,7 @@
     <div>
         <mat-toolbar>
             <div class="flex-container">
-                <span class="toolbar-title"> Cadastro de Usuários </span>
+                <span class="toolbar-title"> Cadastro de Usuário </span>
             </div>
         </mat-toolbar>
     </div>
@@ -19,6 +19,7 @@
                             Nome é obrigatório.
                         </mat-error>
                     </mat-form-field>
+
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>E-mail</mat-label>
                         <input matInput type="text" formControlName="email" />
@@ -28,6 +29,7 @@
                             E-mail é obrigatório.
                         </mat-error>
                     </mat-form-field>
+
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>CPF</mat-label>
                         <input matInput type="text" formControlName="cpf" />
@@ -37,6 +39,7 @@
                             CPF é obrigatório.
                         </mat-error>
                     </mat-form-field>
+
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Senha</mat-label>
                         <input matInput type="text" formControlName="senha" />
@@ -46,12 +49,14 @@
                             Senha é obrigatório.
                         </mat-error>
                     </mat-form-field>
+
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Data de Nascimento</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="dataNascimento" [max]="maxDate">
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
+
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Perfis</mat-label>
                         <mat-select formControlName="perfis" multiple>
