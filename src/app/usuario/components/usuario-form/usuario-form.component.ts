@@ -38,6 +38,10 @@ export class UsuarioFormComponent implements OnInit {
 
     this.usuario = this.activatedRoute.snapshot.data['usuario'];
 
+    if(!this.usuario?.perfis?.includes(1)){
+      this.perfis = this.perfis.filter(item => item.value !== 1);
+    }
+
     this.formGroup = formBuilder.group({
       id: [null],
       nome: ['', Validators.required],
