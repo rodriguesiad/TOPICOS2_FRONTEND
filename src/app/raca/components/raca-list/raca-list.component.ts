@@ -1,15 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 
-import {
-  MatSlideToggleModule,
-  MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS,
-} from '@angular/material/slide-toggle';
 import { Raca } from 'src/app/models/raca.model';
 import { RacaService } from 'src/app/services/raca.service';
+import {MatPaginator} from "@angular/material/paginator";
+import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-raca-list',

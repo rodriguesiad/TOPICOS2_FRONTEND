@@ -9,6 +9,7 @@
 mat-card-actions {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 button[mat-raised-button] {

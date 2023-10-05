@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from '@angular/material/slide-toggle';
 import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Usuario } from 'src/app/models/usuario.model';
 import { PerfilEnum } from 'src/app/models/perfil.enum';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import {MatPaginator} from "@angular/material/paginator";
+import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-usuario-list',
@@ -77,7 +77,7 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
   }
 
   getPerfisText(perfis: number[]): string {
-    
+
     const perfisText = perfis.map(perfil => {
       const perfilObj = PerfilEnum.items.find((item: { text: string; value: number }) => item.value === perfil);
       return perfilObj ? perfilObj.text : '';

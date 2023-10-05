@@ -6,7 +6,7 @@
       </div>
     </mat-toolbar>
   </div>
-  <mat-tab-group>
+  <mat-tab-group [selectedIndex]="getSelectedTabIndex()" (selectedTabChange)="onTabChange($event)">
     <mat-tab class="conteinerBoleto" label="Boleto">
       <app-boleto-recebimento-list></app-boleto-recebimento-list>
     </mat-tab>

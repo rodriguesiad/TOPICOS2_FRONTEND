@@ -9,7 +9,7 @@
   </mat-toolbar>
 
   <div class="card-metodo">
-    <mat-tab-group>
+    <mat-tab-group [selectedIndex]="getSelectedTabIndex()" (selectedTabChange)="onTabChange($event)">
       <mat-tab label="Boleto">
         <app-boleto-recebimento-form></app-boleto-recebimento-form>
       </mat-tab>

@@ -31,11 +31,17 @@ const routes: Routes = [
       () => import('./usuario/usuario.module')
         .then(m => m.UsuarioModule)
   },
-  
+
   {
     path: 'racas', loadChildren:
       () => import('./raca/raca.module')
         .then(m => m.RacaModule)
+  },
+
+  {
+    path: 'metodos-recebimento', loadChildren:
+      () => import('./metodo-recebimento/metodo-recebimento.module')
+        .then(m => m.MetodoRecebimentoModule)
   },
 ];
 

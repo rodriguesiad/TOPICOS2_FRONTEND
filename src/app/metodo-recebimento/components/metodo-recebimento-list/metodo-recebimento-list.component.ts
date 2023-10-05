@@ -10,22 +10,20 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, Observer} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {TabSelectionService} from "../../../shared/services/tab-selection.service";
 
 @Component({
   selector: 'app-metodo-recebimento-list',
   templateUrl: './metodo-recebimento-list.component.html',
   styleUrls: ['./metodo-recebimento-list.component.css']
 })
-export class MetodoRecebimentoListComponent implements OnInit, AfterViewInit {
+export class MetodoRecebimentoListComponent {
   asyncTabs: Observable<string[]>;
-  tableColumnsPix: string[] = ['tipo-column', 'chave-column', 'actions-column'];
-  tableColumnsBoleto: string[] = ['nome-column', 'cnpj-column', 'banco-column', 'agencia-column', 'conta-column', 'actions-column'];
-  metodosPix: PixRecebimento[] = [];
-  metodosBoleto: BoletoRecebimento[] = [];
+  isEdicao: boolean = false;
 
   constructor(
-    private pixService: PixRecebimentoService,
-    private boletoService: BoletoRecebimentoService
+    private tabSelectionService: TabSelectionService,
+    private activatedRoute: ActivatedRoute
               ) {
     this.asyncTabs = new Observable((observer: Observer<string[]>) => {
       setTimeout(() => {
@@ -35,27 +33,18 @@ export class MetodoRecebimentoListComponent implements OnInit, AfterViewInit {
         ]);
       }, 1000);
     });
+
+    this.isEdicao = this.activatedRoute.snapshot.data['isEdicao'];
   }
-
-  ngOnInit(): void {
-    this.pixService.getByInativo().subscribe(data => {
-      this.metodosPix = data;
-    });
-
-    this.boletoService.getByInativo().subscribe(data => {
-      this.metodosBoleto = data;
-    });
-  }
-
-  dataSourcePix = new MatTableDataSource<PixRecebimento>(this.metodosPix);
-  dataSourceBoleto = new MatTableDataSource<BoletoRecebimento>(this.metodosBoleto);
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  ngAfterViewInit() {
-    if (this.paginator) {
-      this.dataSourcePix.paginator = this.paginator;
-      this.dataSourceBoleto.paginator = this.paginator;
-    }
+  getSelectedTabIndex(): number {
+    return this.tabSelectionService.getSelectedTabIndex();
+  }
+
+  onTabChange(event: any): void {
+    // Atualiza o valor de selectedTabIndex com o índice da nova aba selecionada
+    this.tabSelectionService.setSelectedTabIndex(event.index);
   }
 }

@@ -11,12 +11,15 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -25,13 +28,13 @@ import {MatButtonModule} from '@angular/material/button';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatButtonModule
-    
+    MatButtonModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
     FooterComponent
-  ]
+  ],
 })
 export class SharedModule { }
