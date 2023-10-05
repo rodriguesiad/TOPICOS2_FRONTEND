@@ -16,6 +16,14 @@ export class CategoriaService {
     return this.http.get<Categoria[]>(`${this.baseURL}/categorias`);
   }
 
+  findAllPaginado(pageNumber: number, pageSize: number): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(`${this.baseURL}/categorias/paginado?page=${pageNumber}&size=${pageSize}`);
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/categorias/count`);
+  }
+
   findById(id: string): Observable<Categoria> {
     return this.http.get<Categoria>(`${this.baseURL}/categorias/${id}`);
   }
@@ -26,6 +34,10 @@ export class CategoriaService {
 
   update(categoria: Categoria): Observable<Categoria> {
     return this.http.put<Categoria>(`${this.baseURL}/categorias/${categoria.id}`, categoria );
+  }
+
+  alterarSituacao(categoria: Categoria, situacao: boolean): Observable<Categoria> {
+    return this.http.put<Categoria>(`${this.baseURL}/categorias/situacao/${categoria.id}`, situacao );
   }
 
   delete(cidade: Categoria): Observable<any> {

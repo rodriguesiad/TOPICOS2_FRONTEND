@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular
 import { Categoria } from "src/app/models/categoria.model";
 import { CategoriaService } from "src/app/services/categoria.service";
 
-export const categoriaResolver: ResolveFn<Categoria> = 
+export const categoriaResolver: ResolveFn<Categoria> =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
         return inject(CategoriaService).findById(route.paramMap.get('id')!);
     };

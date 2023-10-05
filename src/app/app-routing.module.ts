@@ -21,9 +21,21 @@ const routes: Routes = [
   },
 
   {
-    path: 'metodos-recebimento', loadChildren:
-      () => import('./metodo-recebimento/metodo-recebimento.module')
-        .then(m => m.MetodoRecebimentoModule)
+    path: 'especies', loadChildren:
+      () => import('./especie/especie.module')
+        .then(m => m.EspecieModule)
+  },
+
+  {
+    path: 'usuarios', loadChildren:
+      () => import('./usuario/usuario.module')
+        .then(m => m.UsuarioModule)
+  },
+  
+  {
+    path: 'racas', loadChildren:
+      () => import('./raca/raca.module')
+        .then(m => m.RacaModule)
   },
 ];
 

@@ -1,0 +1,68 @@
+.demo-table {
+    width: 100%;
+}
+
+mat-card {
+    max-width: 1250px;
+    margin: 2rem auto;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 25px;
+}
+
+button[mat-raised-button] {
+    width: 120px;
+    font-size: 12px;
+    background-color: var(--default-green);
+    color: white;
+    margin: 5px 5px 0 0;
+}
+
+.edit-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.toolbar-title {
+    flex: 1;
+    text-align: start;
+    font-size: 28px;
+}
+
+mat-toolbar {
+    background-color: white;
+    padding-left: 5px;
+}
+
+table {
+    width: 100%;
+    table-layout: auto;
+}
+
+.mat-cell,
+.mat-header-cell {
+    margin-right: 10px;
+}
+
+.table-container {
+    border: 1px solid rgb(224, 223, 223);
+    border-radius: 2px;
+    padding: 5px;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track {
+    background-color: var(--default-green);
+}

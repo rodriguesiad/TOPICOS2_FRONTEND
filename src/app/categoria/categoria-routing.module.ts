@@ -5,9 +5,9 @@ import { CategoriaFormComponent } from './components/categoria-form/categoria-fo
 import { categoriaResolver } from './resolver/categoria-resolver';
 
 const routes: Routes = [
-  {path: 'list', component: CategoriaListComponent},
-  {path: 'new', component: CategoriaFormComponent},
-  {path: 'edit/:id', component: CategoriaFormComponent, resolve: {categoria: categoriaResolver}}
+  { path: 'list', component: CategoriaListComponent },
+  { path: 'new', component: CategoriaFormComponent },
+  { path: 'edit/:id', component: CategoriaFormComponent, resolve: { categoria: categoriaResolver } }
 ];
 
 @NgModule({

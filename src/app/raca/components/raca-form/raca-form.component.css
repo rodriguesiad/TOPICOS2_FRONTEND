@@ -1,0 +1,62 @@
+/* mat-form-field */
+.full-width-input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+mat-card {
+    max-width: 800px;
+    margin: 2rem auto;
+    /* Centraliza horizontalmente */
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.centered-toolbar {
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+}
+
+button[mat-raised-button] {
+    width: 120px;
+    font-size: 12px;
+    /* tamanho do botao */
+}
+
+button[mat-raised-button]:not(:last-child) {
+    margin-right: 1rem;
+    /* Adiciona margem à direita de todos os botões, exceto o último */
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.toolbar-title {
+    flex: 1;
+    text-align: start;
+    font-size: 28px;
+}
+
+.pagina {
+    max-width: 1250px;
+    width: 800px;
+    margin: 2rem auto;
+}
+
+mat-toolbar {
+    background-color: white;
+    padding-left: 5px;
+}
+
+.container-titulo {
+    margin-left: 10rem;
+    background-color: aqua;
+}
