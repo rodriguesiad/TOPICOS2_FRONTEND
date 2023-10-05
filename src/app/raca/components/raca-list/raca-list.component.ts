@@ -58,7 +58,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
             this.estadosAtivos = this.racas.map(raca => raca.ativo)
         }),
         catchError(err => {
-          console.log("Erro carregando raças");
+          console.log(err);
           alert("Erro carregando raças.");
           return throwError((() => err));
         })
@@ -71,7 +71,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
       .pipe(
         tap(count => this.total = count),
         catchError(err => {
-          console.log("Erro carregando o total de raças");
+          console.log(err);
           alert("Erro carregando raças.");
           return throwError((() => err));
         })
@@ -81,11 +81,13 @@ export class RacaListComponent implements OnInit, AfterViewInit {
 
   openDialog(event: Event, raca: Raca) {
     let situacao = raca.ativo ? 'desativar' : 'ativar';
+    let situacaoTitle = raca.ativo ? 'Desativar' : 'Ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
       width: "350px",
       height: "225px",
       data: {
+        title: situacaoTitle,
         message: 'Você realmente deseja ' + situacao + ' a raça  "' + raca.nome + '"?'
       }
     })
@@ -96,7 +98,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
           .pipe(
             tap(ca => raca.ativo = ca.ativo),
             catchError(err => {
-              console.log("Erro ao" + situacao + " raça.");
+              console.log(err);
               alert("Erro ao" + situacao + " raça.");
               return throwError((() => err));
             })

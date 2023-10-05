@@ -77,11 +77,13 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   openDialog(event: Event, categoria: Categoria) {
     let situacao = categoria.ativo ? 'desativar' : 'ativar';
+    let situacaoTitle = categoria.ativo ? 'Desativar' : 'Ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
       width: "350px",
       height: "225px",
       data: {
+        title: situacaoTitle,
         message: 'Você realmente deseja ' + situacao + ' a categoria  "' + categoria.nome + '"?'
       }
     })

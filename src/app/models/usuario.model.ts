@@ -1,13 +1,14 @@
-import { Perfil } from "./perfil-enum-model";
 import { Telefone } from "./telefone.model";
+import { PerfilEnum } from "./perfil.enum";
 
 export class Usuario {
     id!: number;
     nome!: string;
     email!: string;
+    cpf!: string;
     senha!: string;
     dataNascimento!: Date;
-    perfis!: Perfil[];
+    perfis!: number[];
     telefones!: Telefone[];
     ativo!: boolean;
 }

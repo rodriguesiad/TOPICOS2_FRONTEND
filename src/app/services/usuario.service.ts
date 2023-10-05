@@ -26,7 +26,7 @@ export class UsuarioService {
   }
 
   save(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin/`, usuario);
+    return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuario);
   }
 
   update(usuario: Usuario): Observable<Usuario> {

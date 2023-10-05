@@ -24,7 +24,19 @@ const routes: Routes = [
     path: 'especies', loadChildren:
       () => import('./especie/especie.module')
         .then(m => m.EspecieModule)
-  }
+  },
+
+  {
+    path: 'usuarios', loadChildren:
+      () => import('./usuario/usuario.module')
+        .then(m => m.UsuarioModule)
+  },
+  
+  {
+    path: 'racas', loadChildren:
+      () => import('./raca/raca.module')
+        .then(m => m.RacaModule)
+  },
 ];
 
 @NgModule({

@@ -54,8 +54,8 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
             this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
         }),
         catchError(err => {
-          console.log("Erro carregando raças");
-          alert("Erro carregando raças.");
+          console.log(err);
+          alert("Erro carregando total de usuários.");
           return throwError((() => err));
         })
       )
@@ -67,8 +67,8 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
       .pipe(
         tap(count => this.total = count),
         catchError(err => {
-          console.log("Erro carregando o total de raças");
-          alert("Erro carregando raças.");
+          console.log(err);
+          alert("Erro carregando o total usuários.");
           return throwError((() => err));
         })
       )
@@ -77,11 +77,13 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
 
   openDialog(event: Event, usuario: Usuario) {
     let situacao = usuario.ativo ? 'desativar' : 'ativar';
+    let situacaoTitle = usuario.ativo ? 'Desativar' : 'Ativar';
 
     const dialogRef = this.dialog.open(SituacaoDialogBoxComponent, {
       width: "350px",
       height: "225px",
       data: {
+        title: situacaoTitle,
         message: 'Você realmente deseja ' + situacao + ' o usuário  "' + usuario.nome + '"?'
       }
     })
@@ -92,14 +94,12 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
           .pipe(
             tap(ca => usuario.ativo = ca.ativo),
             catchError(err => {
-              console.log("Erro ao" + situacao + " raça.");
-              alert("Erro ao" + situacao + " raça.");
+              console.log(err);
+              alert("Erro ao" + situacao + " usuário.");
               return throwError((() => err));
             })
           )
           .subscribe();
-
-
       }
     });
   }
