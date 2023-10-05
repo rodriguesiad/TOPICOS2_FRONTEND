@@ -19,27 +19,26 @@
                       {{estado.nome}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="formGroup.get('estado') &&
+                        formGroup.get('estado')?.invalid &&
+                        formGroup.get('estado')?.touched">
+                    O Estado é obrigatório.
+                  </mat-error>
                 </mat-form-field>
             </form>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button 
-                color="primary" 
-                (click)="salvar()"
-                [disabled]="formGroup.invalid">
-                Salvar
-            </button>
-            <button mat-raised-button 
-                *ngIf="formGroup?.get('id')?.value"
-                color="warn" 
-                (click)="excluir()"
-                [disabled]="formGroup.invalid">
-                Excluir
-            </button>
-            <button mat-raised-button 
+      <mat-card-actions>
+        <button mat-raised-button style="color: var(--default-green);"
                 routerLink="/cidades/list">
-                Cancelar
-            </button>
-        </mat-card-actions>
+          CANCELAR
+        </button>
+        <button mat-raised-button
+                color="primary"
+                (click)="salvar()"
+                [disabled]="formGroup.invalid"
+                style="background-color: var(--default-green);">
+          SALVAR
+        </button>
+      </mat-card-actions>
     </mat-card>
 </div>

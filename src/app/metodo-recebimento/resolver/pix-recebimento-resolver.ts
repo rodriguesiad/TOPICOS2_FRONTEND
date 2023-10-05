@@ -7,3 +7,8 @@ export const pixRecebimentoResolver: ResolveFn<PixRecebimento> =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     return inject(PixRecebimentoService).findByAtivo();
   };
+
+export const pixRecebimentoEditResolver: ResolveFn<PixRecebimento> =
+  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    return inject(PixRecebimentoService).findById(route.paramMap.get('id')!);
+  };

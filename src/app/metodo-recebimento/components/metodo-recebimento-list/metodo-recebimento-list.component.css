@@ -3,7 +3,7 @@
 }
 
 mat-card {
-  max-width: 75%;
+  max-width: 1250px;
   margin: 2rem auto;
 }
 
@@ -35,12 +35,12 @@ table {
   table-layout: auto;
 }
 
-.mat-column-nome-column {
-  width: 75%;
+.mat-column {
+  width: 50%;
 }
 
 .mat-column-actions-column {
-  width: 25%;
+  width: 15%;
 }
 
 .mat-cell,
@@ -60,18 +60,6 @@ table {
   background-color: rgba(29, 135, 229, .2);
 }
 
-.card-metodo {
-  padding: 20px;
-}
-
-.form-row {
-  margin: 8px;
-}
-
-.full-width-input {
-  padding: 5px;
-}
-
-.first-width-input {
-  width: 100%;
+#buttonVoltar {
+  margin-left: 90%;
 }

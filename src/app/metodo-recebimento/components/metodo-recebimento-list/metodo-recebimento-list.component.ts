@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Categoria} from "../../../models/categoria.model";
 import {CategoriaService} from "../../../services/categoria.service";
 import {BoletoRecebimento} from "../../../models/boleto-recebimento.model";
@@ -8,10 +8,9 @@ import {BoletoRecebimentoService} from "../../../services/boleto-recebimento.ser
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, Observer} from "rxjs";
-
-export interface ExampleTab {
-  label: string;
-}
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {TabSelectionService} from "../../../shared/services/tab-selection.service";
 
 @Component({
   selector: 'app-metodo-recebimento-list',
@@ -19,51 +18,33 @@ export interface ExampleTab {
   styleUrls: ['./metodo-recebimento-list.component.css']
 })
 export class MetodoRecebimentoListComponent {
-  asyncTabs: Observable<ExampleTab[]>;
+  asyncTabs: Observable<string[]>;
+  isEdicao: boolean = false;
 
-  boletoRecebimento: FormGroup;
-  pixRecebimento: FormGroup;
-
-  constructor(private categoriaService: CategoriaService,
-              private boletoService: BoletoRecebimentoService,
-              private pixService: PixRecebimentoService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private activatedRoute: ActivatedRoute
-  ) {
-    const pix: PixRecebimento = this.activatedRoute.snapshot.data['pix_recebimento'];
-    const boleto: BoletoRecebimento = this.activatedRoute.snapshot.data['boleto_recebimento'];
-
-    this.boletoRecebimento = formBuilder.group({
-      id: [(boleto && boleto.id) ? boleto.id : null],
-      nome: [(boleto && boleto.nome) ? boleto.nome : '', Validators.required],
-      cnpj: [(boleto && boleto.cnpj) ? boleto.cnpj : '', Validators.required],
-      banco: [(boleto && boleto.banco) ? boleto.banco : '', Validators.required],
-      agencia: [(boleto && boleto.agencia) ? boleto.agencia : '', Validators.required],
-      conta: [(boleto && boleto.conta) ? boleto.conta : '', Validators.required]
-    });
-
-    this.pixRecebimento = formBuilder.group({
-      id: [(pix && pix.id) ? pix.id : null],
-      chave: [(pix && pix.chave) ? pix.chave : '', Validators.required],
-      tipoChavePix: [(pix && pix.tipoChavePix) ? pix.tipoChavePix : '', Validators.required],
-    });
-
-    this.asyncTabs = new Observable((observer: Observer<ExampleTab[]>) => {
+  constructor(
+    private tabSelectionService: TabSelectionService,
+    private activatedRoute: ActivatedRoute
+              ) {
+    this.asyncTabs = new Observable((observer: Observer<string[]>) => {
       setTimeout(() => {
         observer.next([
-          {label: 'Boleto'},
-          {label: 'Pix'}
+          'Boleto',
+          'Pix'
         ]);
       }, 1000);
     });
+
+    this.isEdicao = this.activatedRoute.snapshot.data['isEdicao'];
   }
 
-  salvarBoletoRecebimento() {
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
+  getSelectedTabIndex(): number {
+    return this.tabSelectionService.getSelectedTabIndex();
   }
 
-  salvarPixRecebimento() {
-
+  onTabChange(event: any): void {
+    // Atualiza o valor de selectedTabIndex com o índice da nova aba selecionada
+    this.tabSelectionService.setSelectedTabIndex(event.index);
   }
 }

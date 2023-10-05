@@ -1,1 +1,32 @@
-<p>metodo-recebimento-form works!</p>
+<mat-card>
+  <mat-toolbar>
+    <div class="flex-container">
+      <span class="toolbar-title"> Métodos de Recebimento </span>
+      <button mat-fab color="accent" routerLink="/metodos-recebimento/new">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="card-metodo">
+    <mat-tab-group [selectedIndex]="getSelectedTabIndex()" (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Boleto">
+        <app-boleto-recebimento-form></app-boleto-recebimento-form>
+      </mat-tab>
+
+      <mat-tab label="Pix">
+        <app-pix-recebimento-form></app-pix-recebimento-form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</mat-card>
+
+<button mat-raised-button
+        id="buttonVisualizarAnteriores"
+        color="primary"
+        routerLink="/metodos-recebimento/list"
+        style="background-color: var(--default-green);">
+  VISUALIZAR ANTERIORES
+</button>
+
+

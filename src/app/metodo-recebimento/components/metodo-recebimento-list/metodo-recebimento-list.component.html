@@ -2,92 +2,22 @@
   <div>
     <mat-toolbar>
       <div class="flex-container">
-        <span class="toolbar-title"> Métodos de Recebimento </span>
-        <button mat-fab color="accent" routerLink="/metodos-recebimento/new">
-          <mat-icon>add</mat-icon>
-        </button>
+        <span class="toolbar-title"> Histórico de Métodos de Recebimento </span>
       </div>
     </mat-toolbar>
   </div>
-
-  <div class="card-metodo">
-    <mat-tab-group>
-      <mat-tab class="conteinerBoleto" label="Boleto">
-        <form [formGroup]="boletoRecebimento" >
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="first-width-input">
-              <mat-label for="nome_id">Nome</mat-label>
-              <input matInput type="text" id="nome_id" formControlName="nome" />
-            </mat-form-field>
-          </div>
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">CNPJ</mat-label>
-              <input matInput type="text" id="cnpj_id" formControlName="cnpj" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">Banco</mat-label>
-              <input matInput type="text" id="banco_id" formControlName="banco" />
-            </mat-form-field>
-          </div>
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">Agência</mat-label>
-              <input matInput type="text" id="agencia_id" formControlName="agencia" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-width-input">
-              <mat-label for="nome_id">Conta</mat-label>
-              <input matInput type="text" id="conta_id" formControlName="conta" />
-            </mat-form-field>
-          </div>
-      </form>
-        <mat-card-actions>
-          <button mat-raised-button style="color: var(--default-green);"
-                  routerLink="/metodos-recebimento/list">
-            CANCELAR
-          </button>
-          <button mat-raised-button
-                  color="primary"
-                  (click)="salvarBoletoRecebimento()"
-                  [disabled]="boletoRecebimento.invalid"
-                  style="background-color: var(--default-green);">
-            SALVAR
-          </button>
-        </mat-card-actions>
-        </mat-tab>
-
-        <mat-tab label="Pix">
-          <form [formGroup]="pixRecebimento" >
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="first-width-input">
-              <mat-label for="nome_id">Tipo</mat-label>
-              <input matInput type="text" id="tipo_id" formControlName="chave" />
-            </mat-form-field>
-          </div>
-          <div class="form-row">
-            <mat-form-field appearance="outline" class="first-width-input">
-              <mat-label for="nome_id">Chave</mat-label>
-              <input matInput type="text" id="chave_id" formControlName="tipoChavePix" />
-            </mat-form-field>
-          </div>
-          </form>
-
-            <mat-card-actions>
-              <button mat-raised-button style="color: var(--default-green);"
-                      routerLink="/metodos-recebimento/list">
-                CANCELAR
-              </button>
-              <button mat-raised-button
-                      color="primary"
-                      (click)="salvarPixRecebimento()"
-                      [disabled]="pixRecebimento.invalid"
-                      style="background-color: var(--default-green);">
-                SALVAR
-              </button>
-            </mat-card-actions>
-
-        </mat-tab>
-    </mat-tab-group>
-  </div>
-
+  <mat-tab-group [selectedIndex]="getSelectedTabIndex()" (selectedTabChange)="onTabChange($event)">
+    <mat-tab class="conteinerBoleto" label="Boleto">
+      <app-boleto-recebimento-list></app-boleto-recebimento-list>
+    </mat-tab>
+    <mat-tab label="Pix">
+      <app-pix-recebimento-list></app-pix-recebimento-list>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
+
+<button mat-raised-button style="color: var(--default-green);"
+        id="buttonVoltar"
+        routerLink="/metodos-recebimento/show">
+  VOLTAR
+</button>

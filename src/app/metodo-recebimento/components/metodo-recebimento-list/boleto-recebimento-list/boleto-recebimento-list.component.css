@@ -1,0 +1,51 @@
+.edit-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.mat-column {
+  width: 50%;
+}
+
+.mat-column-actions-column {
+  width: 15%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  margin-right: 10px;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  margin-top: 20px;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-field {
+  flex-grow: 1; /* Faz o input crescer para ocupar todo o espaço disponível */
+  margin-right: 16px; /* Espaçamento entre o input e o botão (ajuste conforme necessário) */
+}
+
+.search-button {
+  flex-shrink: 0; /* Evita que o botão encolha */
+  margin-bottom: 2%;
+  margin-right: 2%;
+}
+

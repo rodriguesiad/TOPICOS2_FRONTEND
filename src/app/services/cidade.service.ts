@@ -13,11 +13,11 @@ export class CidadeService {
   constructor(private http: HttpClient) {}
 
   findAll(): Observable<Cidade[]> {
-    return this.http.get<Cidade[]>(`${this.baseURL}/cidades`);
+    return this.http.get<Cidade[]>(`${this.baseURL}/municipios`);
   }
 
   findById(id: string): Observable<Cidade> {
-    return this.http.get<Cidade>(`${this.baseURL}/cidades/${id}`);
+    return this.http.get<Cidade>(`${this.baseURL}/municipios/${id}`);
   }
 
   save(cidade: Cidade): Observable<Cidade> {
@@ -25,7 +25,7 @@ export class CidadeService {
       nome: cidade.nome,
       idEstado: cidade.estado.id
     }
-    return this.http.post<Cidade>(`${this.baseURL}/cidades`, obj);
+    return this.http.post<Cidade>(`${this.baseURL}/municipios`, obj);
   }
 
   update(cidade: Cidade): Observable<Cidade> {
@@ -33,10 +33,10 @@ export class CidadeService {
       nome: cidade.nome,
       idEstado: cidade.estado.id
     }
-    return this.http.put<Cidade>(`${this.baseURL}/cidades/${cidade.id}`, obj );
+    return this.http.put<Cidade>(`${this.baseURL}/municipios/${cidade.id}`, obj );
   }
 
   delete(cidade: Cidade): Observable<any> {
-    return this.http.delete<Cidade>(`${this.baseURL}/cidades/${cidade.id}`);
+    return this.http.delete<Cidade>(`${this.baseURL}/municipios/${cidade.id}`);
   }
 }

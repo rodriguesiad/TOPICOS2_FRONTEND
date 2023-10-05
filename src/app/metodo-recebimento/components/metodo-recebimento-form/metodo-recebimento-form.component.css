@@ -1,0 +1,106 @@
+.demo-table {
+  width: 100%;
+}
+
+mat-card {
+  max-width: 75%;
+  margin: 2rem auto;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+.toolbar-title {
+  flex: 1;
+  text-align: center;
+}
+
+mat-toolbar {
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.mat-column-nome-column {
+  width: 75%;
+}
+
+.mat-column-actions-column {
+  width: 25%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  margin-right: 10px;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: rgb(128, 203, 196);
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: rgb(29, 135, 229);
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-ripple .mat-ripple-element {
+  background-color: rgba(29, 135, 229, .2);
+}
+
+/* mat-form-field */
+.full-width-input {
+  width: 100%;
+}
+
+.min-width-input {
+  width: calc(50% - 10px);
+}
+
+.space {
+  margin-right: 20px;
+}
+
+mat-tab {
+  max-width: 800px;
+  margin: 2rem auto;
+  /* Centraliza horizontalmente */
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.centered-toolbar {
+  display: flex;
+  justify-content: center;
+  font-size:x-large;
+}
+
+button[mat-raised-button] {
+  width: 120px;
+  /* tamanho do botao */
+}
+
+button[mat-raised-button]:not(:last-child) {
+  margin-right: 1rem;
+  /* Adiciona margem à direita de todos os botões, exceto o último */
+}
+
+#buttonVisualizarAnteriores {
+  width: 230px;
+  margin-left: 67%;
+}
