@@ -20,6 +20,10 @@ export class CidadeService {
     return this.http.get<Cidade>(`${this.baseURL}/municipios/${id}`);
   }
 
+  findByNome(nome: string): Observable<Cidade[]> {
+    return this.http.get<Cidade[]>(`${this.baseURL}/municipios/serach/${nome}`);
+  }
+
   save(cidade: Cidade): Observable<Cidade> {
     const obj = {
       nome: cidade.nome,
@@ -36,7 +40,16 @@ export class CidadeService {
     return this.http.put<Cidade>(`${this.baseURL}/municipios/${cidade.id}`, obj );
   }
 
-  delete(cidade: Cidade): Observable<any> {
-    return this.http.delete<Cidade>(`${this.baseURL}/municipios/${cidade.id}`);
+  delete(id: string): Observable<any> {
+    return this.http.delete<Cidade>(`${this.baseURL}/municipios/${id}`);
   }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/municipios/count`);
+  }
+
+  countByNome(nome: string): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/municipios/search/${nome}/count`);
+  }
+
 }
