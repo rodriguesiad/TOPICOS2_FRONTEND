@@ -59,3 +59,28 @@ table {
 .mat-slide-toggle.mat-checked .mat-slide-toggle-ripple .mat-ripple-element {
   background-color: rgba(29, 135, 229, .2);
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  margin-top: 20px;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-field {
+  flex-grow: 1; /* Faz o input crescer para ocupar todo o espaço disponível */
+  margin-right: 16px; /* Espaçamento entre o input e o botão (ajuste conforme necessário) */
+}
+
+.search-button {
+  flex-shrink: 0; /* Evita que o botão encolha */
+  margin-bottom: 2%;
+  margin-right: 2%;
+}
