@@ -18,7 +18,7 @@ mat-card {
     width: auto;
     display: flex;
     justify-content: flex-end;
-    padding-right: 25px;
+    padding-right: 4px;
 }
 
 button[mat-raised-button] {
