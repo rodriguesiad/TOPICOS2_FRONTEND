@@ -44,4 +44,31 @@ export class CategoriaService {
     return this.http.delete<Categoria>(`${this.baseURL}/categorias/${cidade.id}`);
   }
 
+  findByInativo(pagina: number, tamanhoPagina: number): Observable<Categoria[]> {
+    const params = {
+      page: pagina.toString(),
+      size: tamanhoPagina.toString()
+    }
+    return this.http.get<Categoria[]>(`${this.baseURL}/categorias/get-inativos`, {params});
+  }
+
+  findByCampoBusca(nomeParametro: string, ativoParametro: boolean, pagina: number, tamanhoPagina: number): Observable<Categoria[]> {
+    const params = {
+      page: pagina.toString(),
+      size: tamanhoPagina.toString(),
+      nome: nomeParametro,
+      ativo: ativoParametro
+    }
+    return this.http.get<Categoria[]>(`${this.baseURL}/categorias/search`, {params});
+  }
+
+  countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
+    const params = {
+      nome: nomeParametro,
+      ativo: ativoParametro
+    }
+
+    return this.http.get<number>(`${this.baseURL}/categorias/search/count`, {params});
+  }
+
 }

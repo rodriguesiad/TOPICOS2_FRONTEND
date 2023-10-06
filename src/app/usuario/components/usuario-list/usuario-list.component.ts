@@ -7,6 +7,7 @@ import { PerfilEnum } from 'src/app/models/perfil.enum';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import {MatPaginator} from "@angular/material/paginator";
 import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-usuario-list',
@@ -25,13 +26,19 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
   total = 0;
 
   ativo = false;
+  filtro: FormGroup;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private usuarioService: UsuarioService, public dialog: MatDialog) { }
+  constructor(private usuarioService: UsuarioService, public dialog: MatDialog, private formBuilder: FormBuilder) {
+      this.filtro = formBuilder.group({
+        nome: [''],
+        ativo: [true]
+      })
+   }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -48,7 +55,8 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
   }
 
   carregarDadosPaginados() {
-    this.usuarioService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+    if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
+      this.usuarioService.findByCampoBusca(this.filtro.value?.nome,  this.filtro.value?.ativo, this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
       .pipe(
         tap(usuarios => {
           this.usuarios = usuarios,
@@ -61,10 +69,26 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
         })
       )
       .subscribe();
+    } else{
+      this.usuarioService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+      .pipe(
+        tap(usuarios => {
+          this.usuarios = usuarios,
+            this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
+        }),
+        catchError(err => {
+          console.log(err);
+          alert("Erro carregando total de usuários.");
+          return throwError((() => err));
+        })
+      )
+      .subscribe();
+    }
   }
 
   carregarTotal() {
-    this.usuarioService.count()
+    if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
+      this.usuarioService.countByCampoBusca(this.filtro.value?.nome, this.filtro.value?.ativo)
       .pipe(
         tap(count => this.total = count),
         catchError(err => {
@@ -73,10 +97,25 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
           return throwError((() => err));
         })
       )
-      .subscribe()
+      .subscribe();
+    } else {
+      this.usuarioService.count()
+      .pipe(
+        tap(count => this.total = count),
+        catchError(err => {
+          console.log(err);
+          alert("Erro carregando o total usuários.");
+          return throwError((() => err));
+        })
+      )
+      .subscribe();
+    }
   }
 
-  getPerfisText(perfis: number[]): string {
+  getPerfisText(perfis: number[] | undefined | null): string {
+    if (!perfis) {
+      return '';
+    }
 
     const perfisText = perfis.map(perfil => {
       const perfilObj = PerfilEnum.items.find((item: { text: string; value: number }) => item.value === perfil);
@@ -113,6 +152,26 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
           .subscribe();
       }
     });
+  }
+
+  aplicarFiltro() {
+    this.carregarDadosPaginados();
+    this.carregarTotal();
+  }
+
+  limparFiltro() {
+    this.filtro = this.formBuilder.group({
+      nome: [''],
+      ativo: [null]
+    })
+
+    this.aplicarFiltro();
+  }
+
+  onEnterKey(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.aplicarFiltro();
+    }
   }
 
 }

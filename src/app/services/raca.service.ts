@@ -44,4 +44,22 @@ export class RacaService {
     return this.http.delete<Raca>(`${this.baseURL}/racas/${cidade.id}`);
   }
 
+  findByCampoBusca(nomeParametro: string, ativoParametro: boolean, pagina: number, tamanhoPagina: number): Observable<Raca[]> {
+    const params = {
+      page: pagina.toString(),
+      size: tamanhoPagina.toString(),
+      nome: nomeParametro,
+      ativo: ativoParametro
+    }
+    return this.http.get<Raca[]>(`${this.baseURL}/racas/search`, {params});
+  }
+
+  countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
+    const params = {
+      nome: nomeParametro,
+      ativo: ativoParametro
+    }
+    return this.http.get<number>(`${this.baseURL}/racas/search/count`, {params});
+  }
+
 }

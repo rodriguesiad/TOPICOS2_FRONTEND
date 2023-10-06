@@ -4,8 +4,9 @@ import { catchError, tap, throwError } from 'rxjs';
 import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
-import {MatPaginator} from "@angular/material/paginator";
+import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from "@angular/material/slide-toggle";
+import { MatPaginator } from "@angular/material/paginator";
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-categoria-list',
@@ -25,12 +26,20 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   ativo = false;
 
+  filtro: FormGroup;
+
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private categoriaService: CategoriaService, public dialog: MatDialog) { }
+  constructor(private categoriaService: CategoriaService, public dialog: MatDialog, private formBuilder: FormBuilder) {
+    this.filtro = formBuilder.group({
+      nome: [''],
+      ativo: [true]
+    })
+  }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -47,32 +56,62 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   }
 
   carregarDadosPaginados() {
-    this.categoriaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
-      .pipe(
-        tap(categorias => {
-          this.categorias = categorias,
-            this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
-        }),
-        catchError(err => {
-          console.log("Erro carregando categorias");
-          alert("Erro carregando categorias.");
-          return throwError((() => err));
-        })
-      )
-      .subscribe();
+    if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
+      this.categoriaService.findByCampoBusca(this.filtro.value?.nome, this.filtro.value?.ativo, this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+        .pipe(
+          tap(categorias => {
+            this.categorias = categorias,
+              this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
+          }),
+          catchError(err => {
+            console.log("Erro carregando categorias");
+            alert("Erro carregando categorias.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
+    } else {
+      this.categoriaService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+        .pipe(
+          tap(categorias => {
+            this.categorias = categorias,
+              this.estadosAtivos = this.categorias.map(categoria => categoria.ativo)
+          }),
+          catchError(err => {
+            console.log("Erro carregando categorias");
+            alert("Erro carregando categorias.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
+    }
   }
 
   carregarTotal() {
-    this.categoriaService.count()
-      .pipe(
-        tap(count => this.total = count),
-        catchError(err => {
-          console.log("Erro carregando o total de categorias");
-          alert("Erro carregando categorias.");
-          return throwError((() => err));
-        })
-      )
-      .subscribe()
+    if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
+      this.categoriaService.countByCampoBusca(this.filtro.value?.nome, this.filtro.value?.ativo)
+        .pipe(
+          tap(count => this.total = count),
+          catchError(err => {
+            console.log("Erro carregando o total de categorias");
+            alert("Erro carregando categorias.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe()
+    } else {
+      this.categoriaService.count()
+        .pipe(
+          tap(count => this.total = count),
+          catchError(err => {
+            console.log("Erro carregando o total de categorias");
+            alert("Erro carregando categorias.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe()
+    }
+
   }
 
   openDialog(event: Event, categoria: Categoria) {
@@ -104,6 +143,26 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
       }
     });
+  }
+
+  aplicarFiltro() {
+    this.carregarDadosPaginados();
+    this.carregarTotal();
+  }
+
+  limparFiltro() {
+    this.filtro = this.formBuilder.group({
+      nome: [''],
+      ativo: [null]
+    })
+
+    this.aplicarFiltro();
+  }
+
+  onEnterKey(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.aplicarFiltro();
+    }
   }
 
 }
