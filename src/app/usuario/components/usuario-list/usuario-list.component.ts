@@ -8,6 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import {MatPaginator} from "@angular/material/paginator";
 import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-usuario-list',
@@ -33,7 +34,10 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private usuarioService: UsuarioService, public dialog: MatDialog, private formBuilder: FormBuilder) {
+  constructor(private usuarioService: UsuarioService, 
+    public dialog: MatDialog, 
+    private formBuilder: FormBuilder,
+    private confirmationDialogService: ConfirmationDialogService) {
       this.filtro = formBuilder.group({
         nome: [''],
         ativo: [null]
@@ -42,6 +46,7 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
+    this.carregarTotal();
   }
 
   ngAfterViewInit() {
@@ -152,6 +157,23 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
           .subscribe();
       }
     });
+  }
+
+  openConfirmationDialog(usuario: Usuario): void {
+    const title = 'Confirmar Exclusão de Usuário';
+    const message = 'Tem certeza de que deseja excluir usuário?';
+
+    this.confirmationDialogService.openConfirmationDialog(
+      title,
+      message,
+      () => {
+        this.usuarioService.delete(usuario).subscribe({
+          next: () => {this.ngOnInit()},
+          error: (err) => {
+            console.log(err);
+          }
+        })}
+    );
   }
 
   aplicarFiltro() {

@@ -59,4 +59,8 @@ export class UsuarioService {
     return this.http.get<number>(`${this.baseURL}/usuarios/search/count`, {params});
   }
 
+  delete(usuario: Usuario): Observable<any> {
+    return this.http.delete<Usuario>(`${this.baseURL}/usuarios/${usuario.id}`);
+  }
+
 }

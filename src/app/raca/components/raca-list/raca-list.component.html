@@ -1,75 +1,80 @@
 <mat-card class="no-shadow">
-    <div>
-      <mat-toolbar>
-        <div class="flex-container">
-          <span class="toolbar-title"> Raças </span>
-        </div>
-      </mat-toolbar>
+  <div>
+    <mat-toolbar>
+      <div class="flex-container">
+        <span class="toolbar-title"> Raças </span>
+      </div>
+    </mat-toolbar>
 
-      <div class="filter-container">
-        <form [formGroup]="filtro">
-          <mat-form-field appearance="outline" style="margin-right: 10px;">
-            <mat-label>Situação</mat-label>
-            <mat-select formControlName="ativo">
-              <mat-option [value]="true">Ativo</mat-option>
-              <mat-option [value]="false">Inativo</mat-option>
-            </mat-select>
-          </mat-form-field>
-    
-          <mat-form-field appearance="outline" class="full-width-input">
-            <mat-label>Pesquisar por nome</mat-label>
-            <input matInput type="text" formControlName="nome" (keyup)="onEnterKey($event)" />
-          </mat-form-field>
-        </form>
-    
-        <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
-          <mat-icon>search</mat-icon>
-        </button>
-        <button mat-raised-button color="primary" class="clean-button" style="margin-right: 20px;" (click)="limparFiltro()">
-          LIMPAR
-        </button>
-      </div>
-    </div>
-  
-    <div style="padding: 5px;">
-      <div class="table-container no-shadow rounded-corners">
-        <table mat-table [dataSource]="racas">
-  
-          <!-- Nome Column -->
-          <ng-container matColumnDef="nome-column">
-            <th mat-header-cell *matHeaderCellDef> Nome </th>
-            <td mat-cell *matCellDef="let raca">
-              {{raca.nome}}
-            </td>
-          </ng-container>
-  
-          <!-- Ações Column -->
-          <ng-container matColumnDef="actions-column">
-            <th mat-header-cell *matHeaderCellDef> Ações </th>
-            <td mat-cell *matCellDef="let raca">
-              <div class="edit-button-container">
-                <button [disabled]="!raca.ativo" mat-mini-fab color="black" aria-label="Editar raca" class="no-shadow"
-                  routerLink="/racas/edit/{{raca.id}}">
-                  <mat-icon>edit</mat-icon>
-                </button>
-  
-                <mat-slide-toggle [checked]="raca.ativo" (click)="openDialog($event, raca)"></mat-slide-toggle>
-              </div>
-            </td>
-          </ng-container>
-  
-          <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [length]="total" showFirstLastButtons
-          aria-label="Selecione a página" #paginator style="border-top: 1px solid rgb(224, 223, 223);">
-        </mat-paginator>
-  
-      </div>
-    </div>
-    <div class="button-container">
-      <button mat-raised-button routerLink="/racas/new">
-        NOVO
+    <div class="filter-container">
+      <form [formGroup]="filtro">
+        <mat-form-field appearance="outline" style="margin-right: 10px;">
+          <mat-label>Situação</mat-label>
+          <mat-select formControlName="ativo">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Pesquisar por nome</mat-label>
+          <input matInput type="text" formControlName="nome" (keyup)="onEnterKey($event)" />
+        </mat-form-field>
+      </form>
+
+      <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" class="clean-button" (click)="limparFiltro()">
+        LIMPAR
       </button>
     </div>
-  </mat-card>
+  </div>
+
+  <div style="padding: 5px;">
+    <div class="table-container no-shadow rounded-corners">
+      <table mat-table [dataSource]="racas">
+
+        <!-- Nome Column -->
+        <ng-container matColumnDef="nome-column">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let raca">
+            {{raca.nome}}
+          </td>
+        </ng-container>
+
+        <!-- Ações Column -->
+        <ng-container matColumnDef="actions-column">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let raca">
+            <div class="edit-button-container">
+              <button [disabled]="!raca.ativo" mat-mini-fab color="black" aria-label="Editar raca" class="no-shadow"
+                routerLink="/racas/edit/{{raca.id}}">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <mat-slide-toggle [checked]="raca.ativo" (click)="openDialog($event, raca)"></mat-slide-toggle>
+
+              <button mat-mini-fab color="black" aria-label="Excluir raça" class="no-shadow"
+                (click)="openConfirmationDialog(raca)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [length]="total" showFirstLastButtons
+        aria-label="Selecione a página" #paginator style="border-top: 1px solid rgb(224, 223, 223);">
+      </mat-paginator>
+
+    </div>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button routerLink="/racas/new">
+      NOVO
+    </button>
+  </div>
+</mat-card>

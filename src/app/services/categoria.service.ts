@@ -40,8 +40,8 @@ export class CategoriaService {
     return this.http.put<Categoria>(`${this.baseURL}/categorias/situacao/${categoria.id}`, situacao );
   }
 
-  delete(cidade: Categoria): Observable<any> {
-    return this.http.delete<Categoria>(`${this.baseURL}/categorias/${cidade.id}`);
+  delete(categoria: Categoria): Observable<any> {
+    return this.http.delete<Categoria>(`${this.baseURL}/categorias/${categoria.id}`);
   }
 
   findByInativo(pagina: number, tamanhoPagina: number): Observable<Categoria[]> {
