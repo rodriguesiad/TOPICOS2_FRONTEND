@@ -36,7 +36,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
   constructor(private racaService: RacaService, public dialog: MatDialog, private formBuilder: FormBuilder) {
     this.filtro = formBuilder.group({
       nome: [''],
-      ativo: [true]
+      ativo: [null]
     })
    }
 

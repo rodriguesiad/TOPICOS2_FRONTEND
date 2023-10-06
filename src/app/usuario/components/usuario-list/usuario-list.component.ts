@@ -36,7 +36,7 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
   constructor(private usuarioService: UsuarioService, public dialog: MatDialog, private formBuilder: FormBuilder) {
       this.filtro = formBuilder.group({
         nome: [''],
-        ativo: [true]
+        ativo: [null]
       })
    }
 

@@ -37,7 +37,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   constructor(private categoriaService: CategoriaService, public dialog: MatDialog, private formBuilder: FormBuilder) {
     this.filtro = formBuilder.group({
       nome: [''],
-      ativo: [true]
+      ativo: [null]
     })
   }
 
