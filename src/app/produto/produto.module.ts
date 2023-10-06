@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EspecieRoutingModule } from './especie-routing.module';
-import { EspecieFormComponent } from './components/especie-form/especie-form.component';
-import { EspecieListComponent } from './components/especie-list/especie-list.component';
+import { ProdutoRoutingModule } from './produto-routing.module';
+import { ProdutoListComponent } from './components/produto-list/produto-list.component';
+import { ProdutoFormComponent } from './components/produto-form/produto-form.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,36 +12,33 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDialogModule } from '@angular/material/dialog';
-
 
 
 
 
 @NgModule({
   declarations: [
-    EspecieFormComponent,
-    EspecieListComponent
+    ProdutoListComponent,
+    ProdutoFormComponent
   ],
   imports: [
     CommonModule,
-    EspecieRoutingModule,
+    ProdutoRoutingModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSlideToggleModule,
     MatTableModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSlideToggleModule,
-    FormsModule,
-    MatSelectModule,
-    MatDialogModule
+    MatSelectModule
   ]
 })
-export class EspecieModule { }
+export class ProdutoModule { }

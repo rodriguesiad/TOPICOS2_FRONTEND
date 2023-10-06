@@ -48,4 +48,27 @@ export class EspecieService {
   findAllPaginado(pageNumber: number, pageSize: number): Observable<Especie[]> {
     return this.http.get<Especie[]>(`${this.baseURL}/especies/paginado?page=${pageNumber}&size=${pageSize}`);
   }
+
+  findByCampoBusca(nomeParametro: string, ativoParametro: boolean, pagina: number, tamanhoPagina: number): Observable<Especie[]> {
+    const params = {
+      page: pagina.toString(),
+      size: tamanhoPagina.toString(),
+      nome: nomeParametro,
+      ativo: ativoParametro
+    }
+    return this.http.get<Especie[]>(`${this.baseURL}/especies/search`, {params});
+  }
+
+  countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
+    const params = {
+      nome: nomeParametro,
+      ativo: ativoParametro
+    }
+    return this.http.get<number>(`${this.baseURL}/especies/search/count`, {params});
+  }
+
+  alterarSituacao(especie: Especie, situacao: boolean): Observable<Especie> {
+    return this.http.put<Especie>(`${this.baseURL}/especies/situacao/${especie.id}`, situacao );
+  }
+
 }
