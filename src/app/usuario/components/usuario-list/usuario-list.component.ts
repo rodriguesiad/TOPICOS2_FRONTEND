@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, tap, throwError } from 'rxjs';
-import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
+import { SituacaoDialogBoxComponent } from 'src/app/shared/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Usuario } from 'src/app/models/usuario.model';
 import { PerfilEnum } from 'src/app/models/perfil.enum';
 import { UsuarioService } from 'src/app/services/usuario.service';

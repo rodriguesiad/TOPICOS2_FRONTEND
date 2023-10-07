@@ -53,7 +53,7 @@
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <mat-slide-toggle [checked]="categoria.ativo" (click)="openDialog($event, categoria)"></mat-slide-toggle>
+              <mat-slide-toggle [checked]="categoria.ativo" (click)="openDialog($event, categoria)" class="teste"></mat-slide-toggle>
 
               <button mat-mini-fab color="black" aria-label="Excluir categoria" class="no-shadow"
                 (click)="openConfirmationDialog(categoria)">

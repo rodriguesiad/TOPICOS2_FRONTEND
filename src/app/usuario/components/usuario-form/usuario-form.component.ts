@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario.model';
 import { PerfilEnum } from 'src/app/models/perfil.enum';
@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { Telefone } from 'src/app/models/telefone.model';
 
 @Component({
   selector: 'app-usuario-form',
@@ -30,7 +31,7 @@ export class UsuarioFormComponent implements OnInit {
   selectedPerfil = this.perfis[1].value;
 
   usuario: Usuario;
-
+  
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
@@ -49,7 +50,6 @@ export class UsuarioFormComponent implements OnInit {
       cpf: ['', Validators.required],
       senha: ['', Validators.required],
       dataNascimento: [null],
-      telefones: [null],
       perfis: [null, Validators.required],
       ativo: [null]
     })
@@ -68,7 +68,6 @@ export class UsuarioFormComponent implements OnInit {
       cpf: [(this.usuario && this.usuario.cpf) ? this.usuario.cpf : '', Validators.required],
       senha: [(this.usuario && this.usuario.senha) ? 'Visualização indisponível. Se deseja alterar, escreva uma nova senha.' : ''],
       dataNascimento: [(this.usuario && this.usuario.dataNascimento) ? this.usuario.dataNascimento : null],
-      telefones: [(this.usuario && this.usuario.telefones) ? this.usuario.telefones : null],
       perfis: [(this.usuario && this.usuario.perfis) ? this.usuario.perfis : null, Validators.required],
       ativo: [(this.usuario && this.usuario.ativo) ? this.usuario.ativo : null]
     });
