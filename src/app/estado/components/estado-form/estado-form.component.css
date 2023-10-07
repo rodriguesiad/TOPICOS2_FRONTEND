@@ -29,6 +29,7 @@ mat-card-actions {
 
 button[mat-raised-button] {
     width: 120px;
+    font-size: 12px;
     /* tamanho do botao */
 }
 

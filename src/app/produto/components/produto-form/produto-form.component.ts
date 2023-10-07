@@ -35,6 +35,8 @@ export class ProdutoFormComponent implements OnInit {
       nome:[ '', Validators.required],
       descricao:['', Validators.required],
       preco:[null],
+      peso:[null],
+      porteAnimal:[null],
       estoque:[null],
       raca:[null],
       categoria:[null],
@@ -70,7 +72,9 @@ export class ProdutoFormComponent implements OnInit {
       descricao:[(produto && produto.descricao) ? produto.descricao : '', Validators.required],
       preco:[(produto && produto.preco) ? produto.preco : Validators.required],
       estoque:[(produto && produto.estoque) ? produto.estoque : Validators.required],
+      peso:[(produto && produto.peso) ? produto.peso: Validators.required],
       raca:[raca],
+      porteAnimal:[(produto && produto.porteAnimal) ? produto.porteAnimal: Validators.required],
       categoria:[categoria],
       especie:[especie],
       ativo:[(produto && produto.ativo) ? produto.ativo : true]

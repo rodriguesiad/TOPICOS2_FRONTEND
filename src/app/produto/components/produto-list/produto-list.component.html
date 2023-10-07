@@ -5,7 +5,31 @@
           <span class="toolbar-title"> Produtos </span>
         </div>
       </mat-toolbar>
+      <div class="filter-container">
+        <form [formGroup]="filtro">
+          <mat-form-field appearance="outline" style="margin-right: 10px;">
+            <mat-label>Situação</mat-label>
+            <mat-select formControlName="ativo">
+              <mat-option [value]="true">Ativo</mat-option>
+              <mat-option [value]="false">Inativo</mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" class="full-width-input">
+            <mat-label>Pesquisar por nome</mat-label>
+            <input matInput type="text" formControlName="nome" (keyup)="onEnterKey($event)" />
+          </mat-form-field>
+        </form>
+    
+        <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" class="clean-button" style="margin-right: 20px;" (click)="limparFiltro()">
+          LIMPAR
+        </button>
+      </div>
     </div>
+    
   
     <div style="padding: 5px;">
       <div class="table-container no-shadow rounded-corners" >
@@ -76,7 +100,7 @@
                   routerLink="/produtos/edit/{{produto.id}}">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <mat-slide-toggle [checked]="produto.ativo"></mat-slide-toggle>
+                <mat-slide-toggle [checked]="produto.ativo" (click)="openDialog($event, produto)"></mat-slide-toggle>
               </div>
             </td>
           </ng-container>

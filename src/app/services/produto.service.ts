@@ -21,7 +21,20 @@ export class ProdutoService {
   }
 
   save(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(`${this.baseURL}/produtos`, produto);
+
+    const obj = {
+      nome: produto.nome,
+      descricao: produto.descricao,
+      preco: produto.preco,
+      peso: produto.peso,
+      porte: produto.porteAnimal,
+      estoque: produto.estoque,
+      idRaca: produto.raca.id,
+      idCategoria: produto.categoria.id,
+      idEspecie: produto.especie.id
+    }
+    console.log(obj);
+    return this.http.post<Produto>(`${this.baseURL}/produtos`, obj);
   }
 
   update(produto: Produto): Observable<Produto>{
@@ -30,10 +43,12 @@ export class ProdutoService {
       nome: produto.nome,
       descricao: produto.descricao,
       preco: produto.preco,
+      peso: produto.peso,
+      porte: produto.porteAnimal,
       estoque: produto.estoque,
-      raca: produto.raca,
-      categoria: produto.categoria,
-      especie: produto.especie
+      idRaca: produto.raca.id,
+      idCategoria: produto.categoria.id,
+      idEspecie: produto.especie.id
     }
 
     return this.http.post<Produto>(`${this.baseURL}/produtos/${produto.id}`, obj);
@@ -68,5 +83,9 @@ export class ProdutoService {
       ativo: ativoParametro
     }
     return this.http.get<number>(`${this.baseURL}/produtos/search/count`, {params});
+  }
+
+  alterarSituacao(especie: Produto, situacao: boolean): Observable<Produto> {
+    return this.http.put<Produto>(`${this.baseURL}/produtos/situacao/${especie.id}`, situacao );
   }
 }

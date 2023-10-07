@@ -31,15 +31,6 @@
     </div>
   </div>
 
-<mat-card class="no-shadow">
-    <div>
-      <mat-toolbar>
-        <div class="flex-container">
-          <span class="toolbar-title"> Especies </span>
-        </div>
-      </mat-toolbar>
-    </div>
-  
     <div style="padding: 5px;">
       <div class="table-container no-shadow rounded-corners" >
         <table mat-table [dataSource]="especies">
@@ -61,7 +52,7 @@
                   routerLink="/especies/edit/{{especie.id}}">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <mat-slide-toggle [checked]="especie.ativo"></mat-slide-toggle>
+                <mat-slide-toggle [checked]="especie.ativo" (click)="openDialog($event, especie)"></mat-slide-toggle>
               </div>
             </td>
           </ng-container>

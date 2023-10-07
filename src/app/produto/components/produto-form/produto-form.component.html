@@ -31,6 +31,15 @@
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width-input">
+                    <mat-label>Peso</mat-label>
+                    <input matInput type="number" formControlName="peso" />
+                    <mat-error *ngIf="formGroup.get('peso') &&
+                formGroup.get('peso')?.invalid &&
+                formGroup.get('peso')?.touched">
+                        O peso é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width-input">
                     <mat-label>Estoque</mat-label>
                     <input matInput type="number" formControlName="estoque" />
                     <mat-error *ngIf="formGroup.get('estoque') &&
@@ -63,7 +72,7 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-<!--               <mat-form-field appearance="outline" >
+                 <mat-form-field appearance="outline" >
                     <mat-label>Porte do Animal</mat-label>
                     <mat-select formControlName="porteAnimal" clearable="false">
                       <mat-option [value]="1">
@@ -76,7 +85,7 @@
                         Grande
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>-->
+                  </mat-form-field>
             </form>
         </mat-card-content>
         <mat-card-actions>
