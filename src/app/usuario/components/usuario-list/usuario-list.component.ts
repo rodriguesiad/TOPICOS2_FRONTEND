@@ -40,7 +40,7 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
     private confirmationDialogService: ConfirmationDialogService) {
       this.filtro = formBuilder.group({
         nome: [''],
-        ativo: [null]
+        ativo: ['Todos']
       })
    }
 
@@ -184,7 +184,7 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
   limparFiltro() {
     this.filtro = this.formBuilder.group({
       nome: [''],
-      ativo: [null]
+      ativo: ['Todos']
     })
 
     this.aplicarFiltro();

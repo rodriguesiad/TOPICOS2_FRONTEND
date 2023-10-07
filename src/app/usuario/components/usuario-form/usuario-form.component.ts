@@ -7,7 +7,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { DatePipe } from '@angular/common';
-import { Telefone } from 'src/app/models/telefone.model';
 
 @Component({
   selector: 'app-usuario-form',
@@ -31,7 +30,7 @@ export class UsuarioFormComponent implements OnInit {
   selectedPerfil = this.perfis[1].value;
 
   usuario: Usuario;
-  
+
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,

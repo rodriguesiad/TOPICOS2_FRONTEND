@@ -41,7 +41,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
     {
     this.filtro = formBuilder.group({
       nome: [''],
-      ativo: [null]
+      ativo: ['Todos']
     })
   }
 
@@ -174,7 +174,7 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
   limparFiltro() {
     this.filtro = this.formBuilder.group({
       nome: [''],
-      ativo: [null]
+      ativo: ['Todos']
     })
 
     this.aplicarFiltro();

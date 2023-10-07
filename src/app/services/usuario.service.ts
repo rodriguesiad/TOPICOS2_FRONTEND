@@ -41,20 +41,20 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/situacao/${usuario.id}`, situacao );
   }
 
-  findByCampoBusca(nomeParametro: string, ativoParametro: boolean, pagina: number, tamanhoPagina: number): Observable<Usuario[]> {
+  findByCampoBusca(nomeParametro: string, situacaoParametro: string, pagina: number, tamanhoPagina: number): Observable<Usuario[]> {
     const params = {
       page: pagina.toString(),
       size: tamanhoPagina.toString(),
       campoBusca: nomeParametro,
-      ativo: ativoParametro
+      situacao: situacaoParametro
     }
     return this.http.get<Usuario[]>(`${this.baseURL}/usuarios/search`, {params});
   }
 
-  countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
+  countByCampoBusca(nomeParametro: string, situacaoParametro: string): Observable<number> {
     const params = {
       campoBusca: nomeParametro,
-      ativo: ativoParametro
+      situacao: situacaoParametro
     }
     return this.http.get<number>(`${this.baseURL}/usuarios/search/count`, {params});
   }

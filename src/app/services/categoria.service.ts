@@ -52,20 +52,20 @@ export class CategoriaService {
     return this.http.get<Categoria[]>(`${this.baseURL}/categorias/get-inativos`, {params});
   }
 
-  findByCampoBusca(nomeParametro: string, ativoParametro: boolean, pagina: number, tamanhoPagina: number): Observable<Categoria[]> {
+  findByCampoBusca(nomeParametro: string, situacaoParametro: string, pagina: number, tamanhoPagina: number): Observable<Categoria[]> {
     const params = {
       page: pagina.toString(),
       size: tamanhoPagina.toString(),
       nome: nomeParametro,
-      ativo: ativoParametro
+      situacao: situacaoParametro
     }
     return this.http.get<Categoria[]>(`${this.baseURL}/categorias/search`, {params});
   }
 
-  countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
+  countByCampoBusca(nomeParametro: string, situacaoParametro: string): Observable<number> {
     const params = {
       nome: nomeParametro,
-      ativo: ativoParametro
+      situacao: situacaoParametro
     }
 
     return this.http.get<number>(`${this.baseURL}/categorias/search/count`, {params});
