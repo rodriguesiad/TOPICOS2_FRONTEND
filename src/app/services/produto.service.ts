@@ -67,20 +67,20 @@ export class ProdutoService {
     return this.http.get<Produto[]>(`${this.baseURL}/produtos/paginado?page=${pageNumber}&size=${pageSize}`);
   }
 
-  findByCampoBusca(nomeParametro: string, ativoParametro: boolean, pagina: number, tamanhoPagina: number): Observable<Produto[]> {
+  findByCampoBusca(nomeParametro: string, situacaoParametro: string, pagina: number, tamanhoPagina: number): Observable<Produto[]> {
     const params = {
       page: pagina.toString(),
       size: tamanhoPagina.toString(),
       nome: nomeParametro,
-      ativo: ativoParametro
+      situacao: situacaoParametro
     }
     return this.http.get<Produto[]>(`${this.baseURL}/produtos/search`, {params});
   }
 
-  countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
+  countByCampoBusca(nomeParametro: string, situacaoParametro: string): Observable<number> {
     const params = {
       nome: nomeParametro,
-      ativo: ativoParametro
+      situacao: situacaoParametro
     }
     return this.http.get<number>(`${this.baseURL}/produtos/search/count`, {params});
   }

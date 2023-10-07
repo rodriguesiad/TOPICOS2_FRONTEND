@@ -49,7 +49,7 @@ export class RacaService {
       page: pagina.toString(),
       size: tamanhoPagina.toString(),
       nome: nomeParametro,
-      ativo: situacaoParametro
+      situacao: situacaoParametro
     }
     return this.http.get<Raca[]>(`${this.baseURL}/racas/search`, {params});
   }

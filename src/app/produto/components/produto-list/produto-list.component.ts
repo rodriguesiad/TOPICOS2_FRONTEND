@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { catchError, tap, throwError } from 'rxjs';
-import { SituacaoDialogBoxComponent } from 'src/app/components/situacao-dialog-box/situacao-dialog-box.component';
 import { Produto } from 'src/app/models/produto.model';
 import { ProdutoService } from 'src/app/services/produto.service';
+import { SituacaoDialogBoxComponent } from 'src/app/shared/components/situacao-dialog-box/situacao-dialog-box.component';
 
 @Component({
   selector: 'app-produto-list',
@@ -29,7 +29,7 @@ export class ProdutoListComponent {
   constructor(private produtoService: ProdutoService, public dialog:MatDialog, private formBuilder:FormBuilder) {
     this.filtro = formBuilder.group({
       nome: [''],
-      ativo: [null]
+      ativo: ['Todos']
     })
 
   }
@@ -143,7 +143,7 @@ aplicarFiltro() {
 limparFiltro() {
   this.filtro = this.formBuilder.group({
     nome: [''],
-    ativo: [null]
+    ativo: ['Todos']
   })
 
   this.aplicarFiltro();
