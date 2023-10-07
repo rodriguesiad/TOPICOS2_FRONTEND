@@ -15,10 +15,10 @@ mat-card {
 }
 
 .button-container {
-    width: 100%;
+    width: auto;
     display: flex;
     justify-content: flex-end;
-    padding-right: 25px;
+    padding-right: 4px;
 }
 
 button[mat-raised-button] {
@@ -74,7 +74,7 @@ table {
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
+    width: auto;
 }
 
 form{
@@ -83,6 +83,7 @@ form{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 }
 
 .full-width-input{

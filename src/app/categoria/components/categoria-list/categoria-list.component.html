@@ -26,7 +26,7 @@
     <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
       <mat-icon>search</mat-icon>
     </button>
-    <button mat-raised-button color="primary" class="clean-button" style="margin-right: 20px;" (click)="limparFiltro()">
+    <button mat-raised-button color="primary" class="clean-button" (click)="limparFiltro()">
       LIMPAR
     </button>
   </div>
@@ -54,6 +54,11 @@
               </button>
 
               <mat-slide-toggle [checked]="categoria.ativo" (click)="openDialog($event, categoria)"></mat-slide-toggle>
+
+              <button mat-mini-fab color="black" aria-label="Excluir categoria" class="no-shadow"
+                (click)="openConfirmationDialog(categoria)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </div>
           </td>
         </ng-container>

@@ -7,6 +7,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from "@angular/material/slide-toggle";
 import { MatPaginator } from "@angular/material/paginator";
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-categoria-list',
@@ -33,7 +34,11 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private categoriaService: CategoriaService, public dialog: MatDialog, private formBuilder: FormBuilder) {
+  constructor(private categoriaService: CategoriaService, 
+    public dialog: MatDialog, 
+    private formBuilder: FormBuilder,  
+    private confirmationDialogService: ConfirmationDialogService) 
+    {
     this.filtro = formBuilder.group({
       nome: [''],
       ativo: [null]
@@ -142,6 +147,23 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
       }
     });
+  }
+
+  openConfirmationDialog(categoria: Categoria): void {
+    const title = 'Confirmar Exclusão de Categoria';
+    const message = 'Tem certeza de que deseja excluir esta categoria?';
+
+    this.confirmationDialogService.openConfirmationDialog(
+      title,
+      message,
+      () => {
+        this.categoriaService.delete(categoria).subscribe({
+          next: () => {this.ngOnInit()},
+          error: (err) => {
+            console.log(err);
+          }
+        })}
+    );
   }
 
   aplicarFiltro() {
