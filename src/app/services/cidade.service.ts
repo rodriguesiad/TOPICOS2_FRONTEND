@@ -21,7 +21,7 @@ export class CidadeService {
   }
 
   findByNome(nome: string): Observable<Cidade[]> {
-    return this.http.get<Cidade[]>(`${this.baseURL}/municipios/serach/${nome}`);
+    return this.http.get<Cidade[]>(`${this.baseURL}/municipios/search/${nome}`);
   }
 
   save(cidade: Cidade): Observable<Cidade> {

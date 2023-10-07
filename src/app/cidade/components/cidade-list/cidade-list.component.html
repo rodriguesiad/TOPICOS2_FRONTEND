@@ -8,10 +8,10 @@
   </div>
 
   <div class="filter-container">
-      <mat-form-field appearance="outline" class="full-width-input">
-        <mat-label>Pesquisar</mat-label>
-        <input [(ngModel)]="filtro" matInput type="text" formControlName="nome" (keyup)="onEnterKey($event)" placeholder="Ex. 12345"/>
-      </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Pesquisar</mat-label>
+      <input [(ngModel)]="filtro" (keyup)="onEnterKey($event)" matInput placeholder="Ex. Palmas" #input>
+    </mat-form-field>
 
     <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
       <mat-icon id="icon">search</mat-icon>
