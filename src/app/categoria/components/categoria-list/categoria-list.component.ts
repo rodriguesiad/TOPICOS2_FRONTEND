@@ -29,7 +29,6 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   filtro: FormGroup;
 
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 

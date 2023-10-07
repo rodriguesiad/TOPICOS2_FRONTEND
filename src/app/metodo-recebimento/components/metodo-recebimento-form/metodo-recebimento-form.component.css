@@ -102,5 +102,17 @@ button[mat-raised-button]:not(:last-child) {
 
 #buttonVisualizarAnteriores {
   width: 230px;
-  margin-left: 67%;
+}
+
+.button-container {
+  display: flex;
+  margin-left: 55%;
+}
+
+button[mat-raised-button] {
+  width: 120px;
+  font-size: 12px;
+  background-color: var(--default-green);
+  color: white;
+  margin: 5px 5px 0 0;
 }

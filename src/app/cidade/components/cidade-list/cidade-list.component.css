@@ -2,16 +2,25 @@
   width: 100%;
 }
 
-mat-card {
-  max-width: 1250px;
-  margin: 2rem auto;
-}
-
 .flex-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+}
+
+button[mat-raised-button] {
+  width: 120px;
+  font-size: 12px;
+  background-color: var(--default-green);
+  color: white;
+  margin: 5px 5px 0 0;
 }
 
 .edit-button-container {
@@ -23,11 +32,13 @@ mat-card {
 
 .toolbar-title {
   flex: 1;
-  text-align: center;
+  text-align: start;
+  font-size: 28px;
 }
 
 mat-toolbar {
   background-color: white;
+  padding-left: 5px;
 }
 
 table {
@@ -35,12 +46,12 @@ table {
   table-layout: auto;
 }
 
-.mat-column {
-  width: 50%;
+.mat-column-nome-column {
+  width: 75%;
 }
 
 .mat-column-actions-column {
-  width: 15%;
+  width: 25%;
 }
 
 .mat-cell,
@@ -60,27 +71,38 @@ table {
   background-color: rgba(29, 135, 229, .2);
 }
 
-.container {
+.table-container {
+  border: 1px solid rgb(224, 223, 223);
+  border-radius: 2px;
+  padding: 5px;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track {
+  background-color: var(--default-green);
+}
+
+.filter-container {
+  margin-top: 20px;
+  margin: 8px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: auto;
+}
+
+form{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
-.input-container {
-  margin-top: 20px;
-  margin-left: 15px;
-  display: flex;
-  align-items: center;
+.full-width-input{
+  margin-top: 18px;
   width: 100%;
 }
 
-.input-field {
-  flex-grow: 1; /* Faz o input crescer para ocupar todo o espaço disponível */
-  margin-right: 16px; /* Espaçamento entre o input e o botão (ajuste conforme necessário) */
-}
-
-.search-button {
-  flex-shrink: 0; /* Evita que o botão encolha */
-  margin-bottom: 2%;
-  margin-right: 2%;
+#icon {
+  color: var(--default-green);
 }

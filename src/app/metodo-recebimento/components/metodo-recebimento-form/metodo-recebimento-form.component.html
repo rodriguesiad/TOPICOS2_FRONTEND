@@ -2,9 +2,6 @@
   <mat-toolbar>
     <div class="flex-container">
       <span class="toolbar-title"> Métodos de Recebimento </span>
-      <button mat-fab color="accent" routerLink="/metodos-recebimento/new">
-        <mat-icon>add</mat-icon>
-      </button>
     </div>
   </mat-toolbar>
 
@@ -21,12 +18,18 @@
   </div>
 </mat-card>
 
-<button mat-raised-button
-        id="buttonVisualizarAnteriores"
-        color="primary"
-        routerLink="/metodos-recebimento/list"
-        style="background-color: var(--default-green);">
-  VISUALIZAR ANTERIORES
-</button>
+<div class="button-container">
+  <button
+    mat-raised-button
+    routerLink="/metodos-recebimento/new">
+    NOVO
+  </button>
+  <button mat-raised-button
+          id="buttonVisualizarAnteriores"
+          color="primary"
+          routerLink="/metodos-recebimento/list">
+    VISUALIZAR ANTERIORES
+  </button>
+</div>
 
 
