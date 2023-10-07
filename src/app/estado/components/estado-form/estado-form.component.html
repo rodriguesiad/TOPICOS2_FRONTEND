@@ -27,6 +27,7 @@
             <button mat-raised-button 
                 color="primary" 
                 (click)="salvar()"
+                style="background-color: var(--default-green); color: white;"
                 [disabled]="formGroup.invalid">
                 Salvar
             </button>
@@ -37,7 +38,7 @@
                 [disabled]="formGroup.invalid">
                 Excluir
             </button>
-            <button mat-raised-button 
+            <button mat-raised-button style="color: var(--default-green);"
                 routerLink="/estados/list">
                 Cancelar
             </button>

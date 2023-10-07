@@ -31,4 +31,27 @@ export class EstadoService {
     return this.http.delete<Estado>(`${this.baseURL}/estados/${estado.id}`);
   }
 
+  findAllPaginado(pageNumber: number, pageSize: number): Observable<Estado[]> {
+    return this.http.get<Estado[]>(`${this.baseURL}/estados/paginado?page=${pageNumber}&size=${pageSize}`);
+  }
+
+  findByCampoBusca(nomeParametro: string, pagina: number, tamanhoPagina: number): Observable<Estado[]> {
+    const params = {
+      page: pagina.toString(),
+      size: tamanhoPagina.toString(),
+      nome: nomeParametro
+    }
+    return this.http.get<Estado[]>(`${this.baseURL}/produtos/search`, {params});
+  }
+
+  countByCampoBusca(nomeParametro: string): Observable<number> {
+    const params = {
+      nome: nomeParametro,
+    }
+    return this.http.get<number>(`${this.baseURL}/produtos/search/count`, {params});
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/estados/count`);
+  }
 }

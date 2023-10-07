@@ -3,34 +3,109 @@
 }
 
 mat-card {
-    max-width: 1400px;
+    max-width: 1250px;
     margin: 2rem auto;
-}
-
-.mat-column-id-column {
-    width: 32px;
-    border-right: 1px solid currentColor;
-    padding-right: 24px;
-    text-align: center;
-}
-
-.mat-column-nome-column {
-    padding-left: 16px;
-    font-size: 20px;
-}
-
-.mat-column-sigla-column {
-    font-style: italic;
 }
 
 .flex-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 25px;
+}
+
+button[mat-raised-button] {
+    width: 120px;
+    font-size: 12px;
+    background-color: var(--default-green);
+    color: white;
+    margin: 5px 5px 0 0;
+}
+
+.edit-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
 }
 
 .toolbar-title {
     flex: 1;
-    text-align: center;
+    text-align: start;
+    font-size: 28px;
+}
+
+mat-toolbar {
+    background-color: white;
+    padding-left: 5px;
+}
+
+table {
+    width: 100%;
+    table-layout: auto;
+}
+
+.mat-column-nome-column {
+    width: 75%;
+}
+
+.mat-column-actions-column {
+    width: 25%;
+}
+
+.mat-cell,
+.mat-header-cell {
+    margin-right: 10px;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: rgb(128, 203, 196);
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: rgb(29, 135, 229);
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-ripple .mat-ripple-element {
+    background-color: rgba(29, 135, 229, .2);
+}
+
+.table-container {
+    border: 1px solid rgb(224, 223, 223);
+    border-radius: 2px;
+    padding: 5px;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track {
+    background-color: var(--default-green);
+}
+
+.filter-container {
+    margin-top: 20px;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+form{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.full-width-input{
+    width: 80%;
+    margin-left: 10px;
 }

@@ -2,24 +2,32 @@
   <mat-toolbar>
     <div class="flex-container">
       <span class="toolbar-title"> Controle de Estados </span>
-      <button mat-fab color="accent" routerLink="/estados/new">
-        <mat-icon>add</mat-icon>
-      </button>
     </div>
   </mat-toolbar>
-  
-  <table mat-table [dataSource]="estados" class="mat-elevation-z8 demo-table no-shadow rounded-corners">
-      <!-- Id Column -->
-      <ng-container matColumnDef="id-column">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let estado"> {{estado.id}} </td>
-      </ng-container>
-    
+  <div class="filter-container">
+    <form [formGroup]="filtro">
+      <mat-form-field appearance="outline" class="full-width-input">
+        <mat-label>Pesquisar por nome</mat-label>
+        <input matInput type="text" formControlName="nome" (keyup)="onEnterKey($event)" />
+      </mat-form-field>
+    </form>
+
+    <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" class="clean-button" style="margin-right: 20px;" (click)="limparFiltro()">
+      LIMPAR
+    </button>
+  </div>
+  <div style="padding: 5px;">
+    <div class="table-container no-shadow rounded-corners" >
+    <table mat-table [dataSource]="estados" class="mat-elevation-z8 demo-table no-shadow rounded-corners">
+
       <!-- Nome Column -->
       <ng-container matColumnDef="nome-column">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
         <td mat-cell *matCellDef="let estado"> 
-          <a routerLink="/estados/edit/{{estado.id}}"> {{estado.nome}} </a> 
+          <a> {{estado.nome}} </a> 
         </td>
       </ng-container>
     
@@ -28,8 +36,28 @@
           <th mat-header-cell *matHeaderCellDef> Sigla </th>
           <td mat-cell *matCellDef="let estado"> {{estado.sigla}} </td>
       </ng-container>
+
+      <ng-container matColumnDef="actions-column">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let estado">
+          <div class="edit-button-container">
+            <button mat-mini-fab color="black" aria-label="Editar estado" class="no-shadow"
+              routerLink="/estados/edit/{{estado.id}}">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>  
+    </div>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button routerLink="/estados/new">
+        NOVO
+      </button>
+    </div>
+     
 </mat-card>
