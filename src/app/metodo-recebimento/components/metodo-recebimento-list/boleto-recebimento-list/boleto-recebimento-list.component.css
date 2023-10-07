@@ -47,5 +47,13 @@ table {
   flex-shrink: 0; /* Evita que o botão encolha */
   margin-bottom: 2%;
   margin-right: 2%;
+  color: var(--default-green);
 }
 
+button[mat-raised-button] {
+  width: 120px;
+  font-size: 12px;
+  background-color: var(--default-green);
+  color: white;
+  margin-bottom: 20px;
+}
