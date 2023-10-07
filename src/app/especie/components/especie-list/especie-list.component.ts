@@ -28,7 +28,7 @@ export class EspecieListComponent implements OnInit, AfterViewInit {
   constructor(private especieService: EspecieService, public dialog:MatDialog, private formBuilder:FormBuilder) {
     this.filtro = formBuilder.group({
       nome: [''],
-      ativo: ['Todos']
+      ativo: [null]
     })
 
   }
@@ -142,7 +142,7 @@ export class EspecieListComponent implements OnInit, AfterViewInit {
   limparFiltro() {
     this.filtro = this.formBuilder.group({
       nome: [''],
-      ativo: ['Todos']
+      ativo: [null]
     })
 
     this.aplicarFiltro();

@@ -29,7 +29,7 @@ export class ProdutoListComponent {
   constructor(private produtoService: ProdutoService, public dialog:MatDialog, private formBuilder:FormBuilder) {
     this.filtro = formBuilder.group({
       nome: [''],
-      ativo: ['Todos']
+      ativo: [null]
     })
 
   }
@@ -143,7 +143,7 @@ aplicarFiltro() {
 limparFiltro() {
   this.filtro = this.formBuilder.group({
     nome: [''],
-    ativo: ['Todos']
+    ativo: [null]
   })
 
   this.aplicarFiltro();
