@@ -85,7 +85,7 @@ export class PixRecebimentoListComponent implements OnInit, AfterViewInit {
         // Ação a ser realizada. Neste caso, a de excluir.
         this.pixService.delete(id).subscribe({
           next: () => {
-            window.location.reload()
+            this.ngOnInit()
           },
           error: (err) => {
             console.log(err);

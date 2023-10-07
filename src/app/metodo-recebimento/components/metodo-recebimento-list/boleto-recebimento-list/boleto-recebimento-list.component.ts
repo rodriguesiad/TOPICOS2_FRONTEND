@@ -85,7 +85,7 @@ export class BoletoRecebimentoListComponent implements OnInit, AfterViewInit {
       () => {
         // Ação a ser realizada. Neste caso, a de excluir.
         this.boletoService.delete(id).subscribe({
-          next: () => {window.location.reload()},
+          next: () => {this.ngOnInit()},
           error: (err) => {
             console.log(err);
           }

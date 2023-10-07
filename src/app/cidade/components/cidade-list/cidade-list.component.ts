@@ -24,7 +24,7 @@ export class CidadeListComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   constructor(private cidadeService: CidadeService,
-              private confirmationDialogService: ConfirmationDialogService,) {
+              private confirmationDialogService: ConfirmationDialogService) {
   }
 
 
@@ -97,7 +97,7 @@ export class CidadeListComponent {
         // Ação a ser realizada. Neste caso, a de excluir.
         this.cidadeService.delete(id).subscribe({
           next: () => {
-            window.location.reload()
+            this.ngOnInit()
           },
           error: (err) => {
             console.log(err);
