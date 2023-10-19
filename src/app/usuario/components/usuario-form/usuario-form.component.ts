@@ -21,6 +21,8 @@ import { DatePipe } from '@angular/common';
 export class UsuarioFormComponent implements OnInit {
   formGroup: FormGroup;
   maxDate = new Date();
+  apiResponse: any = null;
+
 
   perfis = PerfilEnum.items.map(item => ({
     value: item.value,
@@ -97,20 +99,65 @@ export class UsuarioFormComponent implements OnInit {
           next: (usuarioCadastrado) => {
             this.router.navigateByUrl('/usuarios/list');
           },
-          error: (err) => {
-            console.log(err);
+          error: (errorResponse) => {
+            this.apiResponse = errorResponse.error;
+          
+            const formControls = ['nome', 'email', 'cpf', 'senha', 'dataNascimento', 'perfis'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+          
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+          
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+          
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
-        });
+      })
       } else {
         this.usuarioService.update(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
             this.router.navigateByUrl('/usuarios/list');
           },
-          error: (err) => {
-            console.log(err);
+          error: (errorResponse) => {
+            this.apiResponse = errorResponse.error;
+          
+            const formControls = ['nome', 'email', 'cpf', 'senha', 'dataNascimento', 'perfis'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+          
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+          
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+          
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
       }
+    }
+  }
+
+  getErrorMessage(fieldName: string): string {
+    if (this.apiResponse && this.apiResponse.errors) {
+      const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+      return error ? error.message : '';
+    } else {
+      return '';
     }
   }
 

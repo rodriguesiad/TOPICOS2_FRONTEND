@@ -12,10 +12,8 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Nome</mat-label>
                         <input matInput type="text" formControlName="nome" />
-                        <mat-error *ngIf="formGroup.get('nome') &&
-                        formGroup.get('nome')?.invalid &&
-                        formGroup.get('nome')?.touched">
-                            Nome é obrigatório.
+                        <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
+                            {{ formGroup.get('nome')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
                 </form>
@@ -29,6 +27,6 @@
                     SALVAR
                 </button>
             </mat-card-actions>
-        </mat-card>   
+        </mat-card>
     </div>
 </mat-card>

@@ -12,6 +12,8 @@ import { EspecieService } from 'src/app/services/especie.service';
 export class EspecieFormComponent {
 
   formGroup: FormGroup;
+  apiResponse: any = null;
+
 
   constructor(private formBuilder: FormBuilder,
               private especieService: EspecieService,
@@ -35,8 +37,26 @@ export class EspecieFormComponent {
           next: (especieCadastrada) => {
             this.router.navigateByUrl('/especies/list');
           },
-          error: (err) => {
-            console.log('Erro ao incluir' + JSON.stringify(err));
+          error: (errorResponse) => {
+            this.apiResponse = errorResponse.error;
+          
+            const formControls = ['nome'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+          
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+          
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+          
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
       } else {
@@ -44,8 +64,26 @@ export class EspecieFormComponent {
           next: (especieCadastrada) => {
             this.router.navigateByUrl('/especies/list');
           },
-          error: (err) => {
-            console.log('Erro ao alterar' + JSON.stringify(err));
+          error: (errorResponse) => {
+            this.apiResponse = errorResponse.error;
+          
+            const formControls = ['nome'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+          
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+          
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+          
+            console.log('Erro ao alterar' + JSON.stringify(errorResponse));
           }
         });        
       }
@@ -65,4 +103,14 @@ export class EspecieFormComponent {
       });
     }      
   }
+
+  getErrorMessage(fieldName: string): string {
+    if (this.apiResponse && this.apiResponse.errors) {
+      const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+      return error ? error.message : '';
+    } else {
+      return '';
+    }
+  }
+
 }

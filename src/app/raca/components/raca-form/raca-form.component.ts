@@ -11,6 +11,7 @@ import { RacaService } from 'src/app/services/raca.service';
 })
 export class RacaFormComponent {
   formGroup: FormGroup;
+  apiResponse: any = null;
 
   constructor(private formBuilder: FormBuilder,
     private racaService: RacaService,
@@ -34,8 +35,26 @@ export class RacaFormComponent {
           next: (racaCadastrada) => {
             this.router.navigateByUrl('/racas/list');
           },
-          error: (err) => {
-            console.log('Erro ao incluir' + JSON.stringify(err));
+          error: (errorResponse) => { 
+            this.apiResponse = errorResponse.error;
+          
+            const formControls = ['nome'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+          
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+          
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+          
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
       } else {
@@ -43,8 +62,25 @@ export class RacaFormComponent {
           next: (racaCadastrada) => {
             this.router.navigateByUrl('/racas/list');
           },
-          error: (err) => {
-            console.log('Erro ao alterar' + JSON.stringify(err));
+          error: (errorResponse) => {this.apiResponse = errorResponse.error;
+          
+            const formControls = ['nome'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+          
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+          
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+          
+            console.log('Erro ao alterar' + JSON.stringify(errorResponse));
           }
         });
       }
@@ -62,6 +98,15 @@ export class RacaFormComponent {
           console.log('Erro ao excluir' + JSON.stringify(err));
         }
       });
+    }
+  }
+
+  getErrorMessage(fieldName: string): string {
+    if (this.apiResponse && this.apiResponse.errors) {
+      const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+      return error ? error.message : '';
+    } else {
+      return '';
     }
   }
 

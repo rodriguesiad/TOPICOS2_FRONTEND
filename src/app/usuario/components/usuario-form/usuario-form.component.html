@@ -13,49 +13,43 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Nome</mat-label>
                         <input matInput type="text" formControlName="nome" />
-                        <mat-error *ngIf="formGroup.get('nome') &&
-                    formGroup.get('nome')?.invalid &&
-                    formGroup.get('nome')?.touched">
-                            Nome é obrigatório.
+                        <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
+                            {{ formGroup.get('nome')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>E-mail</mat-label>
                         <input matInput type="text" formControlName="email" />
-                        <mat-error *ngIf="formGroup.get('email') &&
-                    formGroup.get('email')?.invalid &&
-                    formGroup.get('email')?.touched">
-                            E-mail é obrigatório.
+                        <mat-error *ngIf="formGroup.get('email')?.hasError('apiError')">
+                            {{ formGroup.get('email')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>CPF</mat-label>
                         <input matInput type="text" formControlName="cpf" />
-                        <mat-error *ngIf="formGroup.get('cpf') &&
-                    formGroup.get('cpf')?.invalid &&
-                    formGroup.get('cpf')?.touched">
-                            CPF é obrigatório.
+                        <mat-error *ngIf="formGroup.get('cpf')?.hasError('apiError')">
+                            {{ formGroup.get('cpf')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Senha</mat-label>
                         <input matInput type="text" formControlName="senha" />
-                        <mat-error *ngIf="formGroup.get('senha') &&
-                    formGroup.get('senha')?.invalid &&
-                    formGroup.get('senha')?.touched">
-                            Senha é obrigatório.
+                        <mat-error *ngIf="formGroup.get('senha')?.hasError('apiError')">
+                            {{ formGroup.get('senha')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Outros botões e ações do formulário -->
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Data de Nascimento</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="dataNascimento" [max]="maxDate">
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="formGroup.get('dataNascimento')?.hasError('apiError')">
+                            {{ formGroup.get('dataNascimento')?.getError('apiError') }}
+                        </mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="full-width-input">
@@ -64,6 +58,9 @@
                             <mat-option *ngFor="let perfil of perfis"
                                 [value]="perfil.value">{{perfil.text}}</mat-option>
                         </mat-select>
+                        <mat-error *ngIf="formGroup.get('perfis')?.hasError('apiError')">
+                            {{ formGroup.get('perfis')?.getError('apiError') }}
+                        </mat-error>
                     </mat-form-field>
                 </form>
             </mat-card-content>
