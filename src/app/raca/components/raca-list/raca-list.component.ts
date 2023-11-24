@@ -5,8 +5,8 @@ import { SituacaoDialogBoxComponent } from 'src/app/shared/components/situacao-d
 
 import { Raca } from 'src/app/models/raca.model';
 import { RacaService } from 'src/app/services/raca.service';
-import {MatPaginator} from "@angular/material/paginator";
-import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
+import { MatPaginator } from "@angular/material/paginator";
+import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from "@angular/material/slide-toggle";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
@@ -34,15 +34,15 @@ export class RacaListComponent implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private racaService: RacaService, 
-    public dialog: MatDialog, 
-    private formBuilder: FormBuilder, 
+  constructor(private racaService: RacaService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
     private confirmationDialogService: ConfirmationDialogService) {
     this.filtro = formBuilder.group({
       nome: [''],
       ativo: ['Todos']
     })
-   }
+  }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -59,7 +59,7 @@ export class RacaListComponent implements OnInit, AfterViewInit {
     this.carregarTotal();
   }
 
-  
+
   carregarDadosPaginados() {
     if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
       this.racaService.findByCampoBusca(this.filtro.value?.nome, this.filtro.value?.ativo, this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
@@ -159,11 +159,12 @@ export class RacaListComponent implements OnInit, AfterViewInit {
       message,
       () => {
         this.racaService.delete(raca).subscribe({
-          next: () => {this.ngOnInit()},
+          next: () => { this.ngOnInit() },
           error: (err) => {
             console.log(err);
           }
-        })}
+        })
+      }
     );
   }
 

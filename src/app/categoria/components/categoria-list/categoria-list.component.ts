@@ -34,11 +34,10 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private categoriaService: CategoriaService, 
-    public dialog: MatDialog, 
-    private formBuilder: FormBuilder,  
-    private confirmationDialogService: ConfirmationDialogService) 
-    {
+  constructor(private categoriaService: CategoriaService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    private confirmationDialogService: ConfirmationDialogService) {
     this.filtro = formBuilder.group({
       nome: [''],
       ativo: ['Todos']
@@ -158,11 +157,12 @@ export class CategoriaListComponent implements OnInit, AfterViewInit {
       message,
       () => {
         this.categoriaService.delete(categoria).subscribe({
-          next: () => {this.ngOnInit()},
+          next: () => { this.ngOnInit() },
           error: (err) => {
             console.log(err);
           }
-        })}
+        })
+      }
     );
   }
 

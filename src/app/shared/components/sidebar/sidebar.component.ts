@@ -10,13 +10,13 @@ import { SidebarService } from '../../services/sidebar.service';
 export class SidebarComponent implements OnInit {
   @ViewChild('drawer') public drawer!: MatDrawer;
 
-  constructor(private sideBarService: SidebarService) {  }
+  constructor(private sideBarService: SidebarService) { }
 
   ngOnInit(): void {
-      this.sideBarService.sideNavToggleSubject.subscribe(
-        () => {
-          this.drawer?.toggle();
-        }
-      )
+    this.sideBarService.sideNavToggleSubject.subscribe(
+      () => {
+        this.drawer?.toggle();
+      }
+    )
   }
 }

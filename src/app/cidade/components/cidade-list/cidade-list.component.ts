@@ -1,9 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
-import {Cidade} from 'src/app/models/cidade.model';
-import {CidadeService} from 'src/app/services/cidade.service';
-import {ConfirmationDialogService} from "../../../shared/services/confirmation-dialog.service";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
+import { Component, ViewChild } from '@angular/core';
+import { Cidade } from 'src/app/models/cidade.model';
+import { CidadeService } from 'src/app/services/cidade.service';
+import { ConfirmationDialogService } from "../../../shared/services/confirmation-dialog.service";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-cidade-list',
@@ -24,7 +24,7 @@ export class CidadeListComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   constructor(private cidadeService: CidadeService,
-              private confirmationDialogService: ConfirmationDialogService) {
+    private confirmationDialogService: ConfirmationDialogService) {
   }
 
 

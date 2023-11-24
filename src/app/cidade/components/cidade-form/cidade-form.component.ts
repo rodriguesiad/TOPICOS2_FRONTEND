@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Cidade} from 'src/app/models/cidade.model';
-import {Estado} from 'src/app/models/estado.model';
-import {CidadeService} from 'src/app/services/cidade.service';
-import {EstadoService} from 'src/app/services/estado.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Cidade } from 'src/app/models/cidade.model';
+import { Estado } from 'src/app/models/estado.model';
+import { CidadeService } from 'src/app/services/cidade.service';
+import { EstadoService } from 'src/app/services/estado.service';
 
 @Component({
   selector: 'app-cidade-form',
@@ -16,10 +16,10 @@ export class CidadeFormComponent implements OnInit {
   estados: Estado[] = [];
 
   constructor(private formBuilder: FormBuilder,
-              private estadoService: EstadoService,
-              private cidadeService: CidadeService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+    private estadoService: EstadoService,
+    private cidadeService: CidadeService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
 
     this.formGroup = this.formBuilder.group({
       id: [null],

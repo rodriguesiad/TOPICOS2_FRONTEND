@@ -5,9 +5,9 @@ import { CidadeFormComponent } from './components/cidade-form/cidade-form.compon
 import { cidadeResolver } from './resolver/cidade-resolver';
 
 const routes: Routes = [
-  {path: 'list', component: CidadeListComponent},
-  {path: 'new', component: CidadeFormComponent},
-  {path: 'edit/:id', component: CidadeFormComponent, resolve: {cidade: cidadeResolver}}
+  { path: 'list', component: CidadeListComponent },
+  { path: 'new', component: CidadeFormComponent },
+  { path: 'edit/:id', component: CidadeFormComponent, resolve: { cidade: cidadeResolver } }
 ];
 
 @NgModule({
