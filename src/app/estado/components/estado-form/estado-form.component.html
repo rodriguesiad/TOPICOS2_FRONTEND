@@ -1,4 +1,4 @@
-<mat-toolbar class="centered-toolbar">Cadastro de Estado</mat-toolbar>
+<span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Estado' : 'Cadastrar Estado' }}</span>
 <div class="form-container">
     <mat-card>
         <mat-card-content>

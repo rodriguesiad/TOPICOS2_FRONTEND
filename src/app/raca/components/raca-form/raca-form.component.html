@@ -1,7 +1,7 @@
 <mat-card class="no-shadow pagina">
     <mat-toolbar>
         <div class="flex-container">
-            <span class="toolbar-title"> Cadastro de Raças </span>
+            <span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Raça' : 'Cadastrar Raça' }}</span>
         </div>
     </mat-toolbar>
 

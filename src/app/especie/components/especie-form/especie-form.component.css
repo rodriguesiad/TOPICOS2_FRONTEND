@@ -34,3 +34,9 @@ button[mat-raised-button] {
 button[mat-raised-button]:not(:last-child) {
     margin-right: 1rem;
 }
+
+.toolbar-title {
+    flex: 1;
+    text-align: start;
+    font-size: 28px;
+}

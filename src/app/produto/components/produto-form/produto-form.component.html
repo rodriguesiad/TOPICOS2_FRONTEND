@@ -1,104 +1,141 @@
-<mat-toolbar class="centered-toolbar">Cadastro de Produto</mat-toolbar>
+<span class="centered-text">{{ formGroup.get('id')?.value ? 'Editar Produto' : 'Cadastrar Produto' }}</span>
 <div class="form-container">
-    <mat-card>
-        <mat-card-content>
-            <form [formGroup]="formGroup" >
-                <mat-form-field appearance="outline" class="full-width-input">
-                    <mat-label>Nome</mat-label>
-                    <input matInput type="text" formControlName="nome" />
-                    <mat-error *ngIf="formGroup.get('nome') &&
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="formGroup">
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="nome" />
+          <mat-error *ngIf="formGroup.get('nome') &&
                 formGroup.get('nome')?.invalid &&
                 formGroup.get('nome')?.touched">
-                        Nome é obrigatório.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="full-width-input">
-                    <mat-label>Descrição</mat-label>
-                    <input matInput type="text" formControlName="descricao" />
-                    <mat-error *ngIf="formGroup.get('descricao') &&
+            Nome é obrigatório.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Descrição</mat-label>
+          <input matInput type="text" formControlName="descricao" />
+          <mat-error *ngIf="formGroup.get('descricao') &&
                 formGroup.get('descricao')?.invalid &&
                 formGroup.get('descricao')?.touched">
-                        Descrição é obrigatório.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="full-width-input">
-                    <mat-label>Preço</mat-label>
-                    <input matInput type="number" formControlName="preco" />
-                    <mat-error *ngIf="formGroup.get('preco') &&
+            Descrição é obrigatório.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Preço</mat-label>
+          <input matInput type="number" formControlName="preco" />
+          <mat-error *ngIf="formGroup.get('preco') &&
                 formGroup.get('preco')?.invalid &&
                 formGroup.get('preco')?.touched">
-                        O preço é obrigatório.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="full-width-input">
-                    <mat-label>Peso</mat-label>
-                    <input matInput type="number" formControlName="peso" />
-                    <mat-error *ngIf="formGroup.get('peso') &&
+            O preço é obrigatório.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Peso</mat-label>
+          <input matInput type="number" formControlName="peso" />
+          <mat-error *ngIf="formGroup.get('peso') &&
                 formGroup.get('peso')?.invalid &&
                 formGroup.get('peso')?.touched">
-                        O peso é obrigatório.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="full-width-input">
-                    <mat-label>Estoque</mat-label>
-                    <input matInput type="number" formControlName="estoque" />
-                    <mat-error *ngIf="formGroup.get('estoque') &&
+            O peso é obrigatório.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Estoque</mat-label>
+          <input matInput type="number" formControlName="estoque" />
+          <mat-error *ngIf="formGroup.get('estoque') &&
                 formGroup.get('estoque')?.invalid &&
                 formGroup.get('estoque')?.touched">
-                        O estoque é obrigatório.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" >
-                    <mat-label for="raca_id">Raça</mat-label>
-                    <mat-select formControlName="raca" id="raca_id">
-                      <mat-option *ngFor="let raca of racas" [value]="raca">
-                        {{raca.nome}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                <mat-form-field appearance="outline" >
-                    <mat-label for="categoria_id">Categoria</mat-label>
-                    <mat-select formControlName="categoria" id="categoria_id">
-                      <mat-option *ngFor="let categoria of categorias" [value]="categoria">
-                        {{categoria.nome}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                <mat-form-field appearance="outline" >
-                    <mat-label for="especie_id">Espécie</mat-label>
-                    <mat-select formControlName="especie" id="especie_id">
-                      <mat-option *ngFor="let especie of especies" [value]="especie">
-                        {{especie.nome}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                 <mat-form-field appearance="outline" >
-                    <mat-label>Porte do Animal</mat-label>
-                    <mat-select formControlName="porteAnimal" clearable="false">
-                      <mat-option [value]="1">
-                        Pequeno
-                      </mat-option>
-                      <mat-option [value]="2">
-                        Médio
-                      </mat-option>
-                      <mat-option [value]="3">
-                        Grande
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button style="color: var(--default-green);"
-                routerLink="/produtos/list">
-                CANCELAR
-            </button>
-            <button mat-raised-button
-                (click)="salvar()"
-                [disabled]="formGroup.invalid"
-                style="background-color: var(--default-green); color: white;">
-                SALVAR
-            </button>
-        </mat-card-actions>
-    </mat-card>
+            O estoque é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="sub-form">
+          <mat-form-field appearance="outline" class="input-2-equals-parts">
+            <mat-label for="raca_id">Raça</mat-label>
+            <mat-select formControlName="raca" id="raca_id">
+              <mat-option *ngFor="let raca of racas" [value]="raca">
+                {{raca.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input-2-equals-parts">
+            <mat-label for="categoria_id">Categoria</mat-label>
+            <mat-select formControlName="categoria" id="categoria_id">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                {{categoria.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="sub-form">
+          <mat-form-field appearance="outline" class="input-2-equals-parts">
+            <mat-label for="especie_id">Espécie</mat-label>
+            <mat-select formControlName="especie" id="especie_id">
+              <mat-option *ngFor="let especie of especies" [value]="especie">
+                {{especie.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="input-2-equals-parts">
+            <mat-label>Porte do Animal</mat-label>
+            <mat-select formControlName="porteAnimal" clearable="false">
+              <mat-option [value]="1">
+                Pequeno
+              </mat-option>
+              <mat-option [value]="2">
+                Médio
+              </mat-option>
+              <mat-option [value]="3">
+                Grande
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Imagem da Faixa</mat-label>
+          <input type="file" (change)="carregarImagemSelecionada($event)" hidden #fileInput>
+          <input matInput [value]="fileName" readonly>
+
+          <button mat-icon-button matSuffix (click)="fileInput.click()">
+            <mat-icon>folder_open</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div *ngIf="imagePreview" class="container responsive-grid">
+          <mat-card>
+
+              <img mat-card-image [src]="imagePreview" >
+
+              <mat-card-title class="centered-text"> {{formGroup.get('nome')?.value}} </mat-card-title>
+
+              <mat-card-content class="centered-text"> {{formGroup.get('categoria')?.value?.nome}} </mat-card-content>
+              <br/>
+              <mat-card-content class="centered-text"> {{formGroup.get('preco')?.value | currency:'BRL'}} </mat-card-content>
+
+              <mat-card-actions class="centered-text">
+                  <button mat-button color="primary">Ver mais ...</button>
+              </mat-card-actions>
+
+              <mat-card-footer>
+                  <button mat-flat-button
+                      style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
+              </mat-card-footer>
+          </mat-card>
+      </div>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button style="color: var(--default-green);" routerLink="/produtos/list">
+        CANCELAR
+      </button>
+      <button mat-raised-button (click)="salvar()" [disabled]="formGroup.invalid"
+        style="background-color: var(--default-green); color: white;">
+        SALVAR
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

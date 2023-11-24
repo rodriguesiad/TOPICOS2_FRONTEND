@@ -37,3 +37,9 @@ button[mat-raised-button]:not(:last-child) {
     margin-right: 1rem;
     /* Adiciona margem à direita de todos os botões, exceto o último */
 }
+
+.toolbar-title {
+    flex: 1;
+    text-align: start;
+    font-size: 28px;
+}

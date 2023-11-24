@@ -3,7 +3,7 @@
   <div>
     <mat-toolbar>
       <div class="flex-container">
-        <span class="toolbar-title"> Cadastro de Cidade </span>
+        <span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Cidade' : 'Cadastrar Cidade' }}</span>
       </div>
     </mat-toolbar>
   </div>

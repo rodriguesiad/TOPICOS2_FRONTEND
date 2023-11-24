@@ -8,9 +8,9 @@ import { Produto } from '../models/produto.model';
 })
 export class ProdutoService {
 
-  private baseURL: string =  'http://localhost:8080';
+  private baseURL: string = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<Produto[]> {
     return this.http.get<Produto[]>(`${this.baseURL}/produtos`);
@@ -37,7 +37,7 @@ export class ProdutoService {
     return this.http.post<Produto>(`${this.baseURL}/produtos`, obj);
   }
 
-  update(produto: Produto): Observable<Produto>{
+  update(produto: Produto): Observable<Produto> {
 
     const obj = {
       nome: produto.nome,
@@ -51,10 +51,10 @@ export class ProdutoService {
       idEspecie: produto.especie.id
     }
 
-    return this.http.post<Produto>(`${this.baseURL}/produtos/${produto.id}`, obj);
+    return this.http.put<Produto>(`${this.baseURL}/produtos/${produto.id}`, obj);
   }
 
-  delete(produto: Produto): Observable<any>{
+  delete(produto: Produto): Observable<any> {
 
     return this.http.delete<Produto>(`${this.baseURL}/produtos/${produto.id}`);
   }
@@ -74,7 +74,7 @@ export class ProdutoService {
       nome: nomeParametro,
       ativo: ativoParametro
     }
-    return this.http.get<Produto[]>(`${this.baseURL}/produtos/search`, {params});
+    return this.http.get<Produto[]>(`${this.baseURL}/produtos/search`, { params });
   }
 
   countByCampoBusca(nomeParametro: string, ativoParametro: boolean): Observable<number> {
@@ -82,10 +82,24 @@ export class ProdutoService {
       nome: nomeParametro,
       ativo: ativoParametro
     }
-    return this.http.get<number>(`${this.baseURL}/produtos/search/count`, {params});
+    return this.http.get<number>(`${this.baseURL}/produtos/search/count`, { params });
   }
 
   alterarSituacao(especie: Produto, situacao: boolean): Observable<Produto> {
-    return this.http.put<Produto>(`${this.baseURL}/produtos/situacao/${especie.id}`, situacao );
+    return this.http.put<Produto>(`${this.baseURL}/produtos/situacao/${especie.id}`, situacao);
   }
+
+  uploadImagem(id: number, nomeImagem: string, imagem: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('nomeImagem', imagem.name);
+    formData.append('imagem', imagem, imagem.name);
+
+    return this.http.patch<Produto>(`${this.baseURL}/produtos/image/upload`, formData);
+  }
+
+  getUrlImagem(nomeImagem: string): string {
+    return `${this.baseURL}/image/download/${nomeImagem}`;
+  }
+
 }

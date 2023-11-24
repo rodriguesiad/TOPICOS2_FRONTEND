@@ -14,4 +14,5 @@ export class Produto {
     raca!: Raca;
     categoria!: Categoria;
     especie!: Especie;
+    nomeImagem!: string;
 }
