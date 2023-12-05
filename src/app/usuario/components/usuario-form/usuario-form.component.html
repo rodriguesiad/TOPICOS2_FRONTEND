@@ -2,7 +2,8 @@
     <div>
         <mat-toolbar>
             <div class="flex-container">
-                <span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Usuário' : 'Cadastrar Usuário' }}</span>
+                <span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Usuário' : 'Cadastrar Usuário'
+                    }}</span>
             </div>
         </mat-toolbar>
     </div>
@@ -55,8 +56,7 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Perfis</mat-label>
                         <mat-select formControlName="perfis" multiple>
-                            <mat-option *ngFor="let perfil of perfis"
-                                [value]="perfil.value">{{perfil.text}}</mat-option>
+                            <mat-option *ngFor="let perfil of perfis" [value]="perfil.id">{{perfil.label}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="formGroup.get('perfis')?.hasError('apiError')">
                             {{ formGroup.get('perfis')?.getError('apiError') }}

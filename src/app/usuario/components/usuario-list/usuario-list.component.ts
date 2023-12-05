@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { catchError, tap, throwError } from 'rxjs';
-import { SituacaoDialogBoxComponent } from 'src/app/shared/components/situacao-dialog-box/situacao-dialog-box.component';
-import { Usuario } from 'src/app/models/usuario.model';
-import { PerfilEnum } from 'src/app/models/perfil.enum';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import {MatPaginator} from "@angular/material/paginator";
-import {MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from "@angular/material/slide-toggle";
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from "@angular/material/paginator";
+import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS } from "@angular/material/slide-toggle";
+import { catchError, tap, throwError } from 'rxjs';
+import { Perfil } from 'src/app/models/perfil.model';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { SituacaoDialogBoxComponent } from 'src/app/shared/components/situacao-dialog-box/situacao-dialog-box.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
 @Component({
@@ -21,7 +21,7 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-
     },
   ],
 })
-export class UsuarioListComponent  implements OnInit, AfterViewInit {
+export class UsuarioListComponent implements OnInit, AfterViewInit {
   tableColumns: string[] = ['nome-column', 'email-column', 'cpf-column', 'perfis-column', 'actions-column'];
   usuarios: Usuario[] = [];
   total = 0;
@@ -34,15 +34,15 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
 
   estadosAtivos: boolean[] = [];
 
-  constructor(private usuarioService: UsuarioService, 
-    public dialog: MatDialog, 
+  constructor(private usuarioService: UsuarioService,
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private confirmationDialogService: ConfirmationDialogService) {
-      this.filtro = formBuilder.group({
-        nome: [''],
-        ativo: ['Todos']
-      })
-   }
+    this.filtro = formBuilder.group({
+      nome: [''],
+      ativo: ['Todos']
+    })
+  }
 
   ngOnInit(): void {
     this.carregarDadosPaginados();
@@ -61,73 +61,70 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
 
   carregarDadosPaginados() {
     if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
-      this.usuarioService.findByCampoBusca(this.filtro.value?.nome,  this.filtro.value?.ativo, this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
-      .pipe(
-        tap(usuarios => {
-          this.usuarios = usuarios,
-            this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
-        }),
-        catchError(err => {
-          console.log(err);
-          alert("Erro carregando total de usuários.");
-          return throwError((() => err));
-        })
-      )
-      .subscribe();
-    } else{
+      this.usuarioService.findByCampoBusca(this.filtro.value?.nome, this.filtro.value?.ativo, this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
+        .pipe(
+          tap(usuarios => {
+            this.usuarios = usuarios,
+              this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
+          }),
+          catchError(err => {
+            console.log(err);
+            alert("Erro carregando total de usuários.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
+    } else {
       this.usuarioService.findAllPaginado(this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
-      .pipe(
-        tap(usuarios => {
-          this.usuarios = usuarios,
-            this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
-        }),
-        catchError(err => {
-          console.log(err);
-          alert("Erro carregando total de usuários.");
-          return throwError((() => err));
-        })
-      )
-      .subscribe();
+        .pipe(
+          tap(usuarios => {
+            this.usuarios = usuarios,
+              this.estadosAtivos = this.usuarios.map(usuario => usuario.ativo)
+          }),
+          catchError(err => {
+            console.log(err);
+            alert("Erro carregando total de usuários.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
     }
   }
 
   carregarTotal() {
     if (this.filtro.value?.nome != '' || this.filtro.value?.ativo != null) {
       this.usuarioService.countByCampoBusca(this.filtro.value?.nome, this.filtro.value?.ativo)
-      .pipe(
-        tap(count => this.total = count),
-        catchError(err => {
-          console.log(err);
-          alert("Erro carregando o total usuários.");
-          return throwError((() => err));
-        })
-      )
-      .subscribe();
+        .pipe(
+          tap(count => this.total = count),
+          catchError(err => {
+            console.log(err);
+            alert("Erro carregando o total usuários.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
     } else {
       this.usuarioService.count()
-      .pipe(
-        tap(count => this.total = count),
-        catchError(err => {
-          console.log(err);
-          alert("Erro carregando o total usuários.");
-          return throwError((() => err));
-        })
-      )
-      .subscribe();
+        .pipe(
+          tap(count => this.total = count),
+          catchError(err => {
+            console.log(err);
+            alert("Erro carregando o total usuários.");
+            return throwError((() => err));
+          })
+        )
+        .subscribe();
     }
   }
 
-  getPerfisText(perfis: number[] | undefined | null): string {
+  getPerfisLabel(perfis: Perfil[] | undefined | null): string {
     if (!perfis) {
       return '';
     }
 
-    const perfisText = perfis.map(perfil => {
-      const perfilObj = PerfilEnum.items.find((item: { text: string; value: number }) => item.value === perfil);
-      return perfilObj ? perfilObj.text : '';
-    });
+    const perfisLabel = perfis.map(perfil => perfil.label);
 
-    return perfisText.join(', ');
+    return perfisLabel.join(', ');
   }
 
   openDialog(event: Event, usuario: Usuario) {
@@ -168,11 +165,12 @@ export class UsuarioListComponent  implements OnInit, AfterViewInit {
       message,
       () => {
         this.usuarioService.delete(usuario).subscribe({
-          next: () => {this.ngOnInit()},
+          next: () => { this.ngOnInit() },
           error: (err) => {
             console.log(err);
           }
-        })}
+        })
+      }
     );
   }
 

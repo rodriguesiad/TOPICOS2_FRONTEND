@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Perfil } from '../models/perfil.model';
 import { Usuario } from '../models/usuario.model';
 
 
@@ -8,9 +9,9 @@ import { Usuario } from '../models/usuario.model';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private baseURL: string =  'http://localhost:8080';
+  private baseURL: string = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
   findAllPaginado(pageNumber: number, pageSize: number): Observable<Usuario[]> {
@@ -30,15 +31,27 @@ export class UsuarioService {
   }
 
   save(usuario: Usuario): Observable<Usuario> {
+    const perfis = usuario.perfis.map(perfil => perfil.id);
+    const usuarioDto = {
+      nome: usuario.nome,
+      email: usuario.email,
+      cpf: usuario.cpf,
+      senha: usuario.senha,
+      dataNascimento: usuario.dataNascimento.toString(),
+      perfis: perfis,
+      telefones: usuario.telefones,
+      ativo: usuario.ativo
+    }
+
     return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuario);
   }
 
   update(usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/${usuario.id}`, usuario );
+    return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/${usuario.id}`, usuario);
   }
 
   alterarSituacao(usuario: Usuario, situacao: boolean): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/situacao/${usuario.id}`, situacao );
+    return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/situacao/${usuario.id}`, situacao);
   }
 
   findByCampoBusca(nomeParametro: string, situacaoParametro: string, pagina: number, tamanhoPagina: number): Observable<Usuario[]> {
@@ -48,7 +61,7 @@ export class UsuarioService {
       campoBusca: nomeParametro,
       situacao: situacaoParametro
     }
-    return this.http.get<Usuario[]>(`${this.baseURL}/usuarios/search`, {params});
+    return this.http.get<Usuario[]>(`${this.baseURL}/usuarios/search`, { params });
   }
 
   countByCampoBusca(nomeParametro: string, situacaoParametro: string): Observable<number> {
@@ -56,11 +69,15 @@ export class UsuarioService {
       campoBusca: nomeParametro,
       situacao: situacaoParametro
     }
-    return this.http.get<number>(`${this.baseURL}/usuarios/search/count`, {params});
+    return this.http.get<number>(`${this.baseURL}/usuarios/search/count`, { params });
   }
 
   delete(usuario: Usuario): Observable<any> {
     return this.http.delete<Usuario>(`${this.baseURL}/usuarios/${usuario.id}`);
+  }
+
+  findPerfis(): Observable<Perfil[]> {
+    return this.http.get<Perfil[]>(`${this.baseURL}/usuarios/perfis`);
   }
 
 }

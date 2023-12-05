@@ -1,5 +1,5 @@
+import { Perfil } from "./perfil.model";
 import { Telefone } from "./telefone.model";
-import { PerfilEnum } from "./perfil.enum";
 
 export class Usuario {
     id!: number;
@@ -8,7 +8,7 @@ export class Usuario {
     cpf!: string;
     senha!: string;
     dataNascimento!: Date;
-    perfis!: number[];
+    perfis!: Perfil[];
     telefones!: Telefone[];
     ativo!: boolean;
 }

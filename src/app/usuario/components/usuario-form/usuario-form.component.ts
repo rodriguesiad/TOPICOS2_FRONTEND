@@ -1,36 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario.model';
-import { PerfilEnum } from 'src/app/models/perfil.enum';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Perfil } from 'src/app/models/perfil.model';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-usuario-form',
   templateUrl: './usuario-form.component.html',
   styleUrls: ['./usuario-form.component.css'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
 })
 export class UsuarioFormComponent implements OnInit {
   formGroup: FormGroup;
   maxDate = new Date();
   apiResponse: any = null;
-
-
-  perfis = PerfilEnum.items.map(item => ({
-    value: item.value,
-    text: item.text
-  }));
-
-  selectedPerfil = this.perfis[1].value;
-
+  perfis: Perfil[] = [];
   usuario: Usuario;
 
   constructor(private formBuilder: FormBuilder,
@@ -39,10 +31,6 @@ export class UsuarioFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
 
     this.usuario = this.activatedRoute.snapshot.data['usuario'];
-
-    if(!this.usuario?.perfis?.includes(1)){
-      this.perfis = this.perfis.filter(item => item.value !== 1);
-    }
 
     this.formGroup = formBuilder.group({
       id: [null],
@@ -58,7 +46,10 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.usuarioService.findPerfis().subscribe(data => {
+      this.perfis = data;
+      this.initializeForm();
+    });
   }
 
   initializeForm() {
@@ -90,8 +81,8 @@ export class UsuarioFormComponent implements OnInit {
       const dataFormatada = new DatePipe('pt-BR').transform(usuarioNovo.dataNascimento, 'yyyy-MM-dd');
       usuarioNovo.dataNascimento = dataFormatada;
 
-      if(usuarioNovo.senha == 'Visualização indisponível. Se deseja alterar, escreva uma nova senha.'){
-        usuarioNovo.senha = this.usuario.senha ;
+      if (usuarioNovo.senha == 'Visualização indisponível. Se deseja alterar, escreva uma nova senha.') {
+        usuarioNovo.senha = this.usuario.senha;
       }
 
       if (usuarioNovo.id == null) {
@@ -101,26 +92,26 @@ export class UsuarioFormComponent implements OnInit {
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
-          
+
             const formControls = ['nome', 'email', 'cpf', 'senha', 'dataNascimento', 'perfis'];
             formControls.forEach(controlName => {
               this.formGroup.get(controlName)?.setErrors(null);
             });
-          
+
             if (this.apiResponse && this.apiResponse.errors) {
               this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
                 const fieldName = error.fieldName;
                 const errorMessage = error.message;
-          
+
                 if (formControls.includes(fieldName)) {
                   this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
                 }
               });
             }
-          
+
             console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
-      })
+        })
       } else {
         this.usuarioService.update(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
@@ -128,23 +119,23 @@ export class UsuarioFormComponent implements OnInit {
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
-          
+
             const formControls = ['nome', 'email', 'cpf', 'senha', 'dataNascimento', 'perfis'];
             formControls.forEach(controlName => {
               this.formGroup.get(controlName)?.setErrors(null);
             });
-          
+
             if (this.apiResponse && this.apiResponse.errors) {
               this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
                 const fieldName = error.fieldName;
                 const errorMessage = error.message;
-          
+
                 if (formControls.includes(fieldName)) {
                   this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
                 }
               });
             }
-          
+
             console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
