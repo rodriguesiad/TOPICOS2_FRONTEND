@@ -43,6 +43,8 @@ export class UsuarioService {
       ativo: usuario.ativo
     }
 
+    console.log(usuarioDto.perfis);
+
     return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuarioDto);
   }
 
@@ -58,6 +60,8 @@ export class UsuarioService {
       telefones: usuario.telefones,
       ativo: usuario.ativo
     }
+
+    console.log(usuarioDto);
 
     return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/${usuario.id}`, usuarioDto);
   }

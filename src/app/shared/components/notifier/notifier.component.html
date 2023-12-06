@@ -1,0 +1,11 @@
+<div class="container">
+    <div
+        [ngClass]="{'content-success-style': data.type === 'success',  'content-error-style': data.type === 'error', 'content-warn-style': data.type === 'console.warn;'}">
+        {{ data.message }}
+    </div>
+    <div style="text-align: center; background-color: none;">
+        <button mat-icon-button (click)="snackBarRef.dismiss()" style="box-shadow: none;">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>

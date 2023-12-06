@@ -1,0 +1,18 @@
+.content-success-style {
+    color: rgb(149 255 108 / 84%);
+}
+
+.content-error-style {
+    color: red;
+}
+
+.content-warn-style {
+    color: orange;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

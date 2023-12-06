@@ -8,6 +8,7 @@ import { Perfil } from 'src/app/models/perfil.model';
 import { Telefone } from 'src/app/models/telefone.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { NotifierService } from 'src/app/shared/services/notifier.service';
 
 @Component({
   selector: 'app-usuario-form',
@@ -30,7 +31,8 @@ export class UsuarioFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private notifierService: NotifierService) {
 
     this.usuario = this.activatedRoute.snapshot.data['usuario'];
 
@@ -99,7 +101,7 @@ export class UsuarioFormComponent implements OnInit {
 
     this.formGroup?.get('senha')?.updateValueAndValidity();
 
-    if (this.usuario.id == null) { this.adicionarTelefone(); }
+    if (this.usuario?.id == null) { this.adicionarTelefone(); }
   }
 
   get telefones(): FormArray {
@@ -136,6 +138,7 @@ export class UsuarioFormComponent implements OnInit {
       if (usuarioNovo.id == null) {
         this.usuarioService.save(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
+            this.notifierService.showNotification('Usuário cadastrado com sucesso!', 'success');
             this.router.navigateByUrl('/usuarios/list');
           },
           error: (errorResponse) => {
@@ -163,6 +166,7 @@ export class UsuarioFormComponent implements OnInit {
       } else {
         this.usuarioService.update(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
+            this.notifierService.showNotification('Usuário alterado com sucesso!', 'success');
             this.router.navigateByUrl('/usuarios/list');
           },
           error: (errorResponse) => {
@@ -183,16 +187,16 @@ export class UsuarioFormComponent implements OnInit {
                 }
               });
             }
-
-            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
+            this.notifierService.showNotification('Erro ao alterar usuário!', 'error');
+            console.log('Erro ao alterar' + JSON.stringify(errorResponse));
           }
         });
       }
     } else {
-      if (!this.minTelefones) {
-        alert("Adicione pelo menos 1 telefone para o usuário.")
+      if (!this.minTelefones) {            
+        this.notifierService.showNotification('Adicione pelo menos 1 telefone para o usuário.', 'warn');
       } else {
-        alert('O formulário está inválido.');
+        this.notifierService.showNotification('O formulário está inválido', 'warn');
       }
     }
   }
