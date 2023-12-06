@@ -1,17 +1,24 @@
-<div class="header" style="height: 7rem;">
-    <mat-toolbar style=" height: 55%;">
+<div class="header" style="height: 11%;">
+    <mat-toolbar style=" height: 55%; background-color: white;">
+        <span class="spacer"></span>
         <div class="flex-container">
-            <button (click)="clickMenu()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <button (click)="clickMenu()" mat-icon-button class="example-icon"
+                aria-label="Example icon-button with menu icon">
                 <mat-icon>menu</mat-icon>
             </button>
+            <div class="logo">
+                <a class="unstyled-link">
+                    <img src="../../../../assets/images/logo.png" alt="Logo do sistema" class="imagem-responsiva">
+                </a>
+            </div>
             <span class="example-spacer"></span>
             <span class="toolbar-title">ADMINISTRADOR</span>
             <span class="example-spacer"></span>
             <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                 <mat-icon>favorite</mat-icon>
             </button>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                <mat-icon>share</mat-icon>
+            <button type="button" class="profile-button">
+                <img src="../../../../assets/images/icon_profile.png" alt="Pefil do usuário" class="imagem-responsiva profile"/>
             </button>
         </div>
     </mat-toolbar>

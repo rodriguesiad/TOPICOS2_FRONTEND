@@ -19,5 +19,39 @@
 .toolbar-title {
     flex: 1;
     text-align: center;
-    color: var(--default-green);
+    font-size: smaller;
+    font-weight:500;
+}
+
+.unstyled-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.logo {
+    height: 100%;
+    width: 3%;
+    box-sizing: border-box;
+}
+
+.logo, .logo > a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem-responsiva {
+    max-width: 100%;
+    height: auto;
+}
+
+.profile-button {
+    width: 1.5%;
+    padding: inherit;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: none;
+    cursor: pointer;
 }
