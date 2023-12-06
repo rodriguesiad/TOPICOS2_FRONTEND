@@ -6,9 +6,9 @@
 }
 
 mat-card {
-    max-width: 800px;
+    max-width: 1250px;
     margin: 2rem auto;
-    /* Centraliza horizontalmente */
+    box-shadow: none;
 }
 
 mat-card-actions {
@@ -16,9 +16,9 @@ mat-card-actions {
     justify-content: flex-end;
 }
 
-/* para a div */
-.form-container {
-    padding: 2rem;
+mat-toolbar {
+    background-color: white;
+    padding-left: 5px;
 }
 
 .centered-toolbar {

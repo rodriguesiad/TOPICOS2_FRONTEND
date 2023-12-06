@@ -43,11 +43,23 @@ export class UsuarioService {
       ativo: usuario.ativo
     }
 
-    return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuario);
+    return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuarioDto);
   }
 
   update(usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/${usuario.id}`, usuario);
+    const perfis = usuario.perfis.map(perfil => perfil.id);
+    const usuarioDto = {
+      nome: usuario.nome,
+      email: usuario.email,
+      cpf: usuario.cpf,
+      senha: usuario.senha,
+      dataNascimento: usuario.dataNascimento.toString(),
+      perfis: perfis,
+      telefones: usuario.telefones,
+      ativo: usuario.ativo
+    }
+
+    return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/${usuario.id}`, usuarioDto);
   }
 
   alterarSituacao(usuario: Usuario, situacao: boolean): Observable<Usuario> {

@@ -1,13 +1,12 @@
-/* mat-form-field */
 .full-width-input {
     width: 100%;
     margin-bottom: 20px;
 }
 
 mat-card {
-    max-width: 800px;
+    max-width: 1250px;
     margin: 2rem auto;
-    /* Centraliza horizontalmente */
+    box-shadow: none;
 }
 
 mat-card-actions {
@@ -47,7 +46,7 @@ button[mat-raised-button]:not(:last-child) {
 
 .pagina {
     max-width: 1250px;
-    width: 800px;
+    width: 1250px;
     margin: 2rem auto;
 }
 

@@ -7,7 +7,7 @@
             </div>
         </mat-toolbar>
     </div>
-    <div class="form-container">
+    <div class="form-container no-shadow">
         <mat-card class="form">
             <mat-card-content>
                 <form [formGroup]="formGroup">
@@ -27,13 +27,36 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width-input">
-                        <mat-label>CPF</mat-label>
-                        <input matInput type="text" formControlName="cpf" />
-                        <mat-error *ngIf="formGroup.get('cpf')?.hasError('apiError')">
-                            {{ formGroup.get('cpf')?.getError('apiError') }}
-                        </mat-error>
-                    </mat-form-field>
+                    <div class="sub-form">
+                        <mat-form-field appearance="outline" class="full-width-input">
+                            <mat-label>CPF</mat-label>
+                            <input matInput type="text" formControlName="cpf" />
+                            <mat-error *ngIf="formGroup.get('cpf')?.hasError('apiError')">
+                                {{ formGroup.get('cpf')?.getError('apiError') }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="full-width-input">
+                            <mat-label>Perfis</mat-label>
+                            <mat-select formControlName="perfis" multiple>
+                                <mat-option *ngFor="let perfil of perfis"
+                                    [value]="perfil">{{perfil.label}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formGroup.get('perfis')?.hasError('apiError')">
+                                {{ formGroup.get('perfis')?.getError('apiError') }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="full-width-input">
+                            <mat-label>Data de Nascimento</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dataNascimento" [max]="maxDate">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="formGroup.get('dataNascimento')?.hasError('apiError')">
+                                {{ formGroup.get('dataNascimento')?.getError('apiError') }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
 
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Senha</mat-label>
@@ -43,26 +66,47 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width-input">
-                        <mat-label>Data de Nascimento</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="dataNascimento" [max]="maxDate">
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="formGroup.get('dataNascimento')?.hasError('apiError')">
-                            {{ formGroup.get('dataNascimento')?.getError('apiError') }}
-                        </mat-error>
-                    </mat-form-field>
+                    <div class="sub-form">
+                        <div formArrayName="telefones" style="width: 100%;">
+                            <div *ngFor="let telefone of telefones.controls; let i = index" [formGroupName]="i"
+                                style="width: 100%;">
+                                <div class="sub-form">
+                                    <mat-form-field appearance="outline" class="input-telefone-codigoArea">
+                                        <mat-label>Código Área</mat-label>
+                                        <input matInput type="text" formControlName="codigoArea" />
+                                        <mat-error
+                                            *ngIf="telefone.get('codigoArea')?.invalid && (telefone.get('codigoArea')?.touched || telefone.get('codigoArea')?.dirty)">
+                                            O campo Código Área é obrigatório.
+                                        </mat-error>
+                                    </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width-input">
-                        <mat-label>Perfis</mat-label>
-                        <mat-select formControlName="perfis" multiple>
-                            <mat-option *ngFor="let perfil of perfis" [value]="perfil.id">{{perfil.label}}</mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formGroup.get('perfis')?.hasError('apiError')">
-                            {{ formGroup.get('perfis')?.getError('apiError') }}
-                        </mat-error>
-                    </mat-form-field>
+                                    <mat-form-field appearance="outline" class="input-telefone-numero">
+                                        <mat-label>Número</mat-label>
+                                        <input matInput type="text" formControlName="numero" />
+                                        <mat-error
+                                            *ngIf="telefone.get('numero')?.invalid && (telefone.get('numero')?.touched || telefone.get('numero')?.dirty)">
+                                            O campo Número é obrigatório.
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <button mat-fab extended (click)="removerTelefone(i)" color="warn"
+                                        style="box-shadow: none;">
+                                        <mat-icon>clear</mat-icon>
+                                        Remover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
+
+                <div class="sub-form add-telefone">
+                    <button mat-fab extended (click)="adicionarTelefone()" id="button-add-telefone">
+                        <mat-icon>add_circle_outline </mat-icon>
+                        Adicionar Telefone
+                    </button>
+
+                </div>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-raised-button style="color: var(--default-green);" routerLink="/usuarios/list">

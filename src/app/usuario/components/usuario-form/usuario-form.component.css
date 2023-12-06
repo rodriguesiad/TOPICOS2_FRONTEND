@@ -1,17 +1,28 @@
-/* mat-form-field */
 .full-width-input {
     width: 100%;
     margin-bottom: 20px;
 }
 
 mat-card {
-    max-width: 800px;
+    max-width: 1250px;
     margin: 2rem auto;
-    /* Centraliza horizontalmente */
+    box-shadow: none;
 }
 
 mat-card-actions {
     display: flex;
+    justify-content: flex-end;
+}
+
+.sub-form {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.add-telefone {
     justify-content: flex-end;
 }
 
@@ -24,12 +35,10 @@ mat-card-actions {
 button[mat-raised-button] {
     width: 120px;
     font-size: 12px;
-    /* tamanho do botao */
 }
 
 button[mat-raised-button]:not(:last-child) {
     margin-right: 1rem;
-    /* Adiciona margem à direita de todos os botões, exceto o último */
 }
 
 .flex-container {
@@ -47,11 +56,33 @@ button[mat-raised-button]:not(:last-child) {
 
 .pagina {
     max-width: 1250px;
-    width: 800px;
+    width: 1250px;
     margin: 2rem auto;
 }
 
 mat-toolbar {
     background-color: white;
     padding-left: 5px;
+}
+
+#add-telefone-button {
+    width: 200px;
+}
+
+#remove-telefone-button {
+    width: 150px;
+}
+
+.input-telefone-numero {
+    width: 60%;
+}
+
+.input-telefone-codigoArea {
+    width: 25%;
+}
+
+#button-add-telefone {
+    color: rgb(30, 30, 30);
+    background-color: transparent;
+    box-shadow: none;
 }

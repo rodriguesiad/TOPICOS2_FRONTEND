@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Perfil } from 'src/app/models/perfil.model';
+import { Telefone } from 'src/app/models/telefone.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -23,6 +24,7 @@ export class UsuarioFormComponent implements OnInit {
   maxDate = new Date();
   apiResponse: any = null;
   perfis: Perfil[] = [];
+  minTelefones: boolean = false;
   usuario: Usuario;
 
   constructor(private formBuilder: FormBuilder,
@@ -40,6 +42,7 @@ export class UsuarioFormComponent implements OnInit {
       senha: ['', Validators.required],
       dataNascimento: [null],
       perfis: [null, Validators.required],
+      telefones: this.formBuilder.array([]),
       ativo: [null]
     })
 
@@ -60,7 +63,8 @@ export class UsuarioFormComponent implements OnInit {
       cpf: [(this.usuario && this.usuario.cpf) ? this.usuario.cpf : '', Validators.required],
       senha: [(this.usuario && this.usuario.senha) ? 'Visualização indisponível. Se deseja alterar, escreva uma nova senha.' : ''],
       dataNascimento: [(this.usuario && this.usuario.dataNascimento) ? this.usuario.dataNascimento : null],
-      perfis: [(this.usuario && this.usuario.perfis) ? this.usuario.perfis : null, Validators.required],
+      perfis: [null, Validators.required],
+      telefones: this.formBuilder.array([]),
       ativo: [(this.usuario && this.usuario.ativo) ? this.usuario.ativo : null]
     });
 
@@ -70,12 +74,56 @@ export class UsuarioFormComponent implements OnInit {
       this.formGroup?.get('senha')?.setValidators([Validators.required]);
     }
 
+    if (this.usuario) {
+      if (this.usuario && this.usuario.telefones && this.usuario.telefones.length > 0) {
+        this.usuario.telefones.forEach((telefone: Telefone) => {
+          const newFormGroup = this.formBuilder.group({
+            codigoArea: [telefone.codigoArea, Validators.required],
+            numero: [telefone.numero, Validators.required]
+          });
+
+          this.telefones.push(newFormGroup);
+        });
+
+        this.minTelefones = true;
+      }
+
+      if (this.usuario?.perfis && this.usuario.perfis.length > 0) {
+        const perfisSelecionados = this.perfis.filter(perfil =>
+          this.usuario.perfis.some(usuarioPerfil => usuarioPerfil.id === perfil.id)
+        );
+
+        this.formGroup.get('perfis')?.setValue(perfisSelecionados);
+      }
+    }
+
     this.formGroup?.get('senha')?.updateValueAndValidity();
 
+    if (this.usuario.id == null) { this.adicionarTelefone(); }
+  }
+
+  get telefones(): FormArray {
+    return this.formGroup.get('telefones') as FormArray;
+  }
+
+  adicionarTelefone(): void {
+    this.minTelefones = true;
+
+    this.telefones.push(
+      this.formBuilder.group({
+        codigoArea: ['', Validators.required],
+        numero: ['', Validators.required],
+      })
+    );
+  }
+
+  removerTelefone(index: number): void {
+    this.telefones.removeAt(index);
+    this.minTelefones = this.telefones.length > 0;
   }
 
   salvar() {
-    if (this.formGroup.valid) {
+    if (this.formGroup.valid && this.minTelefones) {
       const usuarioNovo = this.formGroup.value;
 
       const dataFormatada = new DatePipe('pt-BR').transform(usuarioNovo.dataNascimento, 'yyyy-MM-dd');
@@ -139,6 +187,12 @@ export class UsuarioFormComponent implements OnInit {
             console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
+      }
+    } else {
+      if (!this.minTelefones) {
+        alert("Adicione pelo menos 1 telefone para o usuário.")
+      } else {
+        alert('O formulário está inválido.');
       }
     }
   }
