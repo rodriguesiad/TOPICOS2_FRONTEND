@@ -2,7 +2,8 @@
     <div>
         <mat-toolbar>
             <div class="flex-container">
-                <span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Categoria' : 'Cadastrar Categoria' }}</span>
+                <span class="toolbar-title">{{ formGroup.get('id')?.value ? 'Editar Categoria' : 'Cadastrar Categoria'
+                    }}</span>
             </div>
         </mat-toolbar>
     </div>
@@ -13,6 +14,11 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Nome</mat-label>
                         <input matInput type="text" formControlName="nome" />
+                        <mat-error *ngIf="formGroup.get('nome') &&
+                        formGroup.get('nome')?.invalid &&
+                        formGroup.get('nome')?.touched">
+                            O campo Nome é obrigatório.
+                        </mat-error>
                         <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
                             {{ formGroup.get('nome')?.getError('apiError') }}
                         </mat-error>

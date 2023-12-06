@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { NotifierService } from 'src/app/shared/services/notifier.service';
 
 @Component({
   selector: 'app-categoria-form',
@@ -16,7 +17,8 @@ export class CategoriaFormComponent {
   constructor(private formBuilder: FormBuilder,
     private categoriaService: CategoriaService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private notifierService: NotifierService) {
 
     const categoria: Categoria = this.activatedRoute.snapshot.data['categoria'];
 
@@ -33,54 +35,57 @@ export class CategoriaFormComponent {
       if (categoria.id == null) {
         this.categoriaService.save(categoria).subscribe({
           next: (categoriaCadastrada) => {
+            this.notifierService.showNotification('Categoria cadastrada com sucesso!', 'success');
             this.router.navigateByUrl('/categorias/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
-          
+
             const formControls = ['nome'];
             formControls.forEach(controlName => {
               this.formGroup.get(controlName)?.setErrors(null);
             });
-          
+
             if (this.apiResponse && this.apiResponse.errors) {
               this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
                 const fieldName = error.fieldName;
                 const errorMessage = error.message;
-          
+
                 if (formControls.includes(fieldName)) {
                   this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
                 }
               });
             }
-          
+            this.notifierService.showNotification('Erro ao cadastrar categoria!', 'error');
             console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
       } else {
         this.categoriaService.update(categoria).subscribe({
-          next: (categoriaCadastrada) => {
+          next: (categoriaAtualizada) => {
+            this.notifierService.showNotification('Categoria alterada com sucesso!', 'success');
             this.router.navigateByUrl('/categorias/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
-          
+
             const formControls = ['nome'];
             formControls.forEach(controlName => {
               this.formGroup.get(controlName)?.setErrors(null);
             });
-          
+
             if (this.apiResponse && this.apiResponse.errors) {
               this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
                 const fieldName = error.fieldName;
                 const errorMessage = error.message;
-          
+
                 if (formControls.includes(fieldName)) {
                   this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
                 }
               });
             }
-          
+
+            this.notifierService.showNotification('Erro ao alterar categoria!', 'error');
             console.log('Erro ao alterar' + JSON.stringify(errorResponse));
           }
         });

@@ -159,7 +159,7 @@ export class UsuarioFormComponent implements OnInit {
                 }
               });
             }
-
+            this.notifierService.showNotification('Erro ao inserir usuário!', 'error');
             console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         })
@@ -193,7 +193,7 @@ export class UsuarioFormComponent implements OnInit {
         });
       }
     } else {
-      if (!this.minTelefones) {            
+      if (!this.minTelefones) {
         this.notifierService.showNotification('Adicione pelo menos 1 telefone para o usuário.', 'warn');
       } else {
         this.notifierService.showNotification('O formulário está inválido', 'warn');
