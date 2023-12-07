@@ -83,7 +83,6 @@ mat-card {
     justify-content: space-between;
 }
 
-
 .product-list {
     margin: 5px;
     width: 84.3%;
@@ -129,6 +128,9 @@ mat-card {
 .quantidade {
     width: 57px;
     height: 25px;
+    text-align: center;
+    font-size: small;
+    font-weight: bold;
 }
 
 #preco {
