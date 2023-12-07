@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProdutoFormComponent } from './components/produto-form/produto-form.component';
 import { ProdutoListComponent } from './components/produto-list/produto-list.component';
 import { produtoResolver } from './resolver/produto-resolver';
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
   {path: 'list', component: ProdutoListComponent},
   {path: 'new', component: ProdutoFormComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'edit/:id', component: ProdutoFormComponent, resolve: {produto: produtoResolver}}
 ];
 

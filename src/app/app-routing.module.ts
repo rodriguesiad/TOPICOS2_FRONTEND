@@ -55,6 +55,7 @@ const routes: Routes = [
       () => import('./compra/compra.module')
         .then(m => m.CompraModule)
   },
+
 ];
 
 @NgModule({
