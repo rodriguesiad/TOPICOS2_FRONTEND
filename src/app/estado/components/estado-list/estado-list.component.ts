@@ -20,7 +20,7 @@ export class EstadoListComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private estadoService: EstadoService,private formBuilder:FormBuilder) {
+  constructor(private estadoService: EstadoService, private formBuilder:FormBuilder) {
     this.filtro = formBuilder.group({
       nome: ['']
     })
@@ -31,9 +31,9 @@ export class EstadoListComponent implements OnInit {
       this.estados = data;
     });
   }
-  
+
   carregarDadosPaginados() {
-    
+
     if (this.filtro.value?.nome != '') {
       this.estadoService.findByCampoBusca(this.filtro.value?.nome, this.paginator?.pageIndex ?? 0, this.paginator?.pageSize ?? 5)
         .pipe(
@@ -63,7 +63,7 @@ export class EstadoListComponent implements OnInit {
 }
 
 carregarTotal() {
-    
+
   if (this.filtro.value?.nome != '' ) {
     this.estadoService.countByCampoBusca(this.filtro.value?.nome)
       .pipe(

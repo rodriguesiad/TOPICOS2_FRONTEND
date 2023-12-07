@@ -12,8 +12,14 @@ export class ProdutoService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.baseURL}/produtos`);
+  getAll(pagina: number, tamanhoPagina: number): Observable<Produto[]> {
+
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+
+    return this.http.get<Produto[]>(`${this.baseURL}/produtos`, {params});
   }
 
   findById(id: string): Observable<Produto> {
