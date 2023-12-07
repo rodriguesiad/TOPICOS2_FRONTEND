@@ -31,7 +31,7 @@ export class CarrinhoService {
 
   removerTudo(): void {
     this.localStorageService.removeItem('carrinho');
-    window.location.reload(); // reload na página
+    window.location.reload();
   }
 
   remover(item: ItemCarrinho): void {

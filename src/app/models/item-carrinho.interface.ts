@@ -3,4 +3,10 @@ export interface ItemCarrinho {
     nome: string;
     quantidade: number;
     preco: number;
+    raca: string,
+    categoria: string,
+    especie: string,
+    porte: number,
+    peso: number,
+    urlImagem: string,
 }

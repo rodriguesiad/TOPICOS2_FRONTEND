@@ -99,7 +99,7 @@ export class ProdutoService {
   }
 
   getUrlImagem(nomeImagem: string): string {
-    return `${this.baseURL}/image/download/${nomeImagem}`;
+    return `${this.baseURL}/produtos/image/download/${nomeImagem}`;
   }
 
 }

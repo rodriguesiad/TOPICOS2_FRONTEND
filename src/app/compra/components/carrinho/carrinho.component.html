@@ -13,29 +13,36 @@
     <div class="flex-row main">
         <div class="flex-column" style="width: 70%;">
             <div class="product-list flex-column">
-                <mat-card class="flex-row border card" *ngFor="let number of quantidadeTeste; let i = index">
-                    <div class="flex-row">
-                        <img mat-card-image src="../../../../assets/images/logo.png" id="product-image"
-                            class="imagem-responsiva">
+                <ng-container *ngIf="carrinhoItens.length > 0; else carrinhoVazio" class="product-list flex-column">
+                    <mat-card class="flex-row border card" *ngFor="let item of carrinhoItens">
+                        <div class="flex-row">
+                            <img mat-card-image [src]="item.urlImagem" id="product-image" class="imagem-responsiva">
 
-                        <div class="text-card flex-column">
-                            <mat-card-content class="centered-text" id="title"> Ração Seca Magnus</mat-card-content>
-                            <mat-card-content class="centered-text"> 20kg </mat-card-content>
-                            <div class="flex-row text-footer">
-                                <mat-card-content class="centered-text"> Raça </mat-card-content>
-                                <mat-card-content class="centered-text"> Categoria </mat-card-content>
+                            <div class="text-card flex-column">
+                                <mat-card-content class="centered-text" id="title"> {{ item.nome }} </mat-card-content>
+                                <mat-card-content class="centered-text"> {{item.peso}} </mat-card-content>
+                                <div class="flex-row text-footer">
+                                    <mat-card-content class="centered-text"> {{ item.especie }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.raca }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.categoria }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.porte }} </mat-card-content>
+                                </div>
                             </div>
-                        </div>
 
-                        <mat-card-content id="preco"> R$ 124,00 </mat-card-content>
-                        <form [formGroup]="formGroup">
-                            <input matInput type="number" formControlName="quantidade" class="quantidade" />
-                        </form>
-                    </div>
-                    <button mat-mini-fab color="black" aria-label="Excluir do carrinho" class="no-shadow">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-card>
+                            <mat-card-content id="preco"> R$ {{ item.preco }} </mat-card-content>
+                            <form [formGroup]="formGroup">
+                                <input matInput type="number" value="card.quantidade" class="quantidade" />
+                            </form>
+                        </div>
+                        <button mat-mini-fab color="black" aria-label="Excluir do carrinho" class="no-shadow">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-card>
+                </ng-container>
+
+                <ng-template #carrinhoVazio>
+                    <p>O carrinho está vazio.</p>
+                </ng-template>
             </div>
 
             <div class="card endereco">
@@ -74,7 +81,7 @@
                     </div>
                     <div class="flex-row part">
                         <p>Total</p>
-                        <p class="valor">R$ 10000</p>
+                        <p class="valor">R$ {{total}}</p>
                     </div>
                 </mat-card>
                 <div class="flex-column actions">
