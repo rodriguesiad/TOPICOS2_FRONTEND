@@ -29,6 +29,7 @@ export class CarrinhoComponent implements OnInit {
     this.carrinhoService.carrinho$.subscribe(itens => {
       this.carrinhoItens = itens;
       this.total = this.calcularTotal();
+      this.quantidadeTotal = this.calcularTotalItens();
     });
   }
 
@@ -40,4 +41,12 @@ export class CarrinhoComponent implements OnInit {
     return this.carrinhoItens.reduce((total, item) => total + item.quantidade * item.preco, 0);
   }
 
+  calcularTotalItens(): number {
+    return this.carrinhoItens.reduce((total, item) => total + item.quantidade, 0);
+  }
+  
+  atualizarTotal(): void {
+    this.total = this.calcularTotal();
+  }
+  
 }
