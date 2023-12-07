@@ -85,7 +85,7 @@ mat-card {
 
 .product-list {
     margin: 5px;
-    width: 84.3%;
+    width: 84%;
     align-items: flex-start;
     border-radius: 5px;
     gap: 10px;
@@ -229,4 +229,8 @@ button[mat-raised-button] {
     font-weight: 500;
     padding: 0px 20px 0 20px;
     margin: 0;
+}
+
+.endereco-info {
+    padding: 10px;
 }

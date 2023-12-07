@@ -17,7 +17,7 @@ export class CompraService {
     const itens = carrinho.map(item => ({
       quantidade: item.quantidade,
       preco: item.preco,
-      idFaixa: item.id
+      idProduto: item.id
     }));
 
     const produtos = {

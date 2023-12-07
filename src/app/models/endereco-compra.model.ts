@@ -6,5 +6,6 @@ export class EnderecoCompra {
     numero!: string;
     complemento!: string;
     cep!: string;
+    bairro!: string;
     municipio!: Cidade;
 }

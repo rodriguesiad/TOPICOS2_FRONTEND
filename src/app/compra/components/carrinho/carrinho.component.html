@@ -32,10 +32,11 @@
                             <mat-card-content id="preco"> R$ {{ item.preco }} </mat-card-content>
                             <div style="margin-left: 20px;">
                                 <input matInput type="number" [(ngModel)]="item.quantidade" [min]="1"
-                                    (ngModelChange)="atualizarTotal()" class="quantidade" />
+                                    [max]="item.estoque" (ngModelChange)="atualizarTotal()" class="quantidade" />
                             </div>
                         </div>
-                        <button mat-mini-fab color="black" aria-label="Excluir do carrinho" class="no-shadow">
+                        <button mat-mini-fab color="black" aria-label="Excluir do carrinho" class="no-shadow"
+                            (click)="removerItem(item)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-card>
@@ -47,15 +48,15 @@
             </div>
 
             <div class="card endereco">
-                <h3>Endereço</h3>
-                <mat-card class="flex-column border card">
-                    <h5>Casa</h5>
-                    <p>Texto aleatório do endereço</p>
-                </mat-card>
-                <div class="flex-column actions">
-                    <button mat-raised-button style="color: var(--default-green);">
-                        NOVO
-                    </button>
+                <h3 style="margin: 0;">Endereço</h3>
+                <h6>Selecione o endereço da compra</h6>
+                <div *ngFor="let endereco of usuarioLogado?.enderecos">
+                    <mat-radio-button (change)="enderecoSelecionado = endereco"
+                        [checked]="enderecoSelecionado === endereco" [checked]="enderecoSelecionado === endereco">
+                        {{ endereco.logradouro }}, {{ endereco.numero }}, {{ endereco.complemento
+                        }}, {{ endereco.cep }}, {{ endereco.bairro }}, {{ endereco.municipio.nome}} - {{
+                        endereco.municipio.estado.sigla }}
+                    </mat-radio-button>
                 </div>
             </div>
 
@@ -63,12 +64,12 @@
                 <h3>Método de Pagamento</h3>
 
                 <section class="example-section">
-                    <mat-radio-group class="flex-column">
+                    <mat-radio-group class="flex-column" [(ngModel)]="metodoPagamentoSelecionado">
                         <mat-radio-button class="example-margin" value="2">Boleto</mat-radio-button>
                         <mat-radio-button class="example-margin" value="1">PIX</mat-radio-button>
                     </mat-radio-group>
-                </section>
 
+                </section>
             </div>
         </div>
 
@@ -86,16 +87,16 @@
                     </div>
                 </mat-card>
                 <div class="flex-column actions">
-                    <button mat-raised-button
+                    <button mat-raised-button (click)="finalizarCompra()"
                         style="background-color: var(--default-green); color: white; width: 100%; margin-bottom: 10px;">
                         COMPRAR
                     </button>
-                    <button mat-raised-button style="color: var(--default-green);  width: 100%;">
+                    <button mat-raised-button routerLink="/produtos/home"
+                        style="color: var(--default-green);  width: 100%;">
                         ESCOLHER MAIS PRODUTOS
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
 </mat-card>

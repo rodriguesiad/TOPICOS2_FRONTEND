@@ -19,7 +19,7 @@ export class ProdutoService {
       pageSize: tamanhoPagina.toString()
     }
 
-    return this.http.get<Produto[]>(`${this.baseURL}/produtos`, {params});
+    return this.http.get<Produto[]>(`${this.baseURL}/produtos`, { params });
   }
 
   findById(id: string): Observable<Produto> {
@@ -27,7 +27,6 @@ export class ProdutoService {
   }
 
   save(produto: Produto): Observable<Produto> {
-
     const obj = {
       nome: produto.nome,
       descricao: produto.descricao,
@@ -39,7 +38,7 @@ export class ProdutoService {
       idCategoria: produto.categoria.id,
       idEspecie: produto.especie.id
     }
-    console.log(obj);
+    
     return this.http.post<Produto>(`${this.baseURL}/produtos`, obj);
   }
 

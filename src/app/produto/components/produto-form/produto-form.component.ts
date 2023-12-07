@@ -35,8 +35,7 @@ export class ProdutoFormComponent implements OnInit {
     private categoriaService: CategoriaService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private notifierService: NotifierService,
-    private carrinhoService: CarrinhoService) {
+  ) {
 
     this.produtoTeste = this.activatedRoute.snapshot.data['produto'];
 
@@ -146,23 +145,6 @@ export class ProdutoFormComponent implements OnInit {
       reader.onload = e => this.imagePreview = reader.result;
       reader.readAsDataURL(this.selectedFile);
     }
-  }
-
-  adicionarAoCarrinho() {
-    this.notifierService.showNotification('Produto adicionado ao carrinho!', 'success');
-    this.carrinhoService.adicionar({
-      id: this.produtoTeste.id,
-      nome: this.produtoTeste.nome,
-      preco: this.produtoTeste.preco,
-      quantidade: 1,
-      raca: this.produtoTeste.raca.nome,
-      categoria: this.produtoTeste.categoria.nome,
-      especie: this.produtoTeste.especie.nome,
-      porte: this.produtoTeste.porteAnimal,
-      peso: this.produtoTeste.peso,
-      urlImagem: this.produtoService.getUrlImagem(this.produtoTeste?.nomeImagem),
-    })
-
   }
 
   private uploadImage(produtoId: number) {
