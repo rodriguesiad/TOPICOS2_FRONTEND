@@ -49,6 +49,12 @@ const routes: Routes = [
       () => import('./metodo-recebimento/metodo-recebimento.module')
         .then(m => m.MetodoRecebimentoModule)
   },
+
+  {
+    path: 'compras', loadChildren:
+      () => import('./compra/compra.module')
+        .then(m => m.CompraModule)
+  },
 ];
 
 @NgModule({

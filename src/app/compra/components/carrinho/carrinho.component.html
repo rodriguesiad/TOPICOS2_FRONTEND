@@ -1,0 +1,93 @@
+<mat-card class="no-shadow">
+    <div>
+        <mat-toolbar class="page-title">
+            <div class="flex-container">
+                <span class="toolbar-title">Carrinho de Compras</span>
+                <div class="logo">
+                    <img src="../../../../assets/images/carrinho_compra.png" alt="Logo de carrinho de compra"
+                        class="imagem-responsiva">
+                </div>
+            </div>
+        </mat-toolbar>
+    </div>
+    <div class="flex-row main">
+        <div class="flex-column" style="width: 70%;">
+            <div class="product-list flex-column">
+                <mat-card class="flex-row border card" *ngFor="let number of quantidadeTeste; let i = index">
+                    <div class="flex-row">
+                        <img mat-card-image src="../../../../assets/images/logo.png" id="product-image"
+                            class="imagem-responsiva">
+
+                        <div class="text-card flex-column">
+                            <mat-card-content class="centered-text" id="title"> Ração Seca Magnus</mat-card-content>
+                            <mat-card-content class="centered-text"> 20kg </mat-card-content>
+                            <div class="flex-row text-footer">
+                                <mat-card-content class="centered-text"> Raça </mat-card-content>
+                                <mat-card-content class="centered-text"> Categoria </mat-card-content>
+                            </div>
+                        </div>
+
+                        <mat-card-content id="preco"> R$ 124,00 </mat-card-content>
+                        <form [formGroup]="formGroup">
+                            <input matInput type="number" formControlName="quantidade" class="quantidade" />
+                        </form>
+                    </div>
+                    <button mat-mini-fab color="black" aria-label="Excluir do carrinho" class="no-shadow">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card>
+            </div>
+
+            <div class="card endereco">
+                <h3>Endereço</h3>
+                <mat-card class="flex-column border card">
+                    <h5>Casa</h5>
+                    <p>Texto aleatório do endereço</p>
+                </mat-card>
+                <div class="flex-column actions">
+                    <button mat-raised-button style="color: var(--default-green);">
+                        NOVO
+                    </button>
+                </div>
+            </div>
+
+            <div class="card endereco pagamento">
+                <h3>Método de Pagamento</h3>
+
+                <section class="example-section">
+                    <mat-radio-group class="flex-column">
+                        <mat-radio-button class="example-margin" value="2">Boleto</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="1">PIX</mat-radio-button>
+                    </mat-radio-group>
+                </section>
+
+            </div>
+        </div>
+
+        <div class="flex-row" style="width: 30%;">
+            <div class="card total">
+                <h3>Resumo do Pedido</h3>
+                <mat-card class="flex-column border card">
+                    <div class="flex-row part first">
+                        <p>Quantidade de Itens</p>
+                        <p class="valor">100</p>
+                    </div>
+                    <div class="flex-row part">
+                        <p>Total</p>
+                        <p class="valor">R$ 10000</p>
+                    </div>
+                </mat-card>
+                <div class="flex-column actions">
+                    <button mat-raised-button
+                        style="background-color: var(--default-green); color: white; width: 100%; margin-bottom: 10px;">
+                        COMPRAR
+                    </button>
+                    <button mat-raised-button style="color: var(--default-green);  width: 100%;">
+                        ESCOLHER MAIS PRODUTOS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</mat-card>
