@@ -4,9 +4,8 @@ import {Produto} from "../../../models/produto.model";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import { CarrinhoService } from 'src/app/services/carrinho.service';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { NotifierService } from 'src/app/shared/services/notifier.service';
-
 
 type Card = {
   id: number,
@@ -43,7 +42,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private produtoService: ProdutoService,
     private notifierService: NotifierService,
     private carrinhoService: CarrinhoService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngAfterViewInit() {
@@ -59,6 +59,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   carregarProdutos() {
+    const filtro = this.activatedRoute.snapshot.data['filtro'];
+    if (filtro) {
+      this.filtro = filtro;
+    }
+
     if (this.filtro) {
       this.produtoService.findByCampoBusca(this.filtro, true, this.pagina, this.pageSize)
         .subscribe(data => {
@@ -73,6 +78,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   carregarTotalRegistros() {
+    const filtro = this.activatedRoute.snapshot.data['filtro'];
+    if (filtro) {
+      this.filtro = filtro;
+    }
+
     if (this.filtro) {
       this.produtoService.countByCampoBusca(this.filtro, true)
         .subscribe(data => {
@@ -143,7 +153,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.notifierService.showNotification('Produto adicionado ao carrinho!', 'success');
   }
-
 
   showProduto(id: number) {
     this.router.navigateByUrl('/produtos/show/'+id);

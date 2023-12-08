@@ -3,7 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot 
 import { Produto } from "src/app/models/produto.model";
 import { ProdutoService } from "src/app/services/produto.service";
 
-export const produtoResolver: ResolveFn<Produto> = 
+export const produtoResolver: ResolveFn<Produto> =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
         return inject(ProdutoService).findById(route.paramMap.get('id')!);
     };

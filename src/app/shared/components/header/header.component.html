@@ -13,8 +13,18 @@
             </div>
             <span class="example-spacer"></span>
             <span *ngIf="isAdminRoute" class="toolbar-title">ADMINISTRADOR</span>
-            <span *ngIf="!isAdminRoute" class="toolbar-title"></span>
-            <span class="example-spacer"></span>
+
+          <div *ngIf="!isAdminRoute" class="filter-container">
+            <mat-form-field appearance="outline" class="full-width-input">
+              <mat-label>Pesquisar</mat-label>
+              <input [(ngModel)]="filtro" (keyup)="onEnterKey($event)" matInput placeholder="Ex. Ração" #input>
+            </mat-form-field>
+
+            <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
+              <mat-icon id="icon">search</mat-icon>
+            </button>
+          </div>
+          <span class="example-spacer"></span>
             <button routerLink="/compras/carrinho" mat-icon-button class="demo-section example-icon favorite-icon"
                 aria-label="Example icon-button with heart icon" style="margin-right: 10px;">
                 <mat-icon [matBadge]="qtdItensCarrinho" matBadgeColor="warn" matBadgePosition="after"

@@ -1,12 +1,22 @@
-.example-spacer {
-    flex: 1 1 auto;
-}
-
 .header-rote {
     font-size: small;
     color: white;
     font-weight: 200;
     margin-left: 4%;
+}
+
+.filter-container {
+  margin-top: 20px;
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 60%;
+}
+
+.full-width-input{
+  margin-top: 18px;
+  width: 100%;
 }
 
 .flex-container {
@@ -54,4 +64,8 @@
     background-color: white;
     border: none;
     cursor: pointer;
+}
+
+mat-form-field {
+  height: 80px;
 }

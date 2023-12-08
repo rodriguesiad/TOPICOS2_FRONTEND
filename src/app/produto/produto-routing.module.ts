@@ -5,11 +5,13 @@ import { ProdutoListComponent } from './components/produto-list/produto-list.com
 import { produtoResolver } from './resolver/produto-resolver';
 import {HomeComponent} from "./components/home/home.component";
 import {ProdutoShowComponent} from "./components/produto-show/produto-show.component";
+import {filtroResolver} from "./resolver/filtro-resolver";
 
 const routes: Routes = [
   {path: 'list', component: ProdutoListComponent},
   {path: 'new', component: ProdutoFormComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'home/:filtro', component: HomeComponent, resolve: {filtro: filtroResolver}},
   {path: 'show/:id', component: ProdutoShowComponent, resolve: {produto: produtoResolver}},
   {path: 'edit/:id', component: ProdutoFormComponent, resolve: {produto: produtoResolver}}
 ];
