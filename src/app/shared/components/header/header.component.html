@@ -14,11 +14,14 @@
             <span class="example-spacer"></span>
             <span class="toolbar-title">ADMINISTRADOR</span>
             <span class="example-spacer"></span>
-            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                <mat-icon>favorite</mat-icon>
+            <button routerLink="/compras/carrinho" mat-icon-button class="demo-section example-icon favorite-icon"
+                aria-label="Example icon-button with heart icon" style="margin-right: 10px;">
+                <mat-icon [matBadge]="qtdItensCarrinho" matBadgeColor="warn" matBadgePosition="after"
+                    matBadgeOverlap="false" aria-hidden="false">shopping_cart</mat-icon>
             </button>
             <button type="button" class="profile-button">
-                <img src="../../../../assets/images/icon_profile.png" alt="Pefil do usuário" class="imagem-responsiva profile"/>
+                <img src="../../../../assets/images/icon_profile.png" alt="Pefil do usuário"
+                    class="imagem-responsiva profile" />
             </button>
         </div>
     </mat-toolbar>
