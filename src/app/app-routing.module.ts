@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/components/login/login.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,12 @@ const routes: Routes = [
       () => import('./metodo-recebimento/metodo-recebimento.module')
         .then(m => m.MetodoRecebimentoModule)
   },
+  
+  {
+  path: 'auth', loadChildren:
+  () => import('./auth/auth.module')
+    .then(m => m.AuthModule)
+  }
 ];
 
 @NgModule({

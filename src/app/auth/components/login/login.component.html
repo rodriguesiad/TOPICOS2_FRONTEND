@@ -1,0 +1,22 @@
+<div class="login-container">
+    <div class="login-box">
+        <div class="box-header">
+            <div id="logo">
+                <img src="../../../../assets/images/img_login1.png" alt="Logo do sistema">
+            </div>
+            <h2 class="login-title">Efetuar Login</h2>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="login-input" appearance="outline">
+                <input matInput placeholder="Login" formControlName="login" required>
+                <mat-error *ngIf="loginForm.get('login')!.hasError('required')">O login é obrigatório</mat-error>
+            </mat-form-field>
+            <mat-form-field class="login-input" appearance="outline">
+                <input matInput type="password" placeholder="Senha" formControlName="senha" required>
+                <mat-error *ngIf="loginForm.get('senha')!.hasError('required')">A senha é obrigatória</mat-error>
+            </mat-form-field>
+            <button mat-raised-button class="login-button" color="primary" type="submit">LOGIN</button>
+            <p>Esqueceu a senha? <a>Clique Aqui</a></p>
+        </form>
+    </div>
+</div>
