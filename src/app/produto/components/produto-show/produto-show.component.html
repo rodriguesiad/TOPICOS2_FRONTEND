@@ -1,0 +1,69 @@
+<mat-card>
+  <div class="flex-container">
+    <div class="img">
+      <img class="img-principal" mat-card-image [src]="card.urlImagem" >
+    </div>
+    <div class="conteudo">
+      <div class="descricao">
+        <mat-card-title> {{card.titulo}} </mat-card-title>
+        <mat-card-content> {{card.descricao}} </mat-card-content>
+      </div>
+      <div class="preco">
+        <mat-card-title style="color: var(--default-green) "> {{card.preco | currency:'BRL'}} </mat-card-title>
+      </div>
+      <div class="categorias">
+        <div class="categoria">
+          <div class="label">PESO</div>
+          <mat-card-content>{{card.peso}}</mat-card-content>
+        </div>
+        <div class="categoria">
+          <div class="label">ESPÉCIE</div>
+          <mat-card-content>{{card.especie}}</mat-card-content>
+        </div>
+        <div class="categoria">
+          <div class="label">RAÇA</div>
+          <mat-card-content>{{card.raca}}</mat-card-content>
+        </div>
+        <div class="categoria">
+          <div class="label">CATEGORIA</div>
+          <mat-card-content>{{card.categoria}}</mat-card-content>
+        </div>
+      </div>
+      <div class="acoes">
+        <button mat-icon-button class="icon">
+          <mat-icon style="color: var(--default-green)">favorite</mat-icon>
+        </button>
+        <button mat-icon-button class="icon">
+          <mat-icon style="color: var(--default-green)">shopping_cart</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<button mat-raised-button style="color: var(--default-green);" routerLink="/produtos/home">
+  VOLTAR
+</button>
+
+<div class="recomendacoes">
+  <span class="toolbar-title"> Outras Recomendações </span>
+
+  <div class="container responsive-grid">
+    <mat-card class="selecionavel" (click)="showProduto(card.id)" *ngFor="let card of cards()">
+
+      <img mat-card-image [src]="card.urlImagem" >
+
+      <mat-card-content class="centered-text"> {{card.titulo}} </mat-card-content>
+
+      <mat-card-content class="centered-text"> {{card.descricao}} </mat-card-content>
+      <br/>
+      <mat-card-title class="centered-text"> {{card.preco | currency:'BRL'}} </mat-card-title>
+
+    </mat-card>
+  </div>
+
+</div>
+
+
+
+
