@@ -19,6 +19,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { HomeComponent } from './components/home/home.component';
 import {CarouselModule} from "ngx-bootstrap/carousel";
 import {AlertModule} from "ngx-bootstrap/alert";
+import { ProdutoShowComponent } from './components/produto-show/produto-show.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 
@@ -27,7 +29,8 @@ import {AlertModule} from "ngx-bootstrap/alert";
   declarations: [
     ProdutoListComponent,
     ProdutoFormComponent,
-    HomeComponent
+    HomeComponent,
+    ProdutoShowComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import {AlertModule} from "ngx-bootstrap/alert";
     MatSelectModule,
     MatDialogModule,
     CarouselModule,
-    AlertModule
+    AlertModule,
+    MatTabsModule
   ]
 })
 export class ProdutoModule { }
