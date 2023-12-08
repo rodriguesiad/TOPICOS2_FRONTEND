@@ -6,7 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SharedRoutingModule } from './shared-routing.module';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from "@angular/material/dialog";
@@ -30,22 +30,23 @@ import { NotifierComponent } from './components/notifier/notifier.component';
     ConfirmationDialogComponent,
     NotifierComponent
   ],
-  imports: [
-    CommonModule,
-    SharedRoutingModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatGridListModule,
-    MatSnackBarModule,
-    MatBadgeModule
-  ],
+    imports: [
+        CommonModule,
+        SharedRoutingModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatGridListModule,
+        MatSnackBarModule,
+        MatBadgeModule,
+        FormsModule
+    ],
   exports: [
     HeaderComponent,
     SidebarComponent,

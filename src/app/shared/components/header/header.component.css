@@ -9,6 +9,20 @@
     margin-left: 4%;
 }
 
+.filter-container {
+  margin-top: 20px;
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 60%;
+}
+
+.full-width-input{
+  margin-top: 18px;
+  width: 100%;
+}
+
 .flex-container {
     display: flex;
     justify-content: space-between;
@@ -54,4 +68,8 @@
     background-color: white;
     border: none;
     cursor: pointer;
+}
+
+mat-form-field {
+  height: 80px;
 }

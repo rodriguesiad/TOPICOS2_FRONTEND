@@ -12,8 +12,10 @@ import { filter } from 'rxjs';
 export class HeaderComponent implements OnInit {
   qtdItensCarrinho: number = 0;
   isAdminRoute: boolean = true;
+  filtro: string = "";
 
-  constructor(private sidebarService: SidebarService, private carrinhoService: CarrinhoService, private router: Router) { }
+  constructor(private sidebarService: SidebarService, private carrinhoService: CarrinhoService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -31,6 +33,16 @@ export class HeaderComponent implements OnInit {
     this.carrinhoService.carrinho$.subscribe(itens => {
       this.qtdItensCarrinho = itens.reduce((total, item) => total + item.quantidade, 0);
     });
+  }
+
+  onEnterKey(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.aplicarFiltro();
+    }
+  }
+
+  aplicarFiltro() {
+    this.router.navigateByUrl('produtos/home/'+ this.filtro);
   }
 
 }
