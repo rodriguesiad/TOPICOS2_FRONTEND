@@ -9,9 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { SituacaoDialogBoxComponent } from 'src/app/shared/components/situacao-dialog-box/situacao-dialog-box.component';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthRoutingModule } from './auth/auth-routing.module';
+// import { AuthRoutingModule } from './auth/auth-routing.module';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+// import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { ErrorInterceptor } from './auth/interceptors/error.interceptor';
 
 
@@ -21,25 +21,29 @@ import { ErrorInterceptor } from './auth/interceptors/error.interceptor';
     SituacaoDialogBoxComponent
   ],
   imports: [
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: () => localStorage.getItem('jwt_token'),
-        allowedDomains: ['unitins.br'],
-        disallowedRoutes: ['localhost:8080/login']
-      }
-    }),
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: () => localStorage.getItem('jwt_token'),
+    //     allowedDomains: ['unitins.br'],
+    //     disallowedRoutes: ['localhost:8080/login']
+    //   }
+    // }),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
     MatButtonModule,
-    AuthRoutingModule
+    // AuthRoutingModule
   ],
-  providers: [JwtHelperService,
-    { provide: LOCALE_ID, useValue: 'pt' },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+  providers: 
+  [
+    //JwtHelperService,
+    // 
+  //   { provide: LOCALE_ID, useValue: 'pt' },
+  //   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  //   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {
