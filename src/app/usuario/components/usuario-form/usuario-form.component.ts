@@ -139,7 +139,7 @@ export class UsuarioFormComponent implements OnInit {
         this.usuarioService.save(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
             this.notifierService.showNotification('Usuário cadastrado com sucesso!', 'success');
-            this.router.navigateByUrl('/usuarios/list');
+            this.router.navigateByUrl('/admin/usuarios/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -167,7 +167,7 @@ export class UsuarioFormComponent implements OnInit {
         this.usuarioService.update(usuarioNovo).subscribe({
           next: (usuarioCadastrado) => {
             this.notifierService.showNotification('Usuário alterado com sucesso!', 'success');
-            this.router.navigateByUrl('/usuarios/list');
+            this.router.navigateByUrl('/admin/usuarios/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;

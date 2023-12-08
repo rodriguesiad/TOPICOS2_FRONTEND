@@ -55,6 +55,13 @@ img {
     gap: 20px;
 }
 
+button[mat-flat-button] {
+    background-color: var(--default-green);
+    color: white;
+    width: 100%;
+    padding: 16px;
+  }
+
 .toolbar-title {
     flex: 1;
     text-align: start;

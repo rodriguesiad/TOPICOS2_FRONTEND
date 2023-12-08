@@ -50,7 +50,7 @@ export class PixRecebimentoFormComponent {
     if(pix.id == null) {
       this.pixService.save(pix).subscribe({
         next: () => {
-          this.router.navigateByUrl('/metodos-recebimento/show');
+          this.router.navigateByUrl('/admin/metodos-recebimento/show');
         },
         error: (err) => {
           console.log('Erro ao incluir' + JSON.stringify(err));
@@ -59,7 +59,7 @@ export class PixRecebimentoFormComponent {
     } else {
       this.pixService.update(pix).subscribe({
         next: () => {
-          this.router.navigateByUrl('/metodos-recebimento/list');
+          this.router.navigateByUrl('/admin/metodos-recebimento/list');
         },
         error: (err) => {
           console.log('Erro ao editar' + JSON.stringify(err));
@@ -70,10 +70,10 @@ export class PixRecebimentoFormComponent {
 
   back() {
     if (this.isCadastro) {
-      this.router.navigateByUrl('/metodos-recebimento/show')
+      this.router.navigateByUrl('/admin/metodos-recebimento/show')
     }
     if (this.isEdicao) {
-      this.router.navigateByUrl('/metodos-recebimento/list');
+      this.router.navigateByUrl('/admin/metodos-recebimento/list');
     }
 
   }

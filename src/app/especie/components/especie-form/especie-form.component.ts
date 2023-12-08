@@ -34,7 +34,7 @@ export class EspecieFormComponent {
       if (especie.id == null) {
         this.especieService.save(especie).subscribe({
           next: (especieCadastrada) => {
-            this.router.navigateByUrl('/especies/list');
+            this.router.navigateByUrl('/admin/especies/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -61,7 +61,7 @@ export class EspecieFormComponent {
       } else {
         this.especieService.update(especie).subscribe({
           next: (especieCadastrada) => {
-            this.router.navigateByUrl('/especies/list');
+            this.router.navigateByUrl('/admin/especies/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -94,7 +94,7 @@ export class EspecieFormComponent {
     if (especie.id != null) {
       this.especieService.delete(especie).subscribe({
         next: (e) => {
-          this.router.navigateByUrl('/especies/list');
+          this.router.navigateByUrl('/admin/especies/list');
         },
         error: (err) => {
           console.log('Erro ao excluir' + JSON.stringify(err));

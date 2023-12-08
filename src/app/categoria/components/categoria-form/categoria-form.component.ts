@@ -36,7 +36,7 @@ export class CategoriaFormComponent {
         this.categoriaService.save(categoria).subscribe({
           next: (categoriaCadastrada) => {
             this.notifierService.showNotification('Categoria cadastrada com sucesso!', 'success');
-            this.router.navigateByUrl('/categorias/list');
+            this.router.navigateByUrl('/admin/categorias/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -64,7 +64,7 @@ export class CategoriaFormComponent {
         this.categoriaService.update(categoria).subscribe({
           next: (categoriaAtualizada) => {
             this.notifierService.showNotification('Categoria alterada com sucesso!', 'success');
-            this.router.navigateByUrl('/categorias/list');
+            this.router.navigateByUrl('/admin/categorias/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -98,7 +98,7 @@ export class CategoriaFormComponent {
     if (categoria.id != null) {
       this.categoriaService.delete(categoria).subscribe({
         next: (e) => {
-          this.router.navigateByUrl('/categorias/list');
+          this.router.navigateByUrl('/admin/categorias/list');
         },
         error: (err) => {
           console.log('Erro ao excluir' + JSON.stringify(err));

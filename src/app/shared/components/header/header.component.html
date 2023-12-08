@@ -12,7 +12,8 @@
                 </a>
             </div>
             <span class="example-spacer"></span>
-            <span class="toolbar-title">ADMINISTRADOR</span>
+            <span *ngIf="isAdminRoute" class="toolbar-title">ADMINISTRADOR</span>
+            <span *ngIf="!isAdminRoute" class="toolbar-title"></span>
             <span class="example-spacer"></span>
             <button routerLink="/compras/carrinho" mat-icon-button class="demo-section example-icon favorite-icon"
                 aria-label="Example icon-button with heart icon" style="margin-right: 10px;">

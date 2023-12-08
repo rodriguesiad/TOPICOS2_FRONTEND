@@ -51,7 +51,7 @@ export class BoletoRecebimentoFormComponent {
     if(boleto.id == null) {
       this.boletoService.save(boleto).subscribe({
         next: () => {
-          this.router.navigateByUrl('/metodos-recebimento/show');
+          this.router.navigateByUrl('/admin/metodos-recebimento/show');
         },
         error: (err) => {
           console.log('Erro ao incluir' + JSON.stringify(err));
@@ -60,7 +60,7 @@ export class BoletoRecebimentoFormComponent {
     } else {
       this.boletoService.update(boleto).subscribe({
         next: () => {
-          this.router.navigateByUrl('/metodos-recebimento/list');
+          this.router.navigateByUrl('/admin/metodos-recebimento/list');
         },
         error: (err) => {
           console.log('Erro ao editar' + JSON.stringify(err));
@@ -71,10 +71,10 @@ export class BoletoRecebimentoFormComponent {
 
   back() {
     if (this.isCadastro) {
-      this.router.navigateByUrl('/metodos-recebimento/show')
+      this.router.navigateByUrl('/admin/metodos-recebimento/show')
     }
     if (this.isEdicao) {
-      this.router.navigateByUrl('/metodos-recebimento/list');
+      this.router.navigateByUrl('/admin/metodos-recebimento/list');
     }
   }
 

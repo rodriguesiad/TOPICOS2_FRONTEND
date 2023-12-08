@@ -114,22 +114,22 @@
           <div *ngIf="imagePreview" class="container responsive-grid">
             <mat-card>
 
-              <img mat-card-image [src]="imagePreview">
-
-              <mat-card-title class="centered-text"> {{formGroup.get('nome')?.value}} </mat-card-title>
-
-              <mat-card-content class="centered-text"> {{formGroup.get('categoria')?.value?.nome}} </mat-card-content>
-              <br />
-              <mat-card-content class="centered-text"> {{formGroup.get('preco')?.value | currency:'BRL'}}
-              </mat-card-content>
-
-              <mat-card-actions class="centered-text">
-                <button mat-button color="primary">Ver mais ...</button>
-              </mat-card-actions>
-
-              <mat-card-footer>
-                <button mat-flat-button style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
-              </mat-card-footer>
+              <div class="container responsive-grid">
+                <mat-card class="selecionavel">
+              
+                    <img mat-card-image [src]="imagePreview">
+              
+                  <mat-card-content class="centered-text"> {{formGroup.get('nome')?.value}} </mat-card-content>
+              
+                  <mat-card-content class="centered-text"> {{formGroup.get('descricao')?.value}} </mat-card-content>
+                  <br/>
+                  <mat-card-title class="centered-text"> {{ formGroup.get('preco')?.value | currency:'BRL'}} </mat-card-title>
+              
+                    <mat-card-footer>
+                      <button mat-flat-button >Adicionar ao carrinho</button>
+                    </mat-card-footer>
+                  </mat-card>
+                </div>
             </mat-card>
           </div>
 

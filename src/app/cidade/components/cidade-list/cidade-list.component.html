@@ -48,7 +48,7 @@
           <td mat-cell *matCellDef="let cidade">
             <div class="edit-button-container">
               <button mat-mini-fab color="black" aria-label="Editar cidade" class="no-shadow"
-                routerLink="/cidades/edit/{{cidade.id}}">
+                routerLink="/admin/cidades/edit/{{cidade.id}}">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-mini-fab color="black" aria-label="Excluir método recebimento - Boleto" class="no-shadow"
@@ -70,7 +70,7 @@
     </div>
   </div>
   <div class="button-container">
-    <button mat-raised-button routerLink="/cidades/new">
+    <button mat-raised-button routerLink="/admin/cidades/new">
       NOVO
     </button>
   </div>

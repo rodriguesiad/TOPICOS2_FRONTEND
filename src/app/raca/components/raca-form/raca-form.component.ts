@@ -36,7 +36,7 @@ export class RacaFormComponent {
         this.racaService.save(raca).subscribe({
           next: (racaCadastrada) => {
             this.notifierService.showNotification('Raça cadastrada com sucesso!', 'success');
-            this.router.navigateByUrl('/racas/list');
+            this.router.navigateByUrl('/admin/racas/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -64,7 +64,7 @@ export class RacaFormComponent {
         this.racaService.update(raca).subscribe({
           next: (racaCadastrada) => {
             this.notifierService.showNotification('Raça alterada com sucesso!', 'success');
-            this.router.navigateByUrl('/racas/list');
+            this.router.navigateByUrl('/admin/racas/list');
           },
           error: (errorResponse) => {
             this.apiResponse = errorResponse.error;
@@ -98,7 +98,7 @@ export class RacaFormComponent {
     if (raca.id != null) {
       this.racaService.delete(raca).subscribe({
         next: (e) => {
-          this.router.navigateByUrl('/racas/list');
+          this.router.navigateByUrl('/admin/racas/list');
         },
         error: (err) => {
           console.log('Erro ao excluir' + JSON.stringify(err));
