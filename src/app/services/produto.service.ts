@@ -12,8 +12,14 @@ export class ProdutoService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.baseURL}/produtos`);
+  getAll(pagina: number, tamanhoPagina: number): Observable<Produto[]> {
+
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+
+    return this.http.get<Produto[]>(`${this.baseURL}/produtos`, { params });
   }
 
   findById(id: string): Observable<Produto> {
@@ -21,7 +27,6 @@ export class ProdutoService {
   }
 
   save(produto: Produto): Observable<Produto> {
-
     const obj = {
       nome: produto.nome,
       descricao: produto.descricao,
@@ -33,7 +38,7 @@ export class ProdutoService {
       idCategoria: produto.categoria.id,
       idEspecie: produto.especie.id
     }
-    console.log(obj);
+
     return this.http.post<Produto>(`${this.baseURL}/produtos`, obj);
   }
 
@@ -99,7 +104,11 @@ export class ProdutoService {
   }
 
   getUrlImagem(nomeImagem: string): string {
-    return `${this.baseURL}/image/download/${nomeImagem}`;
+    return `${this.baseURL}/produtos/image/download/${nomeImagem}`;
+  }
+
+  getRecomendacoes(idRaca: number, idCategoria: number, idEspecie: number): Observable<Produto[]> {
+    return this.http.get<Produto[]> (`${this.baseURL}/produtos/recomendacoes?idRaca=${idRaca}&idCategoria=${idCategoria}&idEspecie=${idEspecie}`);
   }
 
 }

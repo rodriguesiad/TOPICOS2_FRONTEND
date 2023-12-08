@@ -1,0 +1,93 @@
+img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  padding: 8px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.centered-text {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-left: 15px;
+}
+
+.filter-container {
+  margin-top: 20px;
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: auto;
+}
+
+.full-width-input{
+  margin-top: 18px;
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.flex-content {
+  display: flex;
+  align-items: center;
+}
+
+.material-icons {
+  margin-left: 2px;
+}
+
+.toolbar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 28px;
+}
+
+mat-toolbar {
+  background-color: white;
+  padding-left: 5px;
+}
+
+.search-button {
+  flex-shrink: 0;
+  color: var(--default-green);
+}
+
+button[mat-raised-button] {
+  background-color: var(--default-green);
+  color: white;
+}
+
+button[mat-flat-button] {
+  background-color: var(--default-green);
+  color: white;
+  width: 100%;
+  padding: 16px;
+}
+
+.selecionavel {
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.mat-mdc-card-content {
+  padding: 0 2px;
+}
+
+

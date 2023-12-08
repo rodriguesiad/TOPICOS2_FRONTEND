@@ -43,8 +43,6 @@ export class UsuarioService {
       ativo: usuario.ativo
     }
 
-    console.log(usuarioDto.perfis);
-
     return this.http.post<Usuario>(`${this.baseURL}/usuarios/admin`, usuarioDto);
   }
 
@@ -60,8 +58,6 @@ export class UsuarioService {
       telefones: usuario.telefones,
       ativo: usuario.ativo
     }
-
-    console.log(usuarioDto);
 
     return this.http.put<Usuario>(`${this.baseURL}/usuarios/admin/${usuario.id}`, usuarioDto);
   }
@@ -94,6 +90,10 @@ export class UsuarioService {
 
   findPerfis(): Observable<Perfil[]> {
     return this.http.get<Perfil[]>(`${this.baseURL}/usuarios/perfis`);
+  }
+
+  getPerfilUsuario(): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseURL}/usuario-logado`);
   }
 
 }

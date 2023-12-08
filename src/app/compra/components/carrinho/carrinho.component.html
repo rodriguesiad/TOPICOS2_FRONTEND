@@ -1,0 +1,102 @@
+<mat-card class="no-shadow">
+    <div>
+        <mat-toolbar class="page-title">
+            <div class="flex-container">
+                <span class="toolbar-title">Carrinho de Compras</span>
+                <div class="logo">
+                    <img src="../../../../assets/images/carrinho_compra.png" alt="Logo de carrinho de compra"
+                        class="imagem-responsiva">
+                </div>
+            </div>
+        </mat-toolbar>
+    </div>
+    <div class="flex-row main">
+        <div class="flex-column" style="width: 70%;">
+            <div class="product-list flex-column">
+                <ng-container *ngIf="carrinhoItens.length > 0; else carrinhoVazio" class="product-list flex-column">
+                    <mat-card class="flex-row border card" *ngFor="let item of carrinhoItens">
+                        <div class="flex-row">
+                            <img mat-card-image [src]="item.urlImagem" id="product-image" class="imagem-responsiva">
+
+                            <div class="text-card flex-column">
+                                <mat-card-content class="centered-text" id="title"> {{ item.nome }} </mat-card-content>
+                                <mat-card-content class="centered-text"> {{item.peso}} </mat-card-content>
+                                <div class="flex-row text-footer">
+                                    <mat-card-content class="centered-text"> {{ item.especie }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.raca }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.categoria }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.porte }} </mat-card-content>
+                                </div>
+                            </div>
+
+                            <mat-card-content id="preco"> R$ {{ item.preco }} </mat-card-content>
+                            <div style="margin-left: 20px;">
+                                <input matInput type="number" [(ngModel)]="item.quantidade" [min]="1"
+                                    [max]="item.estoque" (ngModelChange)="atualizarTotal()" class="quantidade" />
+                            </div>
+                        </div>
+                        <button mat-mini-fab color="black" aria-label="Excluir do carrinho" class="no-shadow"
+                            (click)="removerItem(item)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-card>
+                </ng-container>
+
+                <ng-template #carrinhoVazio>
+                    <p>O carrinho está vazio.</p>
+                </ng-template>
+            </div>
+
+            <div class="card endereco">
+                <h3 style="margin: 0;">Endereço</h3>
+                <h6>Selecione o endereço da compra</h6>
+                <div *ngFor="let endereco of usuarioLogado?.enderecos">
+                    <mat-radio-button (change)="enderecoSelecionado = endereco"
+                        [checked]="enderecoSelecionado === endereco" [checked]="enderecoSelecionado === endereco">
+                        {{ endereco.logradouro }}, {{ endereco.numero }}, {{ endereco.complemento
+                        }}, {{ endereco.cep }}, {{ endereco.bairro }}, {{ endereco.municipio.nome}} - {{
+                        endereco.municipio.estado.sigla }}
+                    </mat-radio-button>
+                </div>
+            </div>
+
+            <div class="card endereco pagamento">
+                <h3>Método de Pagamento</h3>
+
+                <section class="example-section">
+                    <mat-radio-group class="flex-column" [(ngModel)]="metodoPagamentoSelecionado">
+                        <mat-radio-button class="example-margin" value="2">Boleto</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="1">PIX</mat-radio-button>
+                    </mat-radio-group>
+
+                </section>
+            </div>
+        </div>
+
+        <div class="flex-row" style="width: 30%;">
+            <div class="card total">
+                <h3>Resumo do Pedido</h3>
+                <mat-card class="flex-column border card">
+                    <div class="flex-row part first">
+                        <p>Quantidade de Itens</p>
+                        <p class="valor">{{ quantidadeTotal }}</p>
+                    </div>
+                    <div class="flex-row part">
+                        <p>Total</p>
+                        <p class="valor">R$ {{total}}</p>
+                    </div>
+                </mat-card>
+                <div class="flex-column actions">
+                    <button mat-raised-button (click)="finalizarCompra()"
+                        style="background-color: var(--default-green); color: white; width: 100%; margin-bottom: 10px;">
+                        COMPRAR
+                    </button>
+                    <button mat-raised-button routerLink="/produtos/home"
+                        style="color: var(--default-green);  width: 100%;">
+                        ESCOLHER MAIS PRODUTOS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card>

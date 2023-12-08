@@ -16,6 +16,11 @@ import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { HomeComponent } from './components/home/home.component';
+import {CarouselModule} from "ngx-bootstrap/carousel";
+import {AlertModule} from "ngx-bootstrap/alert";
+import { ProdutoShowComponent } from './components/produto-show/produto-show.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 
@@ -23,7 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     ProdutoListComponent,
-    ProdutoFormComponent
+    ProdutoFormComponent,
+    HomeComponent,
+    ProdutoShowComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +47,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatToolbarModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    CarouselModule,
+    AlertModule,
+    MatTabsModule
   ]
 })
 export class ProdutoModule { }

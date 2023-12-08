@@ -1,0 +1,47 @@
+<mat-card>
+
+  <mat-toolbar>
+    <div class="flex-container">
+      <div class="flex-content">
+        <span class="toolbar-title">Seu Pet pode gostar</span>
+        <span class="material-icons">pets</span>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="filter-container">
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Pesquisar</mat-label>
+      <input [(ngModel)]="filtro" (keyup)="onEnterKey($event)" matInput placeholder="Ex. Palmas" #input>
+    </mat-form-field>
+
+    <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
+      <mat-icon id="icon">search</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" class="clean-button" style="margin-right: 20px;" (click)="limparFiltro()">
+      LIMPAR
+    </button>
+  </div>
+
+<div class="container responsive-grid">
+  <mat-card class="selecionavel" (click)="showProduto(card.id)" *ngFor="let card of cards()">
+
+      <img mat-card-image [src]="card.urlImagem">
+
+    <mat-card-content class="centered-text"> {{card.titulo}} </mat-card-content>
+
+    <mat-card-content class="centered-text"> {{card.descricao}} </mat-card-content>
+    <br/>
+    <mat-card-title class="centered-text"> {{card.preco | currency:'BRL'}} </mat-card-title>
+
+      <mat-card-footer>
+        <button mat-flat-button (click)="adicionarAoCarrinho(card)">Adicionar ao carrinho</button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <mat-paginator aria-label="Selecione a página" [pageSizeOptions]="[2, 4, 8, 16]" [pageSize]="pageSize"
+    [length]="totalRegistros" (page)="paginar($event)">
+  </mat-paginator>
+
+</mat-card>

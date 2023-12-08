@@ -5,10 +5,12 @@ import { Categoria } from 'src/app/models/categoria.model';
 import { Especie } from 'src/app/models/especie.model';
 import { Produto } from 'src/app/models/produto.model';
 import { Raca } from 'src/app/models/raca.model';
+import { CarrinhoService } from 'src/app/services/carrinho.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EspecieService } from 'src/app/services/especie.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RacaService } from 'src/app/services/raca.service';
+import { NotifierService } from 'src/app/shared/services/notifier.service';
 
 @Component({
   selector: 'app-produto-form',
@@ -20,6 +22,7 @@ export class ProdutoFormComponent implements OnInit {
   racas: Raca[] = [];
   categorias: Categoria[] = [];
   especies: Especie[] = [];
+  produtoTeste: Produto;
 
   fileName: string = '';
   selectedFile: File | null = null;
@@ -31,9 +34,10 @@ export class ProdutoFormComponent implements OnInit {
     private especieService: EspecieService,
     private categoriaService: CategoriaService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+  ) {
 
-    const produto: Produto = this.activatedRoute.snapshot.data['produto'];
+    this.produtoTeste = this.activatedRoute.snapshot.data['produto'];
 
     this.formGroup = this.formBuilder.group({
       id: [null],
