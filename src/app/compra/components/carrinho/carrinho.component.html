@@ -16,7 +16,7 @@
                 <ng-container *ngIf="carrinhoItens.length > 0; else carrinhoVazio" class="product-list flex-column">
                     <mat-card class="flex-row border card" *ngFor="let item of carrinhoItens">
                         <div class="flex-row">
-                            <img mat-card-image [src]="item.urlImagem" id="product-image" class="imagem-responsiva">
+                            <img mat-card-image [src]="item.imagemProduto" id="product-image" class="imagem-responsiva">
 
                             <div class="text-card flex-column">
                                 <mat-card-content class="centered-text" id="title"> {{ item.nome }} </mat-card-content>
@@ -88,12 +88,16 @@
                 </mat-card>
                 <div class="flex-column actions">
                     <button mat-raised-button (click)="finalizarCompra()"
-                        style="background-color: var(--default-green); color: white; width: 100%; margin-bottom: 10px;">
+                        style="background-color: var(--default-green); color: white; width: 100%; margin-bottom: 8px;">
                         COMPRAR
                     </button>
                     <button mat-raised-button routerLink="/produtos/home"
-                        style="color: var(--default-green);  width: 100%;">
+                        style="color: var(--default-green);  width: 100%; margin-bottom: 8px;">
                         ESCOLHER MAIS PRODUTOS
+                    </button>
+                    <button mat-raised-button routerLink="/compras/list"
+                        style="color: var(--default-green);  width: 100%;">
+                        VER MINHAS COMPRAS
                     </button>
                 </div>
             </div>

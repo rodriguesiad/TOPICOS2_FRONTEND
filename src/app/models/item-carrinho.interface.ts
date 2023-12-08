@@ -9,5 +9,5 @@ export interface ItemCarrinho {
     porte: number,
     peso: number,
     estoque: number,
-    urlImagem: string,
+    imagemProduto: string,
 }

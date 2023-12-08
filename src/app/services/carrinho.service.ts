@@ -30,14 +30,9 @@ export class CarrinhoService {
     this.atualizarArmazenamentoLocal();
   }
 
-  removerTudo(path: string): void {
+  removerTudo(): void {
     this.localStorageService.removeItem('carrinho');
-
-    if (path && path != '') {
-      this.router.navigateByUrl(path);
-    } else {
-      window.location.reload();
-    }
+    window.location.reload();
   }
 
   remover(item: ItemCarrinho): void {

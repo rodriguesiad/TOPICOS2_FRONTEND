@@ -1,35 +1,47 @@
 <mat-card class="no-shadow pagina">
     <div>
         <mat-toolbar class="page-title">
-            <div class="flex-container">
-                <span class="toolbar-title">Detalhes da Compra</span>
+            <div class="flex-container" style="justify-content: space-between;width: 100%; padding-right: 10px;">
+                <span class="toolbar-title">Descrição da Compra</span>
+                <button mat-raised-button style="color: var(--default-green);" routerLink="/compras/list">
+                    Voltar
+                </button>
             </div>
         </mat-toolbar>
     </div>
 
     <div class="flex-row main">
-        <div class="flex-column" style="width: 100%;">
-
-            <mat-horizontal-stepper #stepper *ngIf="compra?.statusCompra" >
-                <mat-step *ngFor="let status of statusCompra">
-                    <ng-template matStepLabel>{{ status.label }}</ng-template>
-                    <div *ngIf="status.id <= compra.statusCompra.id">
-                    </div>
-                </mat-step>
-            </mat-horizontal-stepper>
-
+        <div class="flex-column" style="width: 100%; align-items: center;">
+            <div class="flex-row card etapas">
+                <div class="stepper">
+                    <ng-container *ngFor="let status of statusCompra; let i = index">
+                        <div class="flex-column" style="align-items: center; gap:5px">
+                            <div class="step-circle" [class.completed]="i <= currentStep"
+                                [class.active]="i === currentStep">
+                                <span>{{ i + 1 }}</span>
+                            </div>
+                            <span>{{ status.label }}</span>
+                        </div>
+                        <div *ngIf="i !== statusCompra.length - 1" class="line"></div>
+                    </ng-container>
+                </div>
+            </div>
 
             <div class="card pedido">
                 <h3>Informações</h3>
 
                 <section>
-                    <p>Iad Rodrigues Moraes</p>
+                    <p>{{ compra.usuario.nome }}</p>
                 </section>
                 <section>
-                    <p>Endereço</p>
+                    <p> {{ compra.enderecoCompra.logradouro }}, {{ compra.enderecoCompra.numero }}, {{
+                        compra.enderecoCompra.complemento
+                        }}, {{ compra.enderecoCompra.cep }}, {{ compra.enderecoCompra.bairro }}, {{
+                        compra.enderecoCompra.municipio.nome}} - {{
+                        compra.enderecoCompra.municipio.estado.sigla }}</p>
                 </section>
                 <section>
-                    <p>Data do Pedido</p>
+                    <p>Data do Pedido: {{ compra.data | date:'dd/MM/yyyy' }}</p>
                 </section>
             </div>
 
@@ -37,14 +49,36 @@
                 <h3>Detalhes do Pagamento</h3>
 
                 <section>
-                    <p>Total: R$100,10</p>
-                    <p>Data do Pagamento</p>
+                    <p>Total: R${{ compra.totalCompra }}</p>
+                    <p>Data do Pagamento: {{ compra.dataPagamento | date:'dd/MM/yyyy' }}</p>
                 </section>
-                <section>
-                    <mat-card style="background-color: gray;">
-                        <p>Quantidade de Itens</p>
+            </div>
+
+            <div class="product-list flex-column">
+                <h3>Itens</h3>
+                <ng-container *ngIf="compra.itensCompra" class="product-list flex-column">
+                    <mat-card class="flex-row border card" *ngFor="let item of compra.itensCompra">
+                        <div class="flex-row">
+                            <img mat-card-image [src]="getImagem(item.imagemProduto)" id="product-image" class="imagem-responsiva">
+
+                            <div class="text-card flex-column">
+                                <mat-card-content class="centered-text" id="title"> {{ item.nome }} </mat-card-content>
+                                <mat-card-content class="centered-text"> {{item.peso}} </mat-card-content>
+                                <div class="flex-row text-footer">
+                                    <mat-card-content class="centered-text"> {{ item.especie }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.raca }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.categoria }} </mat-card-content>
+                                    <mat-card-content class="centered-text"> {{ item.porte }} </mat-card-content>
+                                </div>
+                            </div>
+
+                            <mat-card-content id="preco"> R$ {{ item.preco }} </mat-card-content>
+                            <div style="margin-left: 20px;">
+                                <input matInput type="number" [(ngModel)]="item.quantidade" class="quantidade" disabled="true"/>
+                            </div>
+                        </div>
                     </mat-card>
-                </section>
+                </ng-container>
             </div>
         </div>
     </div>

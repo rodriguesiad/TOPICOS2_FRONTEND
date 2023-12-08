@@ -1,0 +1,41 @@
+<mat-card class="no-shadow pagina">
+    <div>
+        <mat-toolbar class="page-title">
+            <div class="flex-container" style="justify-content: space-between;width: 100%; padding-right: 10px;">
+                <span class="toolbar-title">Minhas Compras</span>
+                <button mat-raised-button style="color: var(--default-green);" routerLink="/compras/carrinho">
+                    Voltar
+                </button>
+            </div>
+        </mat-toolbar>
+    </div>
+
+    <div class="flex-row main">
+        <div class="flex-column" style="width: 90%;">
+            <div class="product-list flex-column">
+                <ng-container *ngIf="compras.length > 0; else semCompra" class="product-list flex-column">
+                    <mat-card class="flex-row border card" *ngFor="let compra of compras">
+                        <div class="flex-row">
+                            <div class="text-card flex-column">
+                                <h3>Compra - N°{{ compra.id }}</h3>
+                                <p class="text status">{{compra.statusCompra.label}}</p>
+                                <div class="flex-row text-footer">
+                                    <p class="text">Data: {{compra.data | date : 'dd/MM/yyy'}}</p>
+                                    <p class="text">Total: R${{compra.totalCompra}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button mat-mini-fab color="black" aria-label="Visualizar Compra" class="no-shadow"
+                            routerLink="/compras/view/{{compra.id}}">
+                            <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                    </mat-card>
+                </ng-container>
+
+                <ng-template #semCompra>
+                    <p>Nenhuma compra encontrada.</p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</mat-card>

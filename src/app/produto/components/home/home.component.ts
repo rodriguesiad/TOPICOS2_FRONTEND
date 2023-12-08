@@ -138,7 +138,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       porte: card.porte,
       peso: card.peso,
       estoque: card.estoque,
-      urlImagem: card.urlImagem,
+      imagemProduto: card.urlImagem,
     })
 
     this.notifierService.showNotification('Produto adicionado ao carrinho!', 'success');

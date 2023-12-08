@@ -116,8 +116,8 @@ export class CarrinhoComponent implements OnInit {
   pagarPorBoleto(idCompra: number) {
     this.compraService.pagarPorBoleto(idCompra).subscribe({
       next: () => {
-        this.notifierService.showNotification('Compra Realizada com sucesso!', 'success');
-        this.carrinhoService.removerTudo('produtos/home');
+        this.notifierService.showNotification('Compra realizada com sucesso!', 'success');
+        this.carrinhoService.removerTudo();
       },
       error: err => {
         this.notifierService.showNotification('Erro ao realizar pagamento por boleto!', 'error');
@@ -130,7 +130,7 @@ export class CarrinhoComponent implements OnInit {
     this.compraService.pagarPorPix(idCompra).subscribe({
       next: () => {
         this.notifierService.showNotification('Compra Realizada com sucesso!', 'success');
-        this.carrinhoService.removerTudo('produtos/home');
+        this.carrinhoService.removerTudo();
       },
       error: err => {
         this.notifierService.showNotification('Erro ao realizar pagamento por pix!', 'error');

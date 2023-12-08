@@ -15,11 +15,13 @@ import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 import { CompraRoutingModule } from './compra-routing.module';
 import { CompraViewComponent } from './components/compra-view/compra-view.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { CompraListComponent } from './components/compra-list/compra-list.component';
 
 @NgModule({
   declarations: [
     CarrinhoComponent,
-    CompraViewComponent
+    CompraViewComponent,
+    CompraListComponent
   ],
   imports: [
     CommonModule,

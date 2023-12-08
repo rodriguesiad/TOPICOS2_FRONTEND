@@ -69,7 +69,8 @@ section {
 }
 
 .pagamento {
-    height: 85px
+    height: 165px;
+
 }
 
 .stepper {
@@ -119,16 +120,14 @@ section>p {
     margin-bottom: 10px;
 }
 
-
 .product-list {
     margin: 5px;
-    width: 93.2%;
+    width: 100%;
     align-items: flex-start;
     border-radius: 5px;
     gap: 10px;
     max-height: 300px;
-    padding: 2%;
-    background-color: rgb(247, 246, 246);
+    padding: 1%;
     border: 1px solid rgb(188, 185, 185);
     overflow-y: auto;
 }
@@ -143,15 +142,20 @@ section>p {
     align-items: flex-start;
     justify-content: center;
     padding: 5px;
-    width: 60%;
+    width: 100%;
+}
+
+.text {
+    font-size: smaller;
+    margin: 0;
 }
 
 .text-footer {
-    padding-left: 16px;
-    font-size: smaller;
+    padding-left: 0;
+    font-size: small;
     gap: 10px;
     margin-top: 13px;
-    width: 100%;
+    width: 100%
 }
 
 .text-footer>.mat-mdc-card-content {
@@ -162,4 +166,14 @@ section>p {
 
 #title {
     padding-top: 0px;
+}
+
+.text-card > h3 {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.status {
+    font-weight: 500;
+margin-bottom: 10px;
 }
