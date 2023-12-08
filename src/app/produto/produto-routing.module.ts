@@ -4,11 +4,13 @@ import { ProdutoFormComponent } from './components/produto-form/produto-form.com
 import { ProdutoListComponent } from './components/produto-list/produto-list.component';
 import { produtoResolver } from './resolver/produto-resolver';
 import {HomeComponent} from "./components/home/home.component";
+import {ProdutoShowComponent} from "./components/produto-show/produto-show.component";
 
 const routes: Routes = [
   {path: 'list', component: ProdutoListComponent},
   {path: 'new', component: ProdutoFormComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'show/:id', component: ProdutoShowComponent, resolve: {produto: produtoResolver}},
   {path: 'edit/:id', component: ProdutoFormComponent, resolve: {produto: produtoResolver}}
 ];
 

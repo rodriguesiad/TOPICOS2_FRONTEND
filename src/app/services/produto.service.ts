@@ -38,7 +38,7 @@ export class ProdutoService {
       idCategoria: produto.categoria.id,
       idEspecie: produto.especie.id
     }
-    
+
     return this.http.post<Produto>(`${this.baseURL}/produtos`, obj);
   }
 
@@ -105,6 +105,10 @@ export class ProdutoService {
 
   getUrlImagem(nomeImagem: string): string {
     return `${this.baseURL}/produtos/image/download/${nomeImagem}`;
+  }
+
+  getRecomendacoes(idRaca: number, idCategoria: number, idEspecie: number): Observable<Produto[]> {
+    return this.http.get<Produto[]> (`${this.baseURL}/produtos/recomendacoes?idRaca=${idRaca}&idCategoria=${idCategoria}&idEspecie=${idEspecie}`);
   }
 
 }
