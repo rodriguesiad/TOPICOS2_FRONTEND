@@ -13,8 +13,8 @@
             </div>
             <span class="example-spacer"></span>
             <span *ngIf="isAdminRoute" class="toolbar-title">ADMINISTRADOR</span>
-            <span *ngIf="!isAdminRoute" class="toolbar-title">
-               <div class="filter-container">
+
+          <div *ngIf="!isAdminRoute" class="filter-container">
             <mat-form-field appearance="outline" class="full-width-input">
               <mat-label>Pesquisar</mat-label>
               <input [(ngModel)]="filtro" (keyup)="onEnterKey($event)" matInput placeholder="Ex. Ração" #input>
@@ -24,7 +24,6 @@
               <mat-icon id="icon">search</mat-icon>
             </button>
           </div>
-            </span>
           <span class="example-spacer"></span>
             <button routerLink="/compras/carrinho" mat-icon-button class="demo-section example-icon favorite-icon"
                 aria-label="Example icon-button with heart icon" style="margin-right: 10px;">
