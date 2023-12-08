@@ -21,7 +21,7 @@ export class CarrinhoComponent implements OnInit {
   quantidadeTotal: number = 0;
   usuarioLogado: Usuario | undefined;
   enderecoSelecionado: Endereco | null = null;
-  metodoPagamentoSelecionado: string | null = null;
+  metodoPagamentoSelecionado: number | null = null;
   primeiroEnderecoPrincipal: Endereco | undefined;
 
   constructor(private carrinhoService: CarrinhoService,
@@ -92,14 +92,16 @@ export class CarrinhoComponent implements OnInit {
   finalizarCompra(): void {
     if (this.enderecoSelecionado && this.metodoPagamentoSelecionado && this.carrinhoItens.length > 0) {
       this.selecionarEndereco();
-
       if (this.enderecoCompraForm.valid) {
         const enderecoCompra = this.enderecoCompraForm.value;
 
         this.compraService.save(this.carrinhoItens, enderecoCompra).subscribe({
           next: (compraCadastrada) => {
-            console.log(compraCadastrada);
-            this.carrinhoService.removerTudo();
+            if (this.metodoPagamentoSelecionado == 1) {
+              this.pagarPorPix(compraCadastrada.id);
+            } else if (this.metodoPagamentoSelecionado == 2) {
+              this.pagarPorBoleto(compraCadastrada.id);
+            }
           }
         })
       }
@@ -109,6 +111,32 @@ export class CarrinhoComponent implements OnInit {
       if (!this.metodoPagamentoSelecionado) { this.notifierService.showNotification("Escolha pelo menos 1 método de pagamento!", 'warn'); }
       if (this.carrinhoItens.length <= 0) { this.notifierService.showNotification("O carrinho está vazio!", 'warn'); }
     }
+  }
+
+  pagarPorBoleto(idCompra: number) {
+    this.compraService.pagarPorBoleto(idCompra).subscribe({
+      next: () => {
+        this.notifierService.showNotification('Compra Realizada com sucesso!', 'success');
+        this.carrinhoService.removerTudo('produtos/home');
+      },
+      error: err => {
+        this.notifierService.showNotification('Erro ao realizar pagamento por boleto!', 'error');
+        console.log('Erro realizar pagamento por boleto.' + JSON.stringify(err));
+      }
+    })
+  }
+
+  pagarPorPix(idCompra: number) {
+    this.compraService.pagarPorPix(idCompra).subscribe({
+      next: () => {
+        this.notifierService.showNotification('Compra Realizada com sucesso!', 'success');
+        this.carrinhoService.removerTudo('produtos/home');
+      },
+      error: err => {
+        this.notifierService.showNotification('Erro ao realizar pagamento por pix!', 'error');
+        console.log('Erro realizar pagamento por pix.' + JSON.stringify(err));
+      }
+    })
   }
 
 }

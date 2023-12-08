@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ItemCarrinho } from '../models/item-carrinho.interface';
 import { LocalStorageService } from './local-storage.service';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class CarrinhoService {
   private carrinhoSubject = new BehaviorSubject<ItemCarrinho[]>([]);
   carrinho$ = this.carrinhoSubject.asObservable();
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private localStorageService: LocalStorageService, private router: Router) {
     const carrinhoArmazenado = localStorageService.getItem('carrinho') || [];
     this.carrinhoSubject.next(carrinhoArmazenado);
   }
@@ -29,9 +30,14 @@ export class CarrinhoService {
     this.atualizarArmazenamentoLocal();
   }
 
-  removerTudo(): void {
+  removerTudo(path: string): void {
     this.localStorageService.removeItem('carrinho');
-    window.location.reload();
+
+    if (path && path != '') {
+      this.router.navigateByUrl(path);
+    } else {
+      window.location.reload();
+    }
   }
 
   remover(item: ItemCarrinho): void {
@@ -50,5 +56,5 @@ export class CarrinhoService {
   private atualizarArmazenamentoLocal(): void {
     localStorage.setItem('carrinho', JSON.stringify(this.carrinhoSubject.value));
   }
-  
+
 }

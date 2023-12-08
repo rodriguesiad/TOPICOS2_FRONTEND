@@ -28,4 +28,12 @@ export class CompraService {
     return this.http.post<Compra>(`${this.baseURL}`, produtos);
   }
 
+  pagarPorBoleto(idCompra: number): Observable<any> {
+    return this.http.patch<any>(`${this.baseURL}/${idCompra}/pagamento/boleto`, idCompra);
+  }
+
+  pagarPorPix(idCompra: number): Observable<any> {
+    return this.http.patch<any>(`${this.baseURL}/${idCompra}/pagamento/pix`, idCompra);
+  }
+
 }
