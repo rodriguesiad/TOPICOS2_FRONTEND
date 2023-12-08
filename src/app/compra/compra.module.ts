@@ -13,11 +13,13 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 import { CompraRoutingModule } from './compra-routing.module';
-
+import { CompraViewComponent } from './components/compra-view/compra-view.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
-    CarrinhoComponent
+    CarrinhoComponent,
+    CompraViewComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { CompraRoutingModule } from './compra-routing.module';
     ReactiveFormsModule,
     MatInputModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatStepperModule
   ]
 })
 export class CompraModule { }

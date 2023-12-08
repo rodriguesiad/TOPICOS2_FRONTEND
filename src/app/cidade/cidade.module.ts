@@ -37,7 +37,6 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     MatPaginatorModule,
     MatSlideToggleModule,
     FormsModule
-
   ]
 })
 export class CidadeModule { }

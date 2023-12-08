@@ -1,0 +1,52 @@
+<mat-card class="no-shadow pagina">
+    <div>
+        <mat-toolbar class="page-title">
+            <div class="flex-container">
+                <span class="toolbar-title">Detalhes da Compra</span>
+            </div>
+        </mat-toolbar>
+    </div>
+
+    <div class="flex-row main">
+        <div class="flex-column" style="width: 100%;">
+
+            <mat-horizontal-stepper #stepper *ngIf="compra?.statusCompra" >
+                <mat-step *ngFor="let status of statusCompra">
+                    <ng-template matStepLabel>{{ status.label }}</ng-template>
+                    <div *ngIf="status.id <= compra.statusCompra.id">
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+
+
+            <div class="card pedido">
+                <h3>Informações</h3>
+
+                <section>
+                    <p>Iad Rodrigues Moraes</p>
+                </section>
+                <section>
+                    <p>Endereço</p>
+                </section>
+                <section>
+                    <p>Data do Pedido</p>
+                </section>
+            </div>
+
+            <div class="card pedido pagamento">
+                <h3>Detalhes do Pagamento</h3>
+
+                <section>
+                    <p>Total: R$100,10</p>
+                    <p>Data do Pagamento</p>
+                </section>
+                <section>
+                    <mat-card style="background-color: gray;">
+                        <p>Quantidade de Itens</p>
+                    </mat-card>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</mat-card>
