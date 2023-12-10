@@ -25,7 +25,7 @@ import { SharedModule } from './shared/shared.module';
       config: {
         tokenGetter: () => localStorage.getItem('jwt_token'),
         allowedDomains: ['unitins.br'],
-        disallowedRoutes: ['localhost:8080/login']
+        disallowedRoutes: ['localhost:8080/auth']
       }
     }),
     BrowserModule,
