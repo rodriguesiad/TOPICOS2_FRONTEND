@@ -65,6 +65,12 @@ const routes: Routes = [
       () => import('./produto/produto.module')
         .then(m => m.ProdutoModule)
   },
+    
+  {
+  path: 'auth', loadChildren:
+  () => import('./auth/auth.module')
+    .then(m => m.AuthModule)
+  }
 
 ];
 
