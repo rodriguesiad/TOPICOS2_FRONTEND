@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { NotifierService } from 'src/app/shared/services/notifier.service';
 
 @Component({
     selector: 'app-login',
@@ -12,19 +12,19 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 
 export class LoginComponent implements OnInit {
-
+    hide = true;
     loginForm!: FormGroup;
 
     constructor(private formBuilder: FormBuilder,
         private authService: AuthService,
         private router: Router,
         private localStorageService: LocalStorageService,
-        private snackBar: MatSnackBar) { }
+        private notifier: NotifierService) { }
 
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
-            login: ['', [Validators.required, Validators.minLength(3)]],
-            senha: ['', [Validators.required, Validators.minLength(3)]]
+            login: ['', [Validators.required]],
+            senha: ['', [Validators.required]]
         });
     }
 
@@ -34,26 +34,16 @@ export class LoginComponent implements OnInit {
             const senha = this.loginForm.get('senha')!.value;
             this.authService.login(login, senha).subscribe({
                 next: (resp) => {
-                    this.showSnackbarTopPosition(this.authService.getToken(), 'Fechar', 1500);
                     this.router.navigateByUrl('/produtos/list');
                 },
                 error: (err) => {
                     console.log(err);
-                    this.showSnackbarTopPosition("Usuário ou senha Inválidos", 'Fechar', 1500);
+                    this.notifier.showNotification('Login ou senha inválidos', 'error');
                 }
             });
         } else {
-            this.showSnackbarTopPosition("Dados inválidos", 'Fechar', 1500);
+            this.notifier.showNotification('Dados inválidos', 'error');
         }
     }
-
-    showSnackbarTopPosition(content: any, action: any, duration: any) {
-        this.snackBar.open(content, action, {
-            duration: 1500,
-            verticalPosition: "top",
-            horizontalPosition: "right"
-        });
-    }
-
 
 }

@@ -1,22 +1,54 @@
 <div class="login-container">
-    <div class="login-box">
-        <div class="box-header">
-            <div id="logo">
-                <img src="../../../../assets/images/img_login1.png" alt="Logo do sistema">
+    <div class="page-container">
+        <div class="page-container-1">
+            <div class="first-box">
+                <div class="box-header">
+                    <h2 class="login-title">Entrar</h2>
+                </div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="font-size: 10px;">
+                    <mat-form-field class="login-input" appearance="outline">
+                        <input matInput placeholder="Login" formControlName="login" required id="teste">
+                        <button mat-icon-button matSuffix>
+                            <mat-icon>person</mat-icon>
+                        </button>
+                        <mat-error *ngIf="loginForm.get('login')!.hasError('required')">O campo Login é
+                            obrigatório.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="login-input" appearance="outline">
+                        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Senha" formControlName="senha"
+                            required>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="loginForm.get('senha')!.hasError('required')">O campo Senha é
+                            obrigatório.</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button class="login-button" type="submit">LOGIN</button>
+                    <button mat-raised-button id="create-account-button" type="submit">Cria Conta</button>
+                </form>
             </div>
-            <h2 class="login-title">Efetuar Login</h2>
         </div>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="login-input" appearance="outline">
-                <input matInput placeholder="Login" formControlName="login" required>
-                <mat-error *ngIf="loginForm.get('login')!.hasError('required')">O login é obrigatório</mat-error>
-            </mat-form-field>
-            <mat-form-field class="login-input" appearance="outline">
-                <input matInput type="password" placeholder="Senha" formControlName="senha" required>
-                <mat-error *ngIf="loginForm.get('senha')!.hasError('required')">A senha é obrigatória</mat-error>
-            </mat-form-field>
-            <button mat-raised-button class="login-button" color="primary" type="submit">LOGIN</button>
-            <p>Esqueceu a senha? <a>Clique Aqui</a></p>
-        </form>
+        <div class="page-container-2">
+            <div class="second-box">
+                <div class="box-header">
+                    <div id="logo">
+                        <img src="../../../../assets/images/logo-reverse.png" alt="Logo do sistema">
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <h4>Bem-vindo ao PET-ISCO!</h4>
+                    <p>Seja para aquele
+                        petisco especial como recompensa ou para suprimentos essenciais do dia a dia, estamos aqui para
+                        tornar cada momento com seu pet ainda mais especial.
+                        <br><br>
+                        Faça parte do Pet-isco e descubra uma experiência única, onde o amor pelos animais se encontra
+                        com a praticidade de encontrar os melhores produtos para o cuidado e felicidade dos seus pets.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
