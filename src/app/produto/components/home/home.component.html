@@ -10,15 +10,17 @@
   </mat-toolbar>
 
 <div class="container responsive-grid">
-  <mat-card class="selecionavel" (click)="showProduto(card.id)" *ngFor="let card of cards()">
+  <mat-card *ngFor="let card of cards()">
 
+    <div class="selecionavel" (click)="showProduto(card.id)">
       <img mat-card-image [src]="card.urlImagem">
 
-    <mat-card-content class="centered-text"> {{card.titulo}} </mat-card-content>
-
-    <mat-card-content class="centered-text"> {{card.descricao}} </mat-card-content>
-    <br/>
-    <mat-card-title class="centered-text"> {{card.preco | currency:'BRL'}} </mat-card-title>
+      <mat-card-content class="centered-text"> {{card.titulo}} </mat-card-content>
+  
+      <mat-card-content class="centered-text"> {{card.descricao}} </mat-card-content>
+      <br/>
+      <mat-card-title class="centered-text"> {{card.preco | currency:'BRL'}} </mat-card-title>
+    </div>
 
       <mat-card-footer>
         <button mat-flat-button (click)="adicionarAoCarrinho(card)">Adicionar ao carrinho</button>

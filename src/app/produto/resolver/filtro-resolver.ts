@@ -2,5 +2,5 @@ import {ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot} from "@angular/r
 
 export const filtroResolver: any =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return route.paramMap.get('id');
+    return route.paramMap.get('filtro');
   };
