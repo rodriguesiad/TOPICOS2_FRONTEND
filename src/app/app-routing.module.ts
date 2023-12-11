@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './produto/components/home/home.component';
+import { HomeComponent } from './compra/components/home/home.component';
 
 const routes: Routes = [
   {
@@ -52,6 +52,12 @@ const routes: Routes = [
           () => import('./metodo-recebimento/metodo-recebimento.module')
             .then(m => m.MetodoRecebimentoModule)
       },
+
+      {
+        path: 'produtos', loadChildren:
+          () => import('./produto/produto.module')
+            .then(m => m.ProdutoModule)
+      },
     ]
   },
 
@@ -60,16 +66,11 @@ const routes: Routes = [
       () => import('./compra/compra.module')
         .then(m => m.CompraModule)
   },
+
   {
-    path: 'produtos', loadChildren:
-      () => import('./produto/produto.module')
-        .then(m => m.ProdutoModule)
-  },
-    
-  {
-  path: 'auth', loadChildren:
-  () => import('./auth/auth.module')
-    .then(m => m.AuthModule)
+    path: 'auth', loadChildren:
+      () => import('./auth/auth.module')
+        .then(m => m.AuthModule)
   }
 
 ];

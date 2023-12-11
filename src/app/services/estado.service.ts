@@ -41,14 +41,14 @@ export class EstadoService {
       size: tamanhoPagina.toString(),
       nome: nomeParametro
     }
-    return this.http.get<Estado[]>(`${this.baseURL}/produtos/search`, {params});
+    return this.http.get<Estado[]>(`${this.baseURL}/estados/search`, {params});
   }
 
   countByCampoBusca(nomeParametro: string): Observable<number> {
     const params = {
       nome: nomeParametro,
     }
-    return this.http.get<number>(`${this.baseURL}/produtos/search/count`, {params});
+    return this.http.get<number>(`${this.baseURL}/estados/search/count`, {params});
   }
 
   count(): Observable<number> {

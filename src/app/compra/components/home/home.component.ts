@@ -155,6 +155,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   showProduto(id: number) {
-    this.router.navigateByUrl('/produtos/show/'+id);
+    this.router.navigateByUrl('/compras/show/'+id);
   }
 }

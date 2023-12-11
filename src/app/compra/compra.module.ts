@@ -10,18 +10,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CarrinhoComponent } from './components/carrinho/carrinho.component';
-import { CompraRoutingModule } from './compra-routing.module';
-import { CompraViewComponent } from './components/compra-view/compra-view.component';
-import { MatStepperModule } from '@angular/material/stepper';
 import { CompraListComponent } from './components/compra-list/compra-list.component';
+import { CompraViewComponent } from './components/compra-view/compra-view.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProdutoShowComponent } from './components/produto-show/produto-show.component';
+import { CompraRoutingModule } from './compra-routing.module';
 
 @NgModule({
   declarations: [
     CarrinhoComponent,
     CompraViewComponent,
-    CompraListComponent
+    CompraListComponent,
+    HomeComponent,
+    ProdutoShowComponent
   ],
   imports: [
     CommonModule,

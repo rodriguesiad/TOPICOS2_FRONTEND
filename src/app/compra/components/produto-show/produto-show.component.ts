@@ -66,7 +66,7 @@ export class ProdutoShowComponent implements OnInit {
   }
 
   showProduto(id: number) {
-    this.router.navigateByUrl('/produtos/show/'+id);
+    this.router.navigateByUrl('/compras/show/'+id);
   }
 
   carregarCards() {

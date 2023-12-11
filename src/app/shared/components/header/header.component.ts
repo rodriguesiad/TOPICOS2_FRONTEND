@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
   }
 
   aplicarFiltro() {
-    this.router.navigateByUrl('produtos/home/'+ this.filtro);
+    this.router.navigateByUrl('compras/home/'+ this.filtro);
   }
 
 }

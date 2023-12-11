@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
             const senha = this.loginForm.get('senha')!.value;
             this.authService.login(login, senha).subscribe({
                 next: (resp) => {
-                    this.router.navigateByUrl('/produtos/list');
+                    this.router.navigateByUrl('/compras/home');
                 },
                 error: (err) => {
                     console.log(err);

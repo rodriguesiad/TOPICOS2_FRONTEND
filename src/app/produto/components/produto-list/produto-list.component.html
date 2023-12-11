@@ -97,7 +97,7 @@
             <td mat-cell *matCellDef="let produto">
               <div class="edit-button-container">
                 <button mat-mini-fab color="black" aria-label="Editar produto" class="no-shadow"
-                  routerLink="/produtos/edit/{{produto.id}}">
+                  routerLink="/admin/produtos/edit/{{produto.id}}">
                   <mat-icon>edit</mat-icon>
                 </button>
                 <mat-slide-toggle [checked]="produto.ativo" (click)="openDialog($event, produto)"></mat-slide-toggle>
@@ -119,7 +119,7 @@
       </div>
     </div>
     <div class="button-container">
-      <button mat-raised-button routerLink="/produtos/new">
+      <button mat-raised-button routerLink="/admin/produtos/new">
         NOVO
       </button>
     </div>
