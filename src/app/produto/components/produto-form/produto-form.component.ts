@@ -127,7 +127,7 @@ export class ProdutoFormComponent implements OnInit {
     if (produto.id != null) {
       this.produtoService.delete(produto).subscribe({
         next: (e) => {
-          this.router.navigateByUrl('/produtos/list');
+          this.router.navigateByUrl('/admin/produtos/list');
         },
         error: (err) => {
           console.log('Erro ao excluir' + JSON.stringify(err));
@@ -152,14 +152,14 @@ export class ProdutoFormComponent implements OnInit {
       this.produtoService.uploadImagem(produtoId, this.selectedFile.name, this.selectedFile)
         .subscribe({
           next: () => {
-            this.router.navigateByUrl('produtos/list');
+            this.router.navigateByUrl('/admin/produtos/list');
           },
           error: err => {
             console.log('Erro ao cadastrar imagem.' + JSON.stringify(err));
           }
         })
     } else {
-      this.router.navigateByUrl('produtos/list');
+      this.router.navigateByUrl('/admin/produtos/list');
     }
   }
 
