@@ -69,7 +69,8 @@ section {
 }
 
 .pagamento {
-    height: 85px
+    height: 129px;
+    overflow-y: auto;
 }
 
 .stepper {

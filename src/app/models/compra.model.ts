@@ -12,5 +12,7 @@ export class Compra {
     usuario!: Usuario;
     statusCompra!: StatusCompra;
     totalCompra!: number;
-    itensCompra!: ItemCarrinho[]
+    itensCompra!: ItemCarrinho[];
+    sinBoleto!: boolean;
+    sinPix!: boolean;
 }

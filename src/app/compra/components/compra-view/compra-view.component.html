@@ -47,12 +47,22 @@
 
             <div class="card pedido pagamento">
                 <h3>Detalhes do Pagamento</h3>
-
-                <section>
-                    <p>Total: R${{ compra.totalCompra }}</p>
-                    <p>Data do Pagamento: {{ compra.dataPagamento | date:'dd/MM/yyyy' }}</p>
+              
+                <section *ngIf="boletoPagamento">
+                  <p>Total: R$ {{ compra.totalCompra }}</p>
+                  <p>Data do Pagamento: {{ compra.dataPagamento }}</p>
+                  <p>Número do Boleto: {{ boletoPagamento.numeroBoleto }}</p>
+                  <p>Data de Vencimento: {{ boletoPagamento.dataVencimento }}</p>
                 </section>
-            </div>
+              
+                <section *ngIf="pixPagamento">
+                  <p>Total: R$ {{ compra.totalCompra }}</p>
+                  <p>Data do Pagamento: {{ compra.dataPagamento }}</p>
+              
+                  <p>Chave Pix: {{ pixPagamento.chave }}</p>
+                  <p>Tipo de Chave Pix: {{ pixPagamento.tipoChavePix }}</p>
+                </section>
+              </div>
 
             <div class="product-list flex-column">
                 <h3>Itens</h3>
