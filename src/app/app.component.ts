@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
+import { AuthService } from './services/auth.service';
+import { Usuario } from './models/usuario.model';
 
 @Component({
   selector: 'app-root',

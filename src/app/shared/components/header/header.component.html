@@ -2,17 +2,19 @@
     <mat-toolbar style=" height: 55%; background-color: white;">
         <span class="spacer"></span>
         <div class="flex-container">
-            <button (click)="clickMenu()" mat-icon-button class="example-icon"
+            <button *ngIf="usuarioLogado && isAdmin" (click)="clickMenu()" mat-icon-button class="example-icon"
                 aria-label="Example icon-button with menu icon">
                 <mat-icon>menu</mat-icon>
             </button>
             <div class="logo">
-                <a class="unstyled-link">
+                <a (click)="navigateToHome  ()" class="unstyled-link">
                     <img src="../../../../assets/images/logo.png" alt="Logo do sistema" class="imagem-responsiva">
                 </a>
             </div>
             <span class="example-spacer"></span>
-            <span *ngIf="isAdminRoute" class="toolbar-title">ADMINISTRADOR</span>
+            <span class="example-spacer"></span>
+            <span *ngIf="isAdmin" class="toolbar-title">ADMINISTRADOR</span>
+            <span  *ngIf="!isAdmin" class="example-spacer"></span>
 
           <div *ngIf="!isAdminRoute" class="filter-container">
             <mat-form-field appearance="outline" class="full-width-input">
@@ -25,12 +27,14 @@
             </button>
           </div>
           <span class="example-spacer"></span>
+          <span  *ngIf="!isAdmin" class="example-spacer" style="width: 100%;"></span>
+          <span  *ngIf="usuarioLogado && !isAdmin && !isAdminRoute" class="example-spacer" style="width: 100%;"></span>
             <button routerLink="/compras/carrinho" mat-icon-button class="demo-section example-icon favorite-icon"
                 aria-label="Example icon-button with heart icon" style="margin-right: 10px;">
                 <mat-icon [matBadge]="qtdItensCarrinho" matBadgeColor="warn" matBadgePosition="after"
                     matBadgeOverlap="false" aria-hidden="false">shopping_cart</mat-icon>
             </button>
-            <button type="button" class="profile-button">
+            <button type="button" class="profile-button" *ngIf="usuarioLogado">
                 <img src="../../../../assets/images/icon_profile.png" alt="Pefil do usuário"
                     class="imagem-responsiva profile" />
             </button>

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 import { LocalStorageService } from './local-storage.service';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,9 +18,16 @@ export class AuthService {
 
     constructor(private http: HttpClient,
         private localStorageService: LocalStorageService,
-        private jwtHelper: JwtHelperService) {
+        private jwtHelper: JwtHelperService,
+        private usuarioService: UsuarioService) {
 
         this.initUsuarioLogado();
+
+        this.localStorageService.getObservable().subscribe((key: string) => {
+            if (key === this.usuarioLogadoKey) {
+                this.initUsuarioLogado();
+            }
+        });
 
     }
 
@@ -47,12 +55,10 @@ export class AuthService {
                 const authToken = res.headers.get('Authorization') ?? '';
                 if (authToken) {
                     this.setToken(authToken);
-                    const usuarioLogado = res.body;
-                    console.log(usuarioLogado);
-                    if (usuarioLogado) {
-                        this.setUsuarioLogado(usuarioLogado);
-                        this.usuarioLogadoSubject.next(usuarioLogado);
-                    }
+                    this.usuarioService.getUsuarioLogado().subscribe(usuario => {
+                        console.log(usuario);
+                        this.setUsuarioLogado(usuario);
+                    })
                 }
             })
         );
@@ -88,6 +94,19 @@ export class AuthService {
         // Verifica se o token é nulo ou está expirado
         return !token || this.jwtHelper.isTokenExpired(token);
         // npm install @auth0/angular-jwt
+    }
+
+    isUserAdmin(): boolean {
+        const token = this.getToken();
+
+        if (token) {
+            const decodedToken = this.jwtHelper.decodeToken(token);
+            if (decodedToken?.groups && Array.isArray(decodedToken.groups)) {
+                return decodedToken.groups.includes('Administrador');
+            }
+        }
+
+        return false;
     }
 
 }

@@ -114,11 +114,14 @@ export class UsuarioService {
       cpf: usuario.cpf,
       senha: usuario.senha,
       dataNascimento: usuario.dataNascimento.toString(),
-      enderecos : [enderecoDTO]
+      enderecos: [enderecoDTO]
     }
 
     return this.http.post<Usuario>(`${this.baseURL}/usuarios`, usuarioDto);
   }
 
+  getUsuarioLogado(): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseURL}/usuario-logado`);
+  }
 
 }
