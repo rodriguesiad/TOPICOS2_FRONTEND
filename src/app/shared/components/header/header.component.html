@@ -30,7 +30,7 @@
                 <mat-icon [matBadge]="qtdItensCarrinho" matBadgeColor="warn" matBadgePosition="after"
                     matBadgeOverlap="false" aria-hidden="false">shopping_cart</mat-icon>
             </button>
-            <button type="button" class="profile-button">
+            <button [matMenuTriggerFor]="menuPerfil" type="button" class="profile-button"  >
                 <img src="../../../../assets/images/icon_profile.png" alt="Pefil do usuário"
                     class="imagem-responsiva profile" />
             </button>
