@@ -24,6 +24,9 @@
         <button mat-icon-button color="primary" class="search-button" (click)="aplicarFiltro()">
           <mat-icon>search</mat-icon>
         </button>
+        <button mat-icon-button color="primary" class="search-button" (click)="gerarRelatorio()">
+          <mat-icon>info</mat-icon>
+        </button>
         <button mat-raised-button color="primary" class="clean-button" style="margin-right: 20px;" (click)="limparFiltro()">
           LIMPAR
         </button>
@@ -121,6 +124,9 @@
     <div class="button-container">
       <button mat-raised-button routerLink="/admin/produtos/new">
         NOVO
+      </button>
+      <button mat-raised-button color="primary"  (click)="gerarRelatorio()">
+        Baixar Relatório
       </button>
     </div>
   </mat-card>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Produto } from '../models/produto.model';
@@ -109,6 +109,25 @@ export class ProdutoService {
 
   getRecomendacoes(idRaca: number, idCategoria: number, idEspecie: number): Observable<Produto[]> {
     return this.http.get<Produto[]> (`${this.baseURL}/produtos/recomendacoes?idRaca=${idRaca}&idCategoria=${idCategoria}&idEspecie=${idEspecie}`);
+  }
+
+  
+  getRelatorioProduto(): Observable<any> {
+ 
+    const url = `${this.baseURL}/produtos/relatorio/`;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/pdf'
+    });
+
+    const options = {
+      headers: headers,
+      responseType: 'arraybuffer' as 'json'
+    };
+
+    return this.http.get(url, options);
+
   }
 
 }

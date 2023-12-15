@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Perfil } from '../models/perfil.model';
@@ -96,4 +96,22 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseURL}/usuario-logado`);
   }
 
+  
+  getRelatorioUser(): Observable<any> {
+
+    const url = `${this.baseURL}/usuarios/relatorio/`;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/pdf'
+    });
+
+    const options = {
+      headers: headers,
+      responseType: 'arraybuffer' as 'json'
+    };
+    
+    return this.http.get(url, options);
+ 
+  }
 }

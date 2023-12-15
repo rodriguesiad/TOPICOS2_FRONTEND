@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -188,10 +189,27 @@ export class UsuarioListComponent implements OnInit, AfterViewInit {
     this.aplicarFiltro();
   }
 
+  gerarRelatorio(): void {
+    this.usuarioService.getRelatorioUser().subscribe({
+      next: (data: any) => {
+        const blob = new Blob([data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+  
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'relatorioUsuariosPetIsco.pdf';
+          link.dispatchEvent(new MouseEvent('click'));
+  
+          window.URL.revokeObjectURL(url);
+      }
+  
+    })
+  }
+  
   onEnterKey(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       this.aplicarFiltro();
     }
   }
-
 }
+
