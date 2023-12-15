@@ -42,16 +42,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  onEnterKey(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      this.aplicarFiltro();
-    }
-  }
-
-  aplicarFiltro() {
-    this.router.navigateByUrl('compras/home/' + this.filtro);
-  }
-
   getUserLoggerIn() {
     this.subscription.add(this.authService.getUsuarioLogado().subscribe(
       usuario => this.usuarioLogado = usuario
@@ -60,6 +50,18 @@ export class HeaderComponent implements OnInit {
 
   navigateToHome() {
     this.router.navigate(['/compras/home']);
+  }
+
+  logout(){
+    this.removerInformacoesLogado();
+    this.router.navigateByUrl('/login');
+  }
+
+  removerInformacoesLogado(){
+
+    this.authService.removeToken();
+    this.authService.removeUsuarioLogado()
+    this.carrinhoService.removerTudo();
   }
 
 }
