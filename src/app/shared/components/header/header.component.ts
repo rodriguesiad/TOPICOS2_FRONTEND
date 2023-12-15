@@ -3,6 +3,8 @@ import { SidebarService } from '../../services/sidebar.service';
 import { CarrinhoService } from 'src/app/services/carrinho.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   filtro: string = "";
 
   constructor(private sidebarService: SidebarService, private carrinhoService: CarrinhoService,
-              private router: Router) { }
+              private router: Router, private authService: AuthService, private confirmationService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -45,4 +47,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('compras/home/'+ this.filtro);
   }
 
-}
+  deslogar(){
+
+    this.authService.removeToken();
+    this.authService.removeUsuarioLogado()
+    this.carrinhoService.removerTudo();
+    this.router.navigate(['/login'], { replaceUrl: true })  
+  }
+ }
