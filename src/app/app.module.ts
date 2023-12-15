@@ -34,7 +34,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     SharedModule,
     MatButtonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
   ],
   providers:
     [

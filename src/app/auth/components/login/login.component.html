@@ -7,6 +7,7 @@
                 </div>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="font-size: 10px;">
                     <mat-form-field class="login-input" appearance="outline">
+                        <mat-label>Login</mat-label>
                         <input matInput placeholder="Login" formControlName="login" required id="teste">
                         <button mat-icon-button matSuffix>
                             <mat-icon>person</mat-icon>
@@ -16,6 +17,7 @@
                     </mat-form-field>
 
                     <mat-form-field class="login-input" appearance="outline">
+                        <mat-label>Senha</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" placeholder="Senha" formControlName="senha"
                             required>
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -26,7 +28,7 @@
                             obrigatório.</mat-error>
                     </mat-form-field>
                     <button mat-raised-button class="login-button" type="submit">LOGIN</button>
-                    <button mat-raised-button id="create-account-button" type="submit">Cria Conta</button>
+                    <button mat-raised-button id="create-account-button" type="submit" routerLink="/subscribe">Cria Conta</button>
                 </form>
             </div>
         </div>
