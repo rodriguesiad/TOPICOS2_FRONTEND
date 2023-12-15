@@ -16,6 +16,10 @@ export class CidadeService {
     return this.http.get<Cidade[]>(`${this.baseURL}/municipios`);
   }
 
+  findByEstado(idEstado: string): Observable<Cidade[]> {
+    return this.http.get<Cidade[]>(`${this.baseURL}/municipios/estado/${idEstado}`);
+  }
+
   findById(id: string): Observable<Cidade> {
     return this.http.get<Cidade>(`${this.baseURL}/municipios/${id}`);
   }

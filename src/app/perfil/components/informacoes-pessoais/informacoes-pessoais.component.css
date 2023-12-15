@@ -1,0 +1,66 @@
+.full-width-input {
+  width: 100%;
+}
+
+.min-width-input {
+  width: calc(50% - 10px);
+}
+
+.input-telefone-codigoArea {
+  width: 10%;
+}
+
+.min-width-input-telefone {
+  width: calc(37.2% - 10px);
+}
+
+.space {
+  margin-right: 20px;
+}
+
+button[mat-raised-button] {
+  width: 120px;
+}
+
+button[mat-raised-button]:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.container {
+  padding-top: 20px;
+  padding-right: 7px;
+  padding-left: 5px;
+  overflow: hidden;
+}
+
+.content-not-edicao {
+  left: 64%;
+}
+
+.sub-form {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.input-telefone-codigoArea {
+  width: 25%;
+}
+
+.input-telefone-numero {
+  width: 60%;
+}
+
+#button-add-telefone {
+  color: var(--default-purple);
+  background-color: transparent;
+  box-shadow: none;
+  border: var(--default-purple) solid 1px;
+}
+
+#button-remove-telefone {
+  box-shadow: none;
+  background-color: rgb(238, 82, 82);
+}

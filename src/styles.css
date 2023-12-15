@@ -7,14 +7,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --default-purple: #802475;
     --default-green: #41C26A;
 }
-  
+
 .no-shadow {
 box-shadow: none !important;
 }
-  
+
 .rounded-corners {
 border-radius: 4px;
 }
-  
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

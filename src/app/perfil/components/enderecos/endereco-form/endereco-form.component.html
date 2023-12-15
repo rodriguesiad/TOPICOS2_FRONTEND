@@ -1,0 +1,79 @@
+<div class="container">
+  <form [formGroup]="endereco">
+    <h2>{{ endereco.get('id')?.value ? 'Editar Endereço' : 'Cadastrar Endereço' }}</h2>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Titulo</mat-label>
+      <input matInput type="text" formControlName="titulo"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="min-width-input space">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option *ngFor="let estado of estados" [value]="estado">
+          {{estado.nome}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="endereco.get('estado') &&
+                        endereco.get('estado')?.invalid &&
+                        endereco.get('estado')?.touched">
+        O Estado é obrigatório.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="min-width-input">
+      <mat-label>Cidade</mat-label>
+      <mat-select formControlName="cidade">
+        <mat-option *ngFor="let cidade of cidades" [value]="cidade">
+          {{cidade.nome}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="endereco.get('cidade') &&
+                        endereco.get('cidade')?.invalid &&
+                        endereco.get('cidade')?.touched">
+        A Cidade é obrigatória.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>CEP</mat-label>
+      <input matInput type="text" formControlName="cep" required/>
+      <mat-error *ngIf="endereco.get('cep')?.hasError('required') && (endereco.get('cep')?.touched || endereco.get('cep')?.dirty)">
+        O CEP é obrigatório.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Bairro</mat-label>
+      <input matInput type="text" formControlName="bairro" required/>
+      <mat-error *ngIf="endereco.get('bairro')?.hasError('required') && (endereco.get('bairro')?.touched || endereco.get('bairro')?.dirty)">
+        O Bairro é obrigatório.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Logradouro</mat-label>
+      <input matInput type="text" formControlName="logradouro" required/>
+      <mat-error *ngIf="endereco.get('logradouro')?.hasError('required') && (endereco.get('logradouro')?.touched || endereco.get('logradouro')?.dirty)">
+        O Logradouro é obrigatório.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="min-width-input space">
+      <mat-label>Complemento</mat-label>
+      <input matInput type="text" formControlName="complemento"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="min-width-input">
+      <mat-label>Número</mat-label>
+      <input matInput type="text" formControlName="numero" required/>
+      <mat-error *ngIf="endereco.get('numero')?.hasError('required') && (endereco.get('numero')?.touched || endereco.get('numero')?.dirty)">
+        O Número é obrigatório.
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <mat-label >Endereço Principal?</mat-label>
+      <mat-radio-group formControlName="principal">
+        <mat-radio-button value="true">Sim</mat-radio-button>
+        <mat-radio-button value="false">Não</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </form>
+
+  <div class="container-actions">
+    <button mat-raised-button style="color: var(--default-purple); background-color: transparent; left: 70%;" (click)="fecharModal()">Cancelar</button>
+    <button mat-raised-button style="background-color: var(--default-purple); color: white; left: 71%;" (click)="salvar()">Salvar</button>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+#button-remove-endereco {
+  box-shadow: none;
+  background-color: rgb(238, 82, 82);
+}
+
+#button-add-endereco {
+  color: var(--default-purple);
+  background-color: transparent;
+  box-shadow: none;
+  border: var(--default-purple) solid 1px;
+}
+
+.endereco-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.add-endereco {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card {
+  flex: 1;
+  margin-right: 1rem;
+  border: rgba(0, 0, 0, 0.4) solid 1px;
+}
+
+mat-card:first-child {
+  margin-top: 1rem;
+}
+
+.remove-button {
+  margin-left: 1rem;
+}
+
+mat-card-title {
+  padding: 10px;
+}

@@ -15,7 +15,7 @@
             <span class="example-spacer"></span>
             <span *ngIf="isAdmin" class="toolbar-title">ADMINISTRADOR</span>
             <span  *ngIf="!isAdmin" class="example-spacer"></span>
-            
+
           <span class="example-spacer"></span>
           <span  *ngIf="!isAdmin" class="example-spacer" style="width: 100%;"></span>
           <span  *ngIf="usuarioLogado && !isAdmin && !isAdminRoute" class="example-spacer" style="width: 100%;"></span>
@@ -24,10 +24,25 @@
                 <mat-icon [matBadge]="qtdItensCarrinho" matBadgeColor="warn" matBadgePosition="after"
                     matBadgeOverlap="false" aria-hidden="false">shopping_cart</mat-icon>
             </button>
-            <button type="button" class="profile-button" *ngIf="usuarioLogado">
+            <button [matMenuTriggerFor]="menuPerfil" type="button" class="profile-button"  >
                 <img src="../../../../assets/images/icon_profile.png" alt="Pefil do usuário"
                     class="imagem-responsiva profile" />
             </button>
+          <mat-menu #menuPerfil="matMenu">
+            <button routerLink="admin/perfil/view" mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              <span>Conta</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>help_outline</mat-icon>
+              <span>Ajuda</span>
+            </button>
+            <button mat-menu-item disabled>
+              <mat-icon>logout</mat-icon>
+              <span>Sair</span>
+            </button>
+          </mat-menu>
+
         </div>
     </mat-toolbar>
     <mat-toolbar style="background-color: var(--default-purple); height: 45%;">

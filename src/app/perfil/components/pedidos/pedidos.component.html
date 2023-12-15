@@ -1,0 +1,16 @@
+<div *ngFor="let pedido of pedidos; let i = index" class="pedidos-container">
+  <mat-card class="mat-card">
+    <mat-card-content>Data do Pedido: {{pedido.data | date:'dd/MM/yyyy HH:mm'}}</mat-card-content>
+    <mat-card-content>Total da Compra: {{pedido.totalCompra}}</mat-card-content>
+    <mat-card-content>Status da Compra: {{pedido.statusCompra.label}}</mat-card-content>
+    <mat-card-content>Endereço da Compra: {{pedido.enderecoCompra.cep}} - {{pedido.enderecoCompra.logradouro}}, {{pedido.enderecoCompra.bairro}},
+      {{pedido.enderecoCompra.complemento}} <span *ngIf="pedido.enderecoCompra.complemento !== null && pedido.enderecoCompra.complemento !== undefined">,</span>
+      {{pedido.enderecoCompra.numero}} {{pedido.enderecoCompra.municipio.nome}} {{pedido.enderecoCompra.municipio.estado.nome}}</mat-card-content>
+    <br>
+    <mat-card-content>Itens:
+      <div style="text-indent: 10px" *ngFor="let item of pedido.itensCompra;">
+       Produto: {{item.nome}}, Quantidade: {{item.quantidade}}, Valor Unitário: R$ {{item.preco}}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

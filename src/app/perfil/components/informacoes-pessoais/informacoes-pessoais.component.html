@@ -1,0 +1,81 @@
+<div class="container">
+  <form [formGroup]="informacoesPessoais">
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" formControlName="nome"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="text" formControlName="email"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="min-width-input space">
+      <mat-label>CPF</mat-label>
+      <input matInput type="text" formControlName="cpf"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="min-width-input">
+      <mat-label>Data de Nascimento</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dataNascimento" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngIf="isEdicao" class="sub-form">
+      <div formArrayName="telefones" style="width: 100%;">
+        <div *ngFor="let telefone of telefones.controls; let i = index" [formGroupName]="i"
+             style="width: 100%;">
+          <div class="sub-form">
+            <mat-form-field appearance="outline" class="input-telefone-codigoArea">
+              <mat-label>Código Área</mat-label>
+              <input matInput type="text" formControlName="codigoArea"/>
+              <mat-error
+                *ngIf="telefone.get('codigoArea')?.invalid && (telefone.get('codigoArea')?.touched || telefone.get('codigoArea')?.dirty)">
+                O campo Código Área é obrigatório.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-telefone-numero">
+              <mat-label>Número</mat-label>
+              <input matInput type="text" formControlName="numero"/>
+              <mat-error
+                *ngIf="telefone.get('numero')?.invalid && (telefone.get('numero')?.touched || telefone.get('numero')?.dirty)">
+                O campo Número é obrigatório.
+              </mat-error>
+            </mat-form-field>
+
+            <button mat-fab extended (click)="removerTelefone(i)"
+                    id="button-remove-telefone">
+              <mat-icon>clear</mat-icon>
+              Remover
+            </button>
+          </div>
+          </div>
+        <div class="sub-form add-telefone">
+          <button *ngIf="isEdicao" mat-fab extended (click)="adicionarTelefone()" id="button-add-telefone">
+            <mat-icon>add_circle_outline</mat-icon>
+            Adicionar Telefone
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <button *ngIf="!isEdicao" mat-raised-button (click)="abrirModalAlterarSenha()"
+          style="background-color: var(--default-purple); color: white; left: 63%; white-space: nowrap;
+         width: auto">
+     ALTERAR SENHA
+  </button>
+  <button *ngIf="!isEdicao" mat-raised-button (click)="habilitarEdicao()"
+          class="content-not-edicao" style="background-color: var(--default-purple); color: white;">
+    EDITAR
+  </button>
+    <button *ngIf="isEdicao" mat-raised-button (click)="desabilitarEdicao()"
+            style="color: var(--default-purple); background-color: transparent; left: 67%;
+             margin-bottom: 1px">
+      CANCELAR
+    </button>
+    <button *ngIf="isEdicao" mat-raised-button (click)="salvar()"
+            style="background-color: var(--default-purple); color: white; left: 68%; box-shadow: none;
+            margin-bottom: 1px">
+      SALVAR
+    </button>
+</div>
