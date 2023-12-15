@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Perfil } from '../models/perfil.model';
 import { Usuario } from '../models/usuario.model';
+import { Endereco } from '../models/endereco.model';
 
 
 @Injectable({
@@ -95,5 +96,29 @@ export class UsuarioService {
   getPerfilUsuario(): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.baseURL}/usuario-logado`);
   }
+
+  savePublic(usuario: Usuario, endereco: Endereco): Observable<Usuario> {
+    const enderecoDTO = {
+      idMunicipio: endereco.municipio.id,
+      bairro: endereco.bairro,
+      logradouro: endereco.logradouro,
+      numero: endereco.numero,
+      complemento: endereco.complemento,
+      cep: endereco.cep,
+      principal: true
+    }
+
+    const usuarioDto = {
+      nome: usuario.nome,
+      email: usuario.email,
+      cpf: usuario.cpf,
+      senha: usuario.senha,
+      dataNascimento: usuario.dataNascimento.toString(),
+      enderecos : [enderecoDTO]
+    }
+
+    return this.http.post<Usuario>(`${this.baseURL}/usuarios`, usuarioDto);
+  }
+
 
 }
