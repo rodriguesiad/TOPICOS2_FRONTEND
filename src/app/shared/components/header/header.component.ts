@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
 
     this.authService.removeToken();
     this.authService.removeUsuarioLogado()
-    this.carrinhoService.removerTudo();
+    this.carrinhoService.removerTudoLogout();
   }
 
 }
