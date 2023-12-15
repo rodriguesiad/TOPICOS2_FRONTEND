@@ -13,12 +13,18 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { ErrorInterceptor } from './auth/interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { PerfilComponent } from './perfil/components/perfil/perfil.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {PerfilModule} from "./perfil/perfil.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SituacaoDialogBoxComponent
+    SituacaoDialogBoxComponent,
+    PerfilComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -34,7 +40,12 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     SharedModule,
     MatButtonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    AuthRoutingModule,
+    MatCardModule,
+    MatTabsModule,
+    MatToolbarModule,
+    PerfilModule
   ],
   providers:
     [

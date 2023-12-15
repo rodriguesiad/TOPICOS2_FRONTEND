@@ -1,0 +1,24 @@
+.container {
+  padding: 15px;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.min-width-input {
+  width: 48%;
+}
+
+.space {
+  margin-right: 4%;
+}
+
+button[mat-raised-button]:not(:last-child) {
+  margin-right: 1rem;
+}
+
+button[mat-raised-button] {
+  width: 120px;
+  /* tamanho do botao */
+}

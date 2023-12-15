@@ -1,9 +1,9 @@
 import {ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot} from "@angular/router";
 import {inject} from "@angular/core";
-import {DadosPessoais} from "../../../models/dados-pessoais.model";
 import {UsuarioLogadoService} from "../../../services/usuario-logado.service";
+import {UsuarioEndereco} from "../../../models/usuario-endereco.model";
 
-export const dadosPessoaisResolver: ResolveFn<DadosPessoais> =
+export const enderecosResolver: ResolveFn<UsuarioEndereco> =
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return inject(UsuarioLogadoService).getDadosPessoais();
+    return inject(UsuarioLogadoService).getEnderecos();
   };

@@ -11,13 +11,13 @@ export class AppComponent implements OnInit {
   title = 'angular-topicos2-2023-2';
   isLoginPage: boolean = true;
 
-
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(event => {
-        this.isLoginPage = (event.url.includes('/auth') || event.url.includes('/login'));
+        this.isLoginPage = (event.url.includes('/auth') || event.url.includes('/login') || event.url.includes('subscribe'));
       });
   }
+
 }
