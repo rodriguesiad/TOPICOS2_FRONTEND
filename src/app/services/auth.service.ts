@@ -40,7 +40,8 @@ export class AuthService {
             senha: senha
         }
 
-        //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
+        this.removeToken();
+
         return this.http.post(`${this.baseURL}`, params, { observe: 'response' }).pipe(
             tap((res: any) => {
                 const authToken = res.headers.get('Authorization') ?? '';
