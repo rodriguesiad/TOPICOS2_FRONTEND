@@ -5,7 +5,6 @@ import { Categoria } from 'src/app/models/categoria.model';
 import { Especie } from 'src/app/models/especie.model';
 import { Produto } from 'src/app/models/produto.model';
 import { Raca } from 'src/app/models/raca.model';
-import { CarrinhoService } from 'src/app/services/carrinho.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EspecieService } from 'src/app/services/especie.service';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -23,6 +22,7 @@ export class ProdutoFormComponent implements OnInit {
   categorias: Categoria[] = [];
   especies: Especie[] = [];
   produtoTeste: Produto;
+  apiResponse: any = null;
 
   fileName: string = '';
   selectedFile: File | null = null;
@@ -35,6 +35,7 @@ export class ProdutoFormComponent implements OnInit {
     private categoriaService: CategoriaService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private notifierService: NotifierService
   ) {
 
     this.produtoTeste = this.activatedRoute.snapshot.data['produto'];
@@ -103,19 +104,57 @@ export class ProdutoFormComponent implements OnInit {
       if (produto.id == null) {
         this.produtoService.save(produto).subscribe({
           next: (produtoCadastrado) => {
+            this.notifierService.showNotification('Produto cadastrado com sucesso!', 'success');
             this.uploadImage(produtoCadastrado.id);
           },
-          error: (err) => {
-            console.log('Erro ao incluir' + JSON.stringify(err));
+          error: (errorResponse) => {
+            this.apiResponse = errorResponse.error;
+
+            const formControls = ['nome', 'descricao', 'preco', 'raca', 'porteAnimal', 'categoria', 'especie', 'peso', 'estoque'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+            this.notifierService.showNotification('Erro ao incluir produto!', 'error');
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         });
       } else {
         this.produtoService.update(produto).subscribe({
           next: (produtoAtualizado) => {
+            this.notifierService.showNotification('Produto alterado com sucesso!', 'success');
             this.uploadImage(produtoAtualizado.id);
           },
-          error: (err) => {
-            console.log('Erro ao alterar' + JSON.stringify(err));
+          error: (errorResponse) => {
+            this.apiResponse = errorResponse.error;
+
+            const formControls = ['nome', 'descricao', 'preco', 'raca', 'porteAnimal', 'categoria', 'especie', 'peso', 'estoque'];
+            formControls.forEach(controlName => {
+              this.formGroup.get(controlName)?.setErrors(null);
+            });
+
+            if (this.apiResponse && this.apiResponse.errors) {
+              this.apiResponse.errors.forEach((error: { fieldName: any; message: any; }) => {
+                const fieldName = error.fieldName;
+                const errorMessage = error.message;
+
+                if (formControls.includes(fieldName)) {
+                  this.formGroup.get(fieldName)?.setErrors({ apiError: errorMessage });
+                }
+              });
+            }
+            this.notifierService.showNotification('Erro ao alterar produto!', 'error');
+            console.log('Erro ao alterar' + JSON.stringify(errorResponse));
           }
         });
       }
@@ -127,9 +166,11 @@ export class ProdutoFormComponent implements OnInit {
     if (produto.id != null) {
       this.produtoService.delete(produto).subscribe({
         next: (e) => {
+          this.notifierService.showNotification('Produto deletado com sucesso!', 'success');
           this.router.navigateByUrl('/admin/produtos/list');
         },
         error: (err) => {
+          this.notifierService.showNotification('Erro ao deletado produto!', 'error');
           console.log('Erro ao excluir' + JSON.stringify(err));
         }
       });
@@ -155,6 +196,7 @@ export class ProdutoFormComponent implements OnInit {
             this.router.navigateByUrl('/admin/produtos/list');
           },
           error: err => {
+            this.notifierService.showNotification('Erro ao cadastrar imagem', 'error');
             console.log('Erro ao cadastrar imagem.' + JSON.stringify(err));
           }
         })
@@ -162,6 +204,16 @@ export class ProdutoFormComponent implements OnInit {
       this.router.navigateByUrl('/admin/produtos/list');
     }
   }
+
+  getErrorMessage(fieldName: string): string {
+    if (this.apiResponse && this.apiResponse.errors) {
+      const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+      return error ? error.message : '';
+    } else {
+      return '';
+    }
+  }
+
 
 }
 

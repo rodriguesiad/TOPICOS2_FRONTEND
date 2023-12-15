@@ -89,4 +89,12 @@ export class CompraService {
     return this.http.get<Compra[]>(`${this.baseURL}/all`, { params });
   }
 
+  getBoleto(idCompra: number): Observable<BoletoPagamento> {
+    return this.http.get<BoletoPagamento>(`${this.baseURL}/${idCompra}/pagamento/boleto`);
+  }
+
+  getPix(idCompra: number): Observable<PixPagamento> {
+    return this.http.get<PixPagamento>(`${this.baseURL}/${idCompra}/pagamento/pix`);
+  }
+
 }
