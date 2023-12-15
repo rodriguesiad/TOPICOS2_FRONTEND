@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { NotifierComponent } from './components/notifier/notifier.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { NotifierComponent } from './components/notifier/notifier.component';
         MatGridListModule,
         MatSnackBarModule,
         MatBadgeModule,
-        FormsModule
+        FormsModule,
+        MatMenuModule
     ],
   exports: [
     HeaderComponent,

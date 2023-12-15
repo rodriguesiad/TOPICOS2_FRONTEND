@@ -1,0 +1,34 @@
+<div class="profile-container">
+  <div class="profile-picture">
+    <img [src]="selectedProfileImageUrl || defaultProfileImageUrl" alt="Profile Picture" (click)="openImageOptions()">
+  </div>
+  <mat-card-title ><strong>{{nome}}</strong></mat-card-title>
+  <mat-card-content>{{email}}</mat-card-content>
+</div>
+
+<div class="image-options" *ngIf="showImageOptions">
+  <mat-card class="container-img">
+    <mat-card-content class="options-container">
+      <div *ngFor="let option of imageOptions" class="image-option" (click)="selectImage(option)">
+        <img [src]="option" alt="Profile Picture Option">
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div style="height: 22%; width: 100%; background-color: rgba(128,128,128,0.15)"></div>
+<div class="container">
+  <mat-card>
+      <mat-tab-group>
+        <mat-tab label="INFORMAÇÕES PESSOAIS">
+          <app-informacoes-pessoais></app-informacoes-pessoais>
+        </mat-tab>
+        <mat-tab label="ENDEREÇOS">
+          aaaa
+        </mat-tab>
+        <mat-tab label="PEDIDOS">
+          aaaa
+        </mat-tab>
+      </mat-tab-group>
+  </mat-card>
+</div>

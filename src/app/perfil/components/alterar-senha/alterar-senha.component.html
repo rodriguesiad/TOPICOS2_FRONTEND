@@ -1,0 +1,30 @@
+<div class="container">
+  <form [formGroup]="senhas">
+    <h2>Alterar Senha</h2>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Senha Atual</mat-label>
+      <input matInput [type]="mostrarSenha1 ? 'text' : 'password'" formControlName="senhaAtual" required/>
+      <button mat-icon-button matSuffix (click)="toggleMostrarSenha(1)">
+        <mat-icon>{{ mostrarSenha1 ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="senhas.get('senhaAtual')?.hasError('required') && (senhas.get('senhaAtual')?.touched || senhas.get('senhaAtual')?.dirty)">
+        O campo Senha Atual é obrigatório.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width-input">
+      <mat-label>Nova Senha</mat-label>
+      <input matInput [type]="mostrarSenha2 ? 'text' : 'password'" type="text" formControlName="novaSenha" required/>
+      <button mat-icon-button matSuffix (click)="toggleMostrarSenha(2)">
+        <mat-icon>{{ mostrarSenha2 ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="senhas.get('novaSenha')?.hasError('required') && (senhas.get('novaSenha')?.touched || senhas.get('novaSenha')?.dirty)">
+        O campo Nova Senha é obrigatório.
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="container-actions">
+    <button mat-raised-button style="background-color: var(--default-purple); color: white;" (click)="alterarSenha()">Alterar</button>
+    <button mat-raised-button style="color: var(--default-purple); background-color: transparent;" (click)="fecharModal()">Cancelar</button>
+  </div>
+</div>
