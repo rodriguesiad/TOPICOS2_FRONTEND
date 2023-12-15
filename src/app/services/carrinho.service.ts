@@ -35,6 +35,10 @@ export class CarrinhoService {
     window.location.reload();
   }
 
+  removerTudoLogout(): void {
+    this.localStorageService.removeItem('carrinho');
+  }
+
   remover(item: ItemCarrinho): void {
     const carrinhoAtual = this.carrinhoSubject.value;
     const carrinhoAtualizado = carrinhoAtual.filter(itemCarrinho => itemCarrinho !== item);
