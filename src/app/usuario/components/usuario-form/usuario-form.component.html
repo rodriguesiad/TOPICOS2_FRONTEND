@@ -14,12 +14,11 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Nome</mat-label>
                         <input matInput type="text" formControlName="nome" />
-                        <mat-error *ngIf="formGroup.get('nome') &&
-                        formGroup.get('nome')?.invalid &&
-                        formGroup.get('nome')?.touched">
+                        <mat-error
+                            *ngIf="formGroup.get('nome')?.hasError('required') && formGroup.get('nome')?.touched">
                             O campo Nome é obrigatório.
                         </mat-error>
-                        <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
+                        <mat-error *ngIf="formGroup.get('nome')?.value && formGroup.get('nome')?.hasError('apiError')">
                             {{ formGroup.get('nome')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
@@ -27,12 +26,12 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>E-mail</mat-label>
                         <input matInput type="text" formControlName="email" />
-                        <mat-error *ngIf="formGroup.get('email') &&
-                        formGroup.get('email')?.invalid &&
-                        formGroup.get('email')?.touched">
+                        <mat-error
+                            *ngIf="formGroup.get('email')?.hasError('required') && formGroup.get('email')?.touched">
                             O campo E-mail é obrigatório.
                         </mat-error>
-                        <mat-error *ngIf="formGroup.get('email')?.hasError('apiError')">
+                        <mat-error
+                            *ngIf="formGroup.get('email')?.value && formGroup.get('email')?.hasError('apiError')">
                             {{ formGroup.get('email')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
@@ -41,12 +40,12 @@
                         <mat-form-field appearance="outline" class="full-width-input">
                             <mat-label>CPF</mat-label>
                             <input matInput type="text" formControlName="cpf" />
-                            <mat-error *ngIf="formGroup.get('cpf') &&
-                        formGroup.get('cpf')?.invalid &&
-                        formGroup.get('cpf')?.touched">
+                            <mat-error
+                                *ngIf="formGroup.get('cpf')?.hasError('required') && formGroup.get('cpf')?.touched">
                                 O campo CPF é obrigatório.
                             </mat-error>
-                            <mat-error *ngIf="formGroup.get('cpf')?.hasError('apiError')">
+                            <mat-error
+                                *ngIf="formGroup.get('cpf')?.value && formGroup.get('cpf')?.hasError('apiError')">
                                 {{ formGroup.get('cpf')?.getError('apiError') }}
                             </mat-error>
                         </mat-form-field>
@@ -56,12 +55,12 @@
                             <mat-select formControlName="perfis" multiple>
                                 <mat-option *ngFor="let perfil of perfis" [value]="perfil">{{perfil.label}}</mat-option>
                             </mat-select>
-                            <mat-error *ngIf="formGroup.get('perfis') &&
-                        formGroup.get('perfis')?.invalid &&
-                        formGroup.get('perfis')?.touched">
-                                O campo perfis é obrigatório.
+                            <mat-error
+                                *ngIf="formGroup.get('perfis')?.hasError('required') && formGroup.get('perfis')?.touched">
+                                O campo Perfis é obrigatório.
                             </mat-error>
-                            <mat-error *ngIf="formGroup.get('perfis')?.hasError('apiError')">
+                            <mat-error
+                                *ngIf="formGroup.get('perfis')?.value && formGroup.get('perfis')?.hasError('apiError')">
                                 {{ formGroup.get('perfis')?.getError('apiError') }}
                             </mat-error>
                         </mat-form-field>
@@ -80,12 +79,12 @@
                     <mat-form-field appearance="outline" class="full-width-input">
                         <mat-label>Senha</mat-label>
                         <input matInput type="text" formControlName="senha" />
-                        <mat-error *ngIf="formGroup.get('senha') &&
-                        formGroup.get('senha')?.invalid &&
-                        formGroup.get('senha')?.touched">
+                        <mat-error
+                            *ngIf="formGroup.get('senha')?.hasError('required') && formGroup.get('senha')?.touched">
                             O campo Senha é obrigatório.
                         </mat-error>
-                        <mat-error *ngIf="formGroup.get('senha')?.hasError('apiError')">
+                        <mat-error
+                            *ngIf="formGroup.get('senha')?.value && formGroup.get('senha')?.hasError('apiError')">
                             {{ formGroup.get('senha')?.getError('apiError') }}
                         </mat-error>
                     </mat-form-field>
