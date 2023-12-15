@@ -66,7 +66,7 @@ table {
 }
 
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-    background-color: rgb(128, 203, 196);
+    background-color:     #6D3875;
 }
 
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
@@ -84,7 +84,7 @@ table {
 }
 
 ::ng-deep .mdc-switch:enabled .mdc-switch__track {
-    background-color: var(--default-green);
+    background-color:     #6D3875;
 }
 
 .filter-container {

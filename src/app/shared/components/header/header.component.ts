@@ -47,11 +47,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('compras/home/'+ this.filtro);
   }
 
-  deslogar(){
+  logout(){
+
+    this.removerInformacoesLogado();
+    this.router.navigateByUrl('/login');
+  }
+
+  removerInformacoesLogado(){
 
     this.authService.removeToken();
     this.authService.removeUsuarioLogado()
     this.carrinhoService.removerTudo();
-    this.router.navigate(['/login'], { replaceUrl: true })  
   }
  }

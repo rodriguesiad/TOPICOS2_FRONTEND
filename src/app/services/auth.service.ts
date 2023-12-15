@@ -39,8 +39,8 @@ export class AuthService {
             login: email,
             senha: senha
         }
-
         this.removeToken();
+
         //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
         return this.http.post(`${this.baseURL}`, params, { observe: 'response' }).pipe(
             tap((res: any) => {
