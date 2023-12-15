@@ -1,0 +1,9 @@
+.mat-card {
+  flex: 1;
+  margin-right: 1rem;
+  border: rgba(0, 0, 0, 0.4) solid 1px;
+}
+
+.pedidos-container {
+  margin-top: 1rem;
+}
