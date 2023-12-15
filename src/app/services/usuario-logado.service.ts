@@ -19,6 +19,14 @@ export class UsuarioLogadoService {
     return this.http.get<DadosPessoais>(`${this.baseURL}/dados-pessoais`);
   }
 
+  getIconProfile(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/icon-profile`);
+  }
+
+  setIconProfile(icon: number) {
+    return this.http.patch<number>(`${this.baseURL}/icon-profile`, icon);
+  }
+
   getEnderecos(): Observable<UsuarioEndereco> {
     return this.http.get<UsuarioEndereco>(`${this.baseURL}/enderecos`);
   }

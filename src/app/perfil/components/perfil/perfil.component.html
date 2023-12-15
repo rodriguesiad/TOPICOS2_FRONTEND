@@ -10,7 +10,7 @@
   <mat-card class="container-img">
     <mat-card-content class="options-container">
       <div *ngFor="let option of imageOptions" class="image-option" (click)="selectImage(option)">
-        <img [src]="option" alt="Profile Picture Option">
+        <img [src]="option.src" alt="Profile Picture Option">
       </div>
     </mat-card-content>
   </mat-card>

@@ -94,11 +94,6 @@ export class InformacoesPessoaisComponent implements OnInit {
       nomeControl.enable();
     }
 
-    const emailControl = this.informacoesPessoais.get('email');
-    if (emailControl instanceof FormControl) {
-      emailControl.enable();
-    }
-
     const cpfControl = this.informacoesPessoais.get('cpf');
     if (cpfControl instanceof FormControl) {
       cpfControl.enable();

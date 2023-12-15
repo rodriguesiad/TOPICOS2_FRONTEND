@@ -11,23 +11,15 @@ import {Pedido} from "../../../models/pedido.model";
   templateUrl: './pedidos.component.html',
   styleUrls: ['./pedidos.component.css']
 })
-export class PedidosComponent implements OnInit {
+export class PedidosComponent {
   pedidos?: Pedido[];
 
   constructor(private usuarioLogadoService: UsuarioLogadoService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              public dialog: MatDialog,
-              private confirmationDialogService: ConfirmationDialogService
+              public dialog: MatDialog
   ) {
     this.usuarioLogadoService.getPedidos().subscribe(
       data => {this.pedidos = data;}
     )
-  }
-
-  ngOnInit() {
-    console.log(this.pedidos);
   }
 
 }

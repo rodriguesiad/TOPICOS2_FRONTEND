@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsuarioLogadoService} from "../../../services/usuario-logado.service";
 import {DadosPessoais} from "../../../models/dados-pessoais.model";
 import {tap} from "rxjs";
@@ -8,13 +8,15 @@ import {tap} from "rxjs";
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent {
-  defaultProfileImageUrl = '../../../../assets/images/icon_profile.png';
+export class PerfilComponent implements OnInit {
+  defaultProfileImageUrl = '';
   selectedProfileImageUrl: string = ''; // Atribua um valor inicial aqui
   showImageOptions = false;
   nome: string = '';
   email: string = '';
-  constructor(usuarioLogadoService: UsuarioLogadoService) {
+  iconProfile?: number;
+
+  constructor(public usuarioLogadoService: UsuarioLogadoService) {
     usuarioLogadoService.getDadosPessoais()
       .pipe(
         tap(dados => {
@@ -25,19 +27,51 @@ export class PerfilComponent {
       .subscribe();
   }
 
+  ngOnInit() {
+    this.usuarioLogadoService.getIconProfile()
+      .pipe(
+        tap(dado => {
+          this.iconProfile = dado
+        })
+      )
+      .subscribe();
+
+    console.log(this.iconProfile);
+
+    if (this.iconProfile == null) {
+      this.defaultProfileImageUrl = '../../../../assets/images/icon_profile.png';
+    } else {
+      if (this.iconProfile == 1) {
+        this.defaultProfileImageUrl = '../../../../assets/images/icon_profile_1.png'
+      } else if (this.iconProfile == 2) {
+        this.defaultProfileImageUrl = '../../../../assets/images/icon_profile_2.png'
+      } else if (this.iconProfile == 3) {
+        this.defaultProfileImageUrl = '../../../../assets/images/icon_profile_3.jpg'
+      } else if (this.iconProfile == 4) {
+        this.defaultProfileImageUrl = '../../../../assets/images/icon_profile_4.png'
+      } else {
+        this.defaultProfileImageUrl = '../../../../assets/images/icon_profile.png';
+      }
+    }
+
+  }
+
   imageOptions = [
-    '../../../../assets/images/icon_profile_1.png',
-    '../../../../assets/images/icon_profile_2.png',
-    '../../../../assets/images/icon_profile_3.jpg',
-    '../../../../assets/images/icon_profile_4.png',
+    { id: 1, src: '../../../../assets/images/icon_profile_1.png' },
+    { id: 2, src: '../../../../assets/images/icon_profile_2.png' },
+    { id: 3, src: '../../../../assets/images/icon_profile_3.jpg' },
+    { id: 4, src: '../../../../assets/images/icon_profile_4.png' },
   ];
 
   openImageOptions() {
     this.showImageOptions = !this.showImageOptions;
   }
 
-  selectImage(option: string) {
-    this.selectedProfileImageUrl = option;
+  selectImage(option: any) {
+    this.selectedProfileImageUrl = option.src;
     this.showImageOptions = false;
+    console.log(option.id);
+    this.usuarioLogadoService.setIconProfile(option.id).subscribe();
+
   }
 }
